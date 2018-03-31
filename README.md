@@ -1,1 +1,0 @@
-# Visualization-of-the-Olympiad-algorithms
