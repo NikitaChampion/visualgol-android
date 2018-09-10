@@ -28,9 +28,6 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
         btnActSort = (Button) findViewById(R.id.btnActSort);
         btnActSort.setOnClickListener(this);
-
-        btnActGeom = (Button) findViewById(R.id.btnActGeom);
-        btnActGeom.setOnClickListener(this);
     }
 
     @Override
@@ -47,11 +44,6 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.btnActSort:
-                //    Intent intent = new Intent(this, .class);
-                //    startActivity(intent);
-                break;
-
-            case R.id.btnActGeom:
                 //    Intent intent = new Intent(this, .class);
                 //    startActivity(intent);
                 break;

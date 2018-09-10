@@ -6,16 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnActTwo;
+    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //webView = (WebView) findViewById (R.id.webView);
+        //webView.loadUrl("file:///android_asset/giphy.html");
 
         btnActTwo = (Button) findViewById(R.id.btnActTwo);
         btnActTwo.setOnClickListener(this);

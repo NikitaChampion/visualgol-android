@@ -32,12 +32,6 @@ public class ActivityDynamicPr extends AppCompatActivity implements View.OnClick
         button2 = (Button) findViewById(R.id.button2);
         button2.setOnClickListener(this);
 
-        button3 = (Button) findViewById(R.id.button3);
-        button3.setOnClickListener(this);
-
-        button4 = (Button) findViewById(R.id.button4);
-        button4.setOnClickListener(this);
-
         button5 = (Button) findViewById(R.id.button5);
         button5.setOnClickListener(this);
 
@@ -49,12 +43,6 @@ public class ActivityDynamicPr extends AppCompatActivity implements View.OnClick
 
         button8 = (Button) findViewById(R.id.button8);
         button8.setOnClickListener(this);
-
-        button9 = (Button) findViewById(R.id.button9);
-        button9.setOnClickListener(this);
-
-        button10 = (Button) findViewById(R.id.button10);
-        button10.setOnClickListener(this);
     }
 
     @Override
@@ -65,14 +53,6 @@ public class ActivityDynamicPr extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.button2:
-                //Intent intent = new Intent(this, .class);
-                //startActivity(intent);
-                break;
-            case R.id.button3:
-                //Intent intent = new Intent(this, .class);
-                //startActivity(intent);
-                break;
-            case R.id.button4:
                 //Intent intent = new Intent(this, .class);
                 //startActivity(intent);
                 break;
