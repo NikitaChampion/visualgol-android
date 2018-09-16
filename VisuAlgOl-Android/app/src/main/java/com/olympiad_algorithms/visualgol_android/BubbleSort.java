@@ -9,6 +9,7 @@ import android.widget.TextView;
 public class BubbleSort extends AppCompatActivity {
 
     private TextView [] txt_num;
+    long suma = 0;
     private int []numbers = {9,3,7,2,1,8,1,8,4};
     private Handler handler = new Handler();
     int loop = 0;
@@ -36,47 +37,57 @@ public class BubbleSort extends AppCompatActivity {
         (findViewById(R.id.ssort)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ++suma;
                 for (int i = 0; i < numbers.length; ++i){
                     txt_num[i].setText(String.valueOf(numbers[i]));
+                    txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
                 }
-                bubble_sort();
+                Runnable l = new Runnable() {
+                    public void run() {
+                        bubble_sort(suma);
+                    }
+                };
+                handler.postDelayed(l, 500);
             }
         });
     }
 
-    public void bubble_sort(){
-        animation_bubble(1);
+    public void bubble_sort(long cur){
+        animation_bubble(1, cur);
     }
 
-    public void animation_bubble(final int n) {
+    public void animation_bubble(final int n, final long cur) {
         final int m = n - 1;
         Runnable firstDel = new Runnable() {
-            Runnable secondDel = new Runnable() {
-                Runnable thirdDel = new Runnable() {
+            public void run() {
+                Runnable secondDel = new Runnable() {
                     public void run() {
-                        txt_num[m].setBackgroundResource(R.drawable.rectangle_gray);
-                        txt_num[n].setBackgroundResource(R.drawable.rectangle_gray);
-                        int j = n + 1;
-                        if (j == numbers.length - loop) {
-                            txt_num[j-1].setBackgroundResource(R.drawable.rectangle_dark);
-                            j = 1;
-                            ++loop;
-                        }
-                        if (loop < numbers.length - 1) {
-                            animation_bubble(j);
-                        }
+                        Runnable thirdDel = new Runnable() {
+                            public void run() {
+                                if (cur != suma) return;
+                                txt_num[m].setBackgroundResource(R.drawable.rectangle_gray);
+                                txt_num[n].setBackgroundResource(R.drawable.rectangle_gray);
+                                int j = n + 1;
+                                if (j == numbers.length - loop) {
+                                    txt_num[j-1].setBackgroundResource(R.drawable.rectangle_dark);
+                                    j = 1;
+                                    ++loop;
+                                }
+                                if (loop < numbers.length - 1) {
+                                    animation_bubble(j, cur);
+                                }
+                            }
+                        };
+                        if (cur != suma) return;
+                        handler.postDelayed(thirdDel, 1250);
+                        String temp = txt_num[m].getText().toString();
+                        txt_num[m].setText(txt_num[n].getText().toString());
+                        txt_num[n].setText(temp);
                     }
                 };
-                public void run() {
-                    handler.postDelayed(thirdDel, 1500);
-                    String temp = txt_num[m].getText().toString();
-                    txt_num[m].setText(txt_num[n].getText().toString());
-                    txt_num[n].setText(temp);
-                }
-            };
-            public void run() {
+                if (cur != suma) return;
                 if (Integer.valueOf(txt_num[m].getText().toString()) > Integer.valueOf(txt_num[n].getText().toString())) {
-                    handler.postDelayed(secondDel, 1500);
+                    handler.postDelayed(secondDel, 1250);
                     txt_num[m].setBackgroundResource(R.drawable.rectangle_red);
                     txt_num[n].setBackgroundResource(R.drawable.rectangle_red);
                 }
@@ -90,12 +101,13 @@ public class BubbleSort extends AppCompatActivity {
                         ++loop;
                     }
                     if (loop < numbers.length - 1) {
-                        animation_bubble(j);
+                        animation_bubble(j, cur);
                     }
                 }
             }
         };
-        handler.postDelayed(firstDel, 1500);
+        if (cur != suma) return;
+        handler.postDelayed(firstDel, 1250);
         txt_num[m].setBackgroundResource(R.drawable.rectangle_orange);
         txt_num[n].setBackgroundResource(R.drawable.rectangle_orange);
     }
