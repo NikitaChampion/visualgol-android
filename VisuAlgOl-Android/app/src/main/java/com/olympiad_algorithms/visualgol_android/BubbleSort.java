@@ -9,10 +9,10 @@ import android.widget.TextView;
 public class BubbleSort extends AppCompatActivity {
 
     private TextView [] txt_num;
-    long suma = 0;
-    private int []numbers = {9,3,7,2,1,8,1,8,4};
+    private long num_of_clicks = 0;
+    private int []numbers = {9,3,7,2,1,8,1,3,4};
     private Handler handler = new Handler();
-    int loop = 0;
+    private int loop = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,34 +20,29 @@ public class BubbleSort extends AppCompatActivity {
         setContentView(R.layout.activity_bubble_sort);
 
         txt_num = new TextView[9];
-        txt_num[0]= findViewById(R.id.txt_num1);
-        txt_num[1]= findViewById(R.id.txt_num2);
-        txt_num[2]= findViewById(R.id.txt_num3);
-        txt_num[3]= findViewById(R.id.txt_num4);
-        txt_num[4]= findViewById(R.id.txt_num5);
-        txt_num[5]= findViewById(R.id.txt_num6);
-        txt_num[6]= findViewById(R.id.txt_num7);
-        txt_num[7]= findViewById(R.id.txt_num8);
-        txt_num[8]= findViewById(R.id.txt_num9);
+        txt_num[0] = findViewById(R.id.txt_num1);
+        txt_num[1] = findViewById(R.id.txt_num2);
+        txt_num[2] = findViewById(R.id.txt_num3);
+        txt_num[3] = findViewById(R.id.txt_num4);
+        txt_num[4] = findViewById(R.id.txt_num5);
+        txt_num[5] = findViewById(R.id.txt_num6);
+        txt_num[6] = findViewById(R.id.txt_num7);
+        txt_num[7] = findViewById(R.id.txt_num8);
+        txt_num[8] = findViewById(R.id.txt_num9);
 
-        for (int i = 0; i < numbers.length; ++i){
+        for (int i = 0; i < numbers.length; ++i) {
             txt_num[i].setText(String.valueOf(numbers[i]));
         }
 
-        (findViewById(R.id.ssort)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.bub_sort)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ++suma;
-                for (int i = 0; i < numbers.length; ++i){
+                ++num_of_clicks;
+                for (int i = 0; i < numbers.length; ++i) {
                     txt_num[i].setText(String.valueOf(numbers[i]));
                     txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
                 }
-                Runnable l = new Runnable() {
-                    public void run() {
-                        bubble_sort(suma);
-                    }
-                };
-                handler.postDelayed(l, 500);
+                handler.postDelayed(new Runnable() { public void run() { bubble_sort(num_of_clicks); } }, 500);
             }
         });
     }
@@ -58,13 +53,13 @@ public class BubbleSort extends AppCompatActivity {
 
     public void animation_bubble(final int n, final long cur) {
         final int m = n - 1;
-        Runnable firstDel = new Runnable() {
+        Runnable comparison = new Runnable() {
             public void run() {
-                Runnable secondDel = new Runnable() {
+                Runnable if_swap = new Runnable() {
                     public void run() {
-                        Runnable thirdDel = new Runnable() {
+                        Runnable after_swap = new Runnable() {
                             public void run() {
-                                if (cur != suma) return;
+                                if (cur != num_of_clicks) return;
                                 txt_num[m].setBackgroundResource(R.drawable.rectangle_gray);
                                 txt_num[n].setBackgroundResource(R.drawable.rectangle_gray);
                                 int j = n + 1;
@@ -78,16 +73,16 @@ public class BubbleSort extends AppCompatActivity {
                                 }
                             }
                         };
-                        if (cur != suma) return;
-                        handler.postDelayed(thirdDel, 1250);
+                        if (cur != num_of_clicks) return;
+                        handler.postDelayed(after_swap, 1250);
                         String temp = txt_num[m].getText().toString();
-                        txt_num[m].setText(txt_num[n].getText().toString());
+                        txt_num[m].setText(txt_num[n].getText().toString()); // swap
                         txt_num[n].setText(temp);
                     }
                 };
-                if (cur != suma) return;
+                if (cur != num_of_clicks) return;
                 if (Integer.valueOf(txt_num[m].getText().toString()) > Integer.valueOf(txt_num[n].getText().toString())) {
-                    handler.postDelayed(secondDel, 1250);
+                    handler.postDelayed(if_swap, 1250);
                     txt_num[m].setBackgroundResource(R.drawable.rectangle_red);
                     txt_num[n].setBackgroundResource(R.drawable.rectangle_red);
                 }
@@ -106,8 +101,8 @@ public class BubbleSort extends AppCompatActivity {
                 }
             }
         };
-        if (cur != suma) return;
-        handler.postDelayed(firstDel, 1250);
+        if (cur != num_of_clicks) return;
+        handler.postDelayed(comparison, 1250);
         txt_num[m].setBackgroundResource(R.drawable.rectangle_orange);
         txt_num[n].setBackgroundResource(R.drawable.rectangle_orange);
     }
