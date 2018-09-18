@@ -55,6 +55,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
 
+        android:background="@drawable/button_shape"
         android:gravity="center"
 
         android:text="@string/go_next"
