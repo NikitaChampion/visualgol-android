@@ -77,7 +77,7 @@ public class StupidSort extends AppCompatActivity {
                 else {
                     txt_num[n-1].setBackgroundResource(R.drawable.rectangle_gray);
                     txt_num[n].setBackgroundResource(R.drawable.rectangle_gray);
-                    animation_stupid(n + 1, cur);
+                    if (n + 1 < numbers.length) animation_stupid(n + 1, cur);
                 }
             }
         };

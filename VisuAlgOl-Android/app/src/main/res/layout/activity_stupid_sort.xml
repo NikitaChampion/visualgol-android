@@ -141,9 +141,9 @@
             <TextView
                 android:id="@+id/st_sort"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="130dp"
-                android:layout_marginRight="130dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="125dp"
+                android:layout_marginRight="125dp"
                 android:layout_marginTop="15dp"
                 android:background="#448844"
                 android:gravity="center"
