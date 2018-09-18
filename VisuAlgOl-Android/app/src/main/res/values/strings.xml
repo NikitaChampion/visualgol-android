@@ -10,6 +10,7 @@
     <string name="basic_sort_algo">Basic sort algorithms</string>
     <string name="basic_sort">.....................</string>
     <string name="basic_sort2">.....................</string>
+    <string name="stupid_sort">Stupid sort</string>
     <string name="bubble_sort">Bubble sort</string>
     <string name="shell_sort_intro">Shell sort</string>
     <string name="merge_sort_intro">Merge sort</string>

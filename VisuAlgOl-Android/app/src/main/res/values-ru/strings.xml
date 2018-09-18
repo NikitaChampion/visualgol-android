@@ -12,6 +12,7 @@
 
     </string>
     <string name="basic_sort2">.....................</string>
+    <string name="stupid_sort">Глупая сортировка</string>
     <string name="bubble_sort">Сортировка пузырьком</string>
     <string name="shell_sort_intro">Сортировка Шелла</string>
     <string name="merge_sort_intro">Сортировка слиянием</string>
