@@ -2,7 +2,7 @@
     <string name="first_intro">Visualization of the Olympiad algorithms</string>
     <string name="sort_intro">Sorting</string>
     <string name="app_name">VisuAlgOl</string>
-    <string name="about">Welcome to VisuAlgOl! This application was created to study the Olympiad algorithms in informatics with the support of the Lyceum of the Higher School of Economics. To continue, click the button «Go».</string>
+    <string name="about">Welcome to VisuAlgOl! This application was created to learn olympiad algorithms in informatics with the support of the HSE Lyceum. To continue, click the button below.</string>
     <string name="go_next">Go</string>
     <string name="choose">Choose an algorithm</string>
     <string name="soldiers">Soldiers lined up in a row</string>
@@ -16,4 +16,5 @@
     <string name="merge_sort_intro">Merge sort</string>
     <string name="heap_sort_intro">Heap sort</string>
     <string name="one">1</string>
+    <string name="answer">Answer:</string>
 </resources>
