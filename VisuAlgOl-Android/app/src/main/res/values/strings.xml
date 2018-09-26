@@ -8,6 +8,7 @@
     <string name="soldiers">Soldiers lined up in a row</string>
     <string name="sort_introduction">What is sorting? Sorting is ordering: arranging items in a sequence ordered by some criterion. For example, people at school in pe lessons and in the army are lined up by height, because the order is needed.</string>
     <string name="basic_sort_algo">Basic sort algorithms</string>
+    <string name="sort_bub">Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list to be sorted, compares each pair of adjacent items and swaps them if they are in the wrong order. The pass through the list is repeated until no swaps are needed, which indicates that the list is sorted.</string>
     <string name="basic_sort">.....................</string>
     <string name="basic_sort2">.....................</string>
     <string name="stupid_sort">Stupid sort</string>
