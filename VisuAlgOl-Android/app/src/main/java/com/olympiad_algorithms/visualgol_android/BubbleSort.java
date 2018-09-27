@@ -10,7 +10,7 @@ public class BubbleSort extends AppCompatActivity {
 
     private TextView [] txt_num;
     private long num_of_clicks = 0;
-    private int []numbers = {9,3,7,2,1,8,1,3,4};
+    private int []numbers = {7,2,3,1,9,1,8,3,4};
     private Handler handler = new Handler();
     private int loop = 0;
 
@@ -42,7 +42,7 @@ public class BubbleSort extends AppCompatActivity {
                     txt_num[i].setText(String.valueOf(numbers[i]));
                     txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
                 }
-                handler.postDelayed(new Runnable() { public void run() { bubble_sort(num_of_clicks); } }, 500);
+                handler.postDelayed(new Runnable() { public void run() { bubble_sort(num_of_clicks); } }, 600);
             }
         });
     }

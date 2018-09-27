@@ -1,9 +1,11 @@
 package com.olympiad_algorithms.visualgol_android;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class StupidSort extends AppCompatActivity {
@@ -39,9 +41,18 @@ public class StupidSort extends AppCompatActivity {
                     txt_num[i].setText(String.valueOf(numbers[i]));
                     txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
                 }
-                handler.postDelayed(new Runnable() { public void run() { stupid_sort(num_of_clicks); } }, 500);
+                handler.postDelayed(new Runnable() { public void run() { stupid_sort(num_of_clicks); } }, 600);
             }
         });
+
+        EditText editTxt = findViewById(R.id.editText);
+
+        //Если кнопка нажата, то начинается Algorithms activity
+        if(editTxt.getText().toString().equals("test")){
+            Intent intent = new Intent(this, Algorithms.class);
+            intent.putExtra("isTrue",true);
+            startActivity(intent);
+        }
     }
 
     public void stupid_sort(long cur){
