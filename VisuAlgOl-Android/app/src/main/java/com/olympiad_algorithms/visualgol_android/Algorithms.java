@@ -19,30 +19,19 @@ public class Algorithms extends AppCompatActivity {
     String[] SearchArray;
     String[] RecursionArray;
     String[] GraphsArray;
+    String[] StringArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algorithms);
 
-        String locale = java.util.Locale.getDefault().getDisplayName(); // получение текущего языка системы
-
-        if (locale.charAt(0) == 'р' && locale.charAt(1) == 'у')
-        {
-            mGroupsArray = new String[] { "Сортировки", "Поиск", "Рекурсия", "Графы" };
-            SortArray = new String[] { "Что это и для чего нужно?", "Сортировка пузырьком", "Сортировка Шелла", "Сортировка слиянием", "Пирамидальная сортировка", "Быстрая сортировка" };
-            SearchArray = new String[] { "Линейный поиск", "Бинарный поиск", "Тернарный поиск" };
-            RecursionArray = new String[] { "Что это и для чего нужно?" };
-            GraphsArray = new String[] { "Поиск в глубину", "Поиск в ширину" };
-        }
-        else
-        {
-            mGroupsArray = new String[] { "Sorting algorithms", "Search algorithms", "Recursion", "Graphs" };
-            SortArray = new String[] { "What is it and what is it for?", "Bubble", "Shell sort", "Merge sort", "Heap sort", "Quick sort" };
-            SearchArray = new String[] { "Linear search", "Binary search", "Ternary search" };
-            RecursionArray = new String[] { "What is it and what is it for?" };
-            GraphsArray = new String[] { "DFS", "BFS" };
-        }
+        mGroupsArray = new String[] { getString(R.string.sorting), getString(R.string.search), getString(R.string.recursion), getString(R.string.graphs), getString(R.string.strings) };
+        SortArray = new String[] { getString(R.string.what), getString(R.string.bubble_sort), getString(R.string.merge_sort), getString(R.string.heap_sort), getString(R.string.quick_sort) };
+        SearchArray = new String[] { getString(R.string.lin_search), getString(R.string.bin_search), getString(R.string.ter_search) };
+        RecursionArray = new String[] { getString(R.string.what) };
+        GraphsArray = new String[] { getString(R.string.dfs), getString(R.string.bfs) };
+        StringArray = new String[] { getString(R.string.prefix), getString(R.string.z_fun) };
 
         Map<String, String> map; // коллекция для групп
         ArrayList<Map<String, String>> groupDataList = new ArrayList<>(); // заполняем коллекцию групп из массива с названиями групп
@@ -92,6 +81,14 @@ public class Algorithms extends AppCompatActivity {
         }
         childDataList.add(childDataItemList);
 
+        childDataItemList = new ArrayList<>(); // создаём коллекцию элементов для четвёртой группы
+        for (String algorithm : StringArray) {
+            map = new HashMap<>();
+            map.put("algorithmName", algorithm);
+            childDataItemList.add(map);
+        }
+        childDataList.add(childDataItemList);
+
         String childFrom[] = new String[]{"algorithmName"}; // список атрибутов элементов для чтения
 
         int childTo[] = new int[]{android.R.id.text1}; // список ID view-элементов, в которые будет помещены атрибуты элементов
@@ -120,19 +117,26 @@ public class Algorithms extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else if (childPosition == 2) {
-                        Intent intent = new Intent(Algorithms.this, ShellSort.class);
-                        startActivity(intent);
-                    }
-                    else if (childPosition == 3) {
                         Intent intent = new Intent(Algorithms.this, MergeSort.class);
                         startActivity(intent);
                     }
-                    else if (childPosition == 4) {
+                    else if (childPosition == 3) {
                         Intent intent = new Intent(Algorithms.this, HeapSort.class);
                         startActivity(intent);
                     }
-                    else if (childPosition == 5) {
+                    else if (childPosition == 4) {
                         Intent intent = new Intent(Algorithms.this, QuickSort.class);
+                        startActivity(intent);
+                    }
+                }
+                else if (groupPosition == 4)
+                {
+                    if (childPosition == 0) {
+                        Intent intent = new Intent(Algorithms.this, Prefix_fun.class);
+                        startActivity(intent);
+                    }
+                    else if (childPosition == 1) {
+                        Intent intent = new Intent(Algorithms.this, Z_fun.class);
                         startActivity(intent);
                     }
                 }

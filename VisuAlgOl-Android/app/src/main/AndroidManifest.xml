@@ -22,7 +22,8 @@
         <activity android:name=".HeapSort" />
         <activity android:name=".QuickSort" />
         <activity android:name=".MergeSort" />
-        <activity android:name=".ShellSort"></activity>
+        <activity android:name=".Prefix_fun" />
+        <activity android:name=".Z_fun"></activity>
     </application>
 
 </manifest>

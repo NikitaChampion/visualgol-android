@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.toAlgorithms:
                 Intent intent = new Intent(this, Algorithms.class);
                 startActivity(intent);

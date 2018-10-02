@@ -167,29 +167,30 @@
 
             </LinearLayout>
 
-            <TextView
+            <Button
                 android:id="@+id/bub_sort"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="100dp"
-                android:layout_marginRight="100dp"
+
+                style="@android:style/Widget.Holo.Light.Button.Toggle"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:background="#448844"
+
+                android:background="@drawable/button_shape"
                 android:gravity="center"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
+
                 android:text="@string/bubble_sort"
                 android:textColor="#ffffff"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txt_num5" />
+                app:layout_constraintTop_toBottomOf="@+id/txt_num5" />
 
             <TextView
                 android:id="@+id/SortBub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
                 android:text="@string/sort_bub"
                 android:textColor="#000000"
@@ -201,8 +202,8 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="155dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="5dp"
                 android:contentDescription="@string/bubble_sort"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -215,7 +216,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center_horizontal"
-                android:text="@string/sort_bub2"
+                android:text="@string/sort_bub_2"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -228,7 +229,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="@string/answer" />
+                android:hint="@string/answer" />
 
         </LinearLayout>
     </ScrollView>
