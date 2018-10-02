@@ -14,7 +14,6 @@ public class Prefix_fun extends AppCompatActivity implements View.OnClickListene
     private TextView[] txt_num;
     private TextView[] pr;
     private char[] chars = {'a', 'b', 'a', 'c', 'a', 'b', 'a'};
-    private int[] numbers = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     private long num_of_clicks = 0;
     private Handler handler = new Handler();
 
@@ -42,7 +41,7 @@ public class Prefix_fun extends AppCompatActivity implements View.OnClickListene
         pr[6] = findViewById(R.id.pr_7);
 
         for (int i = 0; i < pr.length; ++i) {
-            pr[i].setText(String.valueOf(numbers[i]));
+            pr[i].setText("0");
             txt_num[i].setText(String.valueOf(chars[i]));
         }
 
@@ -56,7 +55,7 @@ public class Prefix_fun extends AppCompatActivity implements View.OnClickListene
             case R.id.pr_fun:
                 ++num_of_clicks;
                 for (int i = 0; i < pr.length; ++i) {
-                    pr[i].setText(String.valueOf(numbers[i]));
+                    pr[i].setText("0");
                     txt_num[i].setTextColor(Color.parseColor("#000000"));
                     pr[i].setBackgroundResource(R.drawable.rectangle_white);
                 }
