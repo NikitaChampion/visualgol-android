@@ -45,10 +45,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num2"
@@ -58,10 +55,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num3"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num3"
@@ -71,10 +65,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num4"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num2"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num4"
@@ -84,10 +75,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num5"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num3"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num5"
@@ -97,10 +85,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num6"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num4"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num6"
@@ -110,10 +95,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num7"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num5"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num7"
@@ -123,9 +105,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num6"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
@@ -144,10 +124,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/z_2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/z_2"
@@ -157,10 +134,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/z_3"
-                    app:layout_constraintStart_toEndOf="@+id/z_1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/z_3"
@@ -170,10 +144,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/z_4"
-                    app:layout_constraintStart_toEndOf="@+id/z_2"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/z_4"
@@ -183,10 +154,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/z_5"
-                    app:layout_constraintStart_toEndOf="@+id/z_3"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/z_5"
@@ -196,10 +164,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/z_6"
-                    app:layout_constraintStart_toEndOf="@+id/z_4"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/z_6"
@@ -209,10 +174,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/z_7"
-                    app:layout_constraintStart_toEndOf="@+id/z_5"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/z_7"
@@ -222,9 +184,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/z_6"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 

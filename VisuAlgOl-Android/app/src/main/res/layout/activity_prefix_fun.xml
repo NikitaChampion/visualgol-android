@@ -45,10 +45,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num2"
@@ -58,10 +55,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num3"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num3"
@@ -71,10 +65,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num4"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num2"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num4"
@@ -84,10 +75,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num5"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num3"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num5"
@@ -97,10 +85,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num6"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num4"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num6"
@@ -110,10 +95,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_num7"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num5"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/txt_num7"
@@ -123,9 +105,7 @@
                     android:gravity="center"
                     android:text="@string/symbol"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:layout_constraintStart_toEndOf="@+id/txt_num6"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
@@ -144,10 +124,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/pr_2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/pr_2"
@@ -157,10 +134,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/pr_3"
-                    app:layout_constraintStart_toEndOf="@+id/pr_1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/pr_3"
@@ -170,10 +144,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/pr_4"
-                    app:layout_constraintStart_toEndOf="@+id/pr_2"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/pr_4"
@@ -183,10 +154,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/pr_5"
-                    app:layout_constraintStart_toEndOf="@+id/pr_3"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/pr_5"
@@ -196,10 +164,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/pr_6"
-                    app:layout_constraintStart_toEndOf="@+id/pr_4"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/pr_6"
@@ -209,10 +174,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/pr_7"
-                    app:layout_constraintStart_toEndOf="@+id/pr_5"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/pr_7"
@@ -222,9 +184,7 @@
                     android:gravity="center"
                     android:text="@string/one"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/pr_6"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -245,7 +205,7 @@
                 android:textSize="20sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_num4" />
+                app:layout_constraintTop_toBottomOf="@+id/pr_4" />
 
             <TextView
                 android:id="@+id/SortIntroduction"
