@@ -60,7 +60,7 @@
                 android:id="@+id/toAlgorithms"
 
                 style="@android:style/Widget.Holo.Light.Button.Toggle"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
