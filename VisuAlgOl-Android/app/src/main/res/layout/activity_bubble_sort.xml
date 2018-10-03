@@ -25,10 +25,7 @@
                 android:textAllCaps="false"
                 android:textColor="?android:attr/colorForeground"
                 android:textSize="20sp"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textStyle="italic" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -131,22 +128,16 @@
 
             <Button
                 android:id="@+id/bub_sort"
-
                 style="@android:style/Widget.Holo.Light.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-
                 android:background="@drawable/button_shape"
                 android:gravity="center"
-
                 android:text="@string/bubble_sort"
                 android:textColor="#ffffff"
-                android:textSize="20sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_num5" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/SortBub"
@@ -156,10 +147,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/sort_bub"
                 android:textColor="#000000"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bub_sort" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -167,9 +155,6 @@
                 android:layout_height="250dp"
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/bubble_sort"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/SortBub"
                 app:srcCompat="@drawable/bubble" />
 
             <TextView
@@ -180,10 +165,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/sort_bub_2"
                 android:textColor="#000000"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/editText"
