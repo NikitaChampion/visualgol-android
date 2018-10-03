@@ -9,21 +9,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Algorithms" />
-        <activity android:name=".StupidSort" />
-        <activity android:name=".BubbleSort" />
-        <activity android:name=".HeapSort" />
-        <activity android:name=".QuickSort" />
-        <activity android:name=".MergeSort" />
-        <activity android:name=".Prefix_fun" />
-        <activity android:name=".Z_fun"></activity>
+        <activity android:name=".Algorithms"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".StupidSort"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".BubbleSort"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HeapSort"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".QuickSort"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MergeSort"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Prefix_fun"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Z_fun"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
