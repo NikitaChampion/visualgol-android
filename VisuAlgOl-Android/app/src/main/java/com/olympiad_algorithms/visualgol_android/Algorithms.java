@@ -81,7 +81,7 @@ public class Algorithms extends AppCompatActivity {
         }
         childDataList.add(childDataItemList);
 
-        childDataItemList = new ArrayList<>(); // создаём коллекцию элементов для четвёртой группы
+        childDataItemList = new ArrayList<>(); // создаём коллекцию элементов для пятой группы
         for (String algorithm : StringArray) {
             map = new HashMap<>();
             map.put("algorithmName", algorithm);
@@ -108,37 +108,44 @@ public class Algorithms extends AppCompatActivity {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 if (groupPosition == 0)
                 {
-                    if (childPosition == 0) {
-                        Intent intent = new Intent(Algorithms.this, StupidSort.class);
-                        startActivity(intent);
+                    Intent intent;
+                    switch (childPosition) {
+                        case 0:
+                            intent = new Intent(Algorithms.this, StupidSort.class);
+                            break;
+                        case 1:
+                            intent = new Intent(Algorithms.this, BubbleSort.class);
+                            break;
+                        case 2:
+                            intent = new Intent(Algorithms.this, MergeSort.class);
+                            break;
+                        case 3:
+                            intent = new Intent(Algorithms.this, HeapSort.class);
+                            break;
+                        case 4:
+                            intent = new Intent(Algorithms.this, QuickSort.class);
+                            break;
+                        default:
+                            intent = new Intent(Algorithms.this, StupidSort.class);
+                            break;
                     }
-                    else if (childPosition == 1) {
-                        Intent intent = new Intent(Algorithms.this, BubbleSort.class);
-                        startActivity(intent);
-                    }
-                    else if (childPosition == 2) {
-                        Intent intent = new Intent(Algorithms.this, MergeSort.class);
-                        startActivity(intent);
-                    }
-                    else if (childPosition == 3) {
-                        Intent intent = new Intent(Algorithms.this, HeapSort.class);
-                        startActivity(intent);
-                    }
-                    else if (childPosition == 4) {
-                        Intent intent = new Intent(Algorithms.this, QuickSort.class);
-                        startActivity(intent);
-                    }
+                    startActivity(intent);
                 }
                 else if (groupPosition == 4)
                 {
-                    if (childPosition == 0) {
-                        Intent intent = new Intent(Algorithms.this, Prefix_fun.class);
-                        startActivity(intent);
+                    Intent intent;
+                    switch (childPosition) {
+                        case 0:
+                            intent = new Intent(Algorithms.this, Prefix_fun.class);
+                            break;
+                        case 1:
+                            intent = new Intent(Algorithms.this, Z_fun.class);
+                            break;
+                        default:
+                            intent = new Intent(Algorithms.this, Prefix_fun.class);
+                            break;
                     }
-                    else if (childPosition == 1) {
-                        Intent intent = new Intent(Algorithms.this, Z_fun.class);
-                        startActivity(intent);
-                    }
+                    startActivity(intent);
                 }
                 return false;
             }
