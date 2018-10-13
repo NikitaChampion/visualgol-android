@@ -1,1 +1,1 @@
-# Visualization-of-the-Olympiad-algorithms
+# VisuAlgOl
