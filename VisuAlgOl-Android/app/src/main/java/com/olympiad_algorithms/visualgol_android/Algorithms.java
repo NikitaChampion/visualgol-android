@@ -4,107 +4,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.SimpleExpandableListAdapter;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 
 public class Algorithms extends AppCompatActivity {
 
-    String[] mGroupsArray;
-    String[] SortArray;
-    String[] SearchArray;
-    String[] RecursionArray;
-    String[] GraphsArray;
-    String[] StringArray;
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algorithms);
 
-        mGroupsArray = new String[] { getString(R.string.sorting), getString(R.string.search), getString(R.string.recursion), getString(R.string.graphs), getString(R.string.strings) };
-        SortArray = new String[] { getString(R.string.what), getString(R.string.bubble_sort), getString(R.string.merge_sort), getString(R.string.heap_sort), getString(R.string.quick_sort) };
-        SearchArray = new String[] { getString(R.string.lin_search), getString(R.string.bin_search), getString(R.string.ter_search) };
-        RecursionArray = new String[] { getString(R.string.what) };
-        GraphsArray = new String[] { getString(R.string.dfs), getString(R.string.bfs) };
-        StringArray = new String[] { getString(R.string.prefix), getString(R.string.z_fun) };
+        // get the listView
+        expListView = findViewById(R.id.expListView);
 
-        Map<String, String> map; // коллекция для групп
-        ArrayList<Map<String, String>> groupDataList = new ArrayList<>(); // заполняем коллекцию групп из массива с названиями групп
+        // preparing list data
+        prepareListData();
 
-        for (String group : mGroupsArray) { // заполняем список атрибутов для каждой группы
-            map = new HashMap<>();
-            map.put("groupName", group); // Темы
-            groupDataList.add(map);
-        }
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
-        String groupFrom[] = new String[]{"groupName"}; // список атрибутов групп для чтения
-        int groupTo[] = new int[]{android.R.id.text1}; // список ID view-элементов, в которые будет помещены атрибуты групп
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
 
-        ArrayList<ArrayList<Map<String, String> > > childDataList = new ArrayList<>(); // создаём общую коллекцию для коллекций элементов
-
-        ArrayList<Map<String, String> > childDataItemList = new ArrayList<>(); // создаём коллекцию элементов для первой группы
-
-        for (String algorithm : SortArray) {
-            map = new HashMap<>();
-            map.put("algorithmName", algorithm); // "Конкретные" алгоритмы
-            childDataItemList.add(map);
-        }
-
-        childDataList.add(childDataItemList); // добавляем в коллекцию коллекций
-
-        childDataItemList = new ArrayList<>(); // создаём коллекцию элементов для второй группы
-        for (String algorithm : SearchArray) {
-            map = new HashMap<>();
-            map.put("algorithmName", algorithm);
-            childDataItemList.add(map);
-        }
-        childDataList.add(childDataItemList);
-
-        childDataItemList = new ArrayList<>(); // создаём коллекцию элементов для третьей группы
-        for (String algorithm : RecursionArray) {
-            map = new HashMap<>();
-            map.put("algorithmName", algorithm);
-            childDataItemList.add(map);
-        }
-        childDataList.add(childDataItemList);
-
-        childDataItemList = new ArrayList<>(); // создаём коллекцию элементов для четвёртой группы
-        for (String algorithm : GraphsArray) {
-            map = new HashMap<>();
-            map.put("algorithmName", algorithm);
-            childDataItemList.add(map);
-        }
-        childDataList.add(childDataItemList);
-
-        childDataItemList = new ArrayList<>(); // создаём коллекцию элементов для пятой группы
-        for (String algorithm : StringArray) {
-            map = new HashMap<>();
-            map.put("algorithmName", algorithm);
-            childDataItemList.add(map);
-        }
-        childDataList.add(childDataItemList);
-
-        String childFrom[] = new String[]{"algorithmName"}; // список атрибутов элементов для чтения
-
-        int childTo[] = new int[]{android.R.id.text1}; // список ID view-элементов, в которые будет помещены атрибуты элементов
-
-        SimpleExpandableListAdapter adapter = new SimpleExpandableListAdapter(
-                this, groupDataList,
-                android.R.layout.simple_expandable_list_item_1, groupFrom,
-                groupTo, childDataList, android.R.layout.simple_list_item_1,
-                childFrom, childTo);
-
-        ExpandableListView expandableListView = findViewById(R.id.expListView);
-        expandableListView.setAdapter(adapter);
-
-
-        // нажатие на элемент
-        expandableListView.setOnChildClickListener(new OnChildClickListener() {
+        // ListView Group click listener
+        expListView.setOnChildClickListener(new OnChildClickListener() {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 if (groupPosition == 0)
                 {
@@ -150,5 +80,51 @@ public class Algorithms extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    /*
+    ===========================================================================
+        Preparing the list data
+    ===========================================================================
+    */
+    private void prepareListData() {
+        listDataHeader = new ArrayList<>();
+        listDataChild = new HashMap<>();
+
+        listDataHeader.add(getString(R.string.sorting));
+        listDataHeader.add(getString(R.string.search));
+        listDataHeader.add(getString(R.string.recursion));
+        listDataHeader.add(getString(R.string.graphs));
+        listDataHeader.add(getString(R.string.strings));
+
+        // Adding child data
+        List<String> SortArray = new ArrayList<>();
+        SortArray.add(getString(R.string.what));
+        SortArray.add(getString(R.string.bubble_sort));
+        SortArray.add(getString(R.string.merge_sort));
+        SortArray.add(getString(R.string.heap_sort));
+        SortArray.add(getString(R.string.quick_sort));
+
+        List<String> SearchArray = new ArrayList<>();
+        SearchArray.add(getString(R.string.lin_search));
+        SearchArray.add(getString(R.string.bin_search));
+        SearchArray.add(getString(R.string.ter_search));
+
+        List<String> RecursionArray = new ArrayList<>();
+        RecursionArray.add(getString(R.string.what));
+
+        List<String> GraphsArray = new ArrayList<>();
+        GraphsArray.add(getString(R.string.dfs));
+        GraphsArray.add(getString(R.string.bfs));
+
+        List<String> StringArray = new ArrayList<>();
+        StringArray.add(getString(R.string.prefix));
+        StringArray.add(getString(R.string.z_fun));
+
+        listDataChild.put(listDataHeader.get(0), SortArray);
+        listDataChild.put(listDataHeader.get(1), SearchArray);
+        listDataChild.put(listDataHeader.get(2), RecursionArray);
+        listDataChild.put(listDataHeader.get(3), GraphsArray);
+        listDataChild.put(listDataHeader.get(4), StringArray);
     }
 }
