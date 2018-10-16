@@ -4,11 +4,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.Toast;
 
 public class Algorithms extends AppCompatActivity {
 
@@ -16,6 +20,9 @@ public class Algorithms extends AppCompatActivity {
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    String setter;
+
+    private final static String FILE_NAME = "content.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +35,7 @@ public class Algorithms extends AppCompatActivity {
         // preparing list data
         prepareListData();
 
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild, setter);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
@@ -126,5 +133,27 @@ public class Algorithms extends AppCompatActivity {
         listDataChild.put(listDataHeader.get(2), RecursionArray);
         listDataChild.put(listDataHeader.get(3), GraphsArray);
         listDataChild.put(listDataHeader.get(4), StringArray);
+
+        setter = loadText();
+    }
+
+    public String loadText() {
+        FileInputStream fin = null;
+        try {
+            fin = openFileInput(FILE_NAME);
+            byte[] bytes = new byte[fin.available()];
+            fin.read(bytes);
+            return new String(bytes);
+        } catch (IOException ex) {
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            return FILE_NAME;
+        } finally {
+            try {
+                if (fin != null)
+                    fin.close();
+            } catch (IOException ex) {
+                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

@@ -40,4 +40,6 @@
     <string name="one">1</string>
     <string name="symbol">a</string>
     <string name="answer">Ответ:</string>
+    <string name="check">Проверить</string>
+    <string name="task2">Отсортируйте следующий массив чисел по возрастанию: 2 1 3</string>
 </resources>

@@ -17,12 +17,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
+    private String setter;
 
     ExpandableListAdapter(Context context, List<String> listDataHeader,
-                          HashMap<String, List<String>> listChildData) {
+                          HashMap<String, List<String>> listChildData, String setter) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
+        this.setter = setter;
     }
 
     @Override
@@ -52,6 +54,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = convertView.findViewById(R.id.lblListItem);
 
         txtListChild.setText(childText);
+
+        if (setter.charAt(groupPosition*10+childPosition)=='1')
+            txtListChild.setBackgroundResource(R.color.green);
+        else txtListChild.setBackgroundResource(R.color.white);
+
         return convertView;
     }
 

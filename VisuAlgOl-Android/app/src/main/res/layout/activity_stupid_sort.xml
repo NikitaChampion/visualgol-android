@@ -137,13 +137,32 @@
                 android:contentDescription="@string/soldiers"
                 app:srcCompat="@drawable/soldiers" />
 
-            <EditText
-                android:id="@+id/editText"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="@string/answer" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal">
+
+                <EditText
+                    android:id="@+id/edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="12"
+                    android:hint="@string/answer"
+                    android:inputType="textPersonName" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    style="@android:style/Widget.Holo.Light.Button.Toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shape"
+                    android:gravity="center"
+                    android:text="@string/check"
+                    android:textColor="#ffffff"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

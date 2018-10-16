@@ -6,15 +6,25 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class BubbleSort extends AppCompatActivity implements View.OnClickListener {
 
     Button bub_sort;
+    Button btnSave;
+    EditText edit_text;
     private TextView [] txt_num;
     private long num_of_clicks = 0;
     private int []numbers = {7,2,1,3,9,0,8,3,4};
     private int []numbers_2 = {7,2,1,3,9,0,8,3,4};
     private Handler handler = new Handler();
+
+    private final static String FILE_NAME = "content.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +48,11 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
 
         bub_sort = findViewById(R.id.bub_sort);
         bub_sort.setOnClickListener(this);
+
+        edit_text = findViewById(R.id.edit_text);
+
+        btnSave = findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(this);
     }
 
     @Override
@@ -52,6 +67,10 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
                 }
                 handler.postDelayed(new Runnable() { public void run() { bubble_sort(num_of_clicks); } }, 600);
                 break;
+            case R.id.btnSave:
+                if (edit_text.getText().toString().equals("1 2 3"))
+                    saveText('1');
+                else saveText('0');
             default:
                 break;
         }
@@ -119,5 +138,48 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
                 }, 1250*current);
             }
         }
+    }
+    public String loadText() {
+        FileInputStream fin = null;
+        try {
+            fin = openFileInput(FILE_NAME);
+            byte[] bytes = new byte[fin.available()];
+            fin.read(bytes);
+            return new String(bytes);
+        }
+        catch(IOException ex) {
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            StringBuilder curBuilder = new StringBuilder();
+            for (int i = 0; i < 100; ++i)
+                curBuilder.append('0');
+            return curBuilder.toString();
+        }
+        finally {
+            try {
+                if (fin != null)
+                    fin.close();
+            } catch (IOException ex) {
+                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    public void saveText(char ch) {
+        char[] c = loadText().toCharArray();
+        c[1] = ch;
+        String str = new String(c);
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(str.getBytes());
+        }
+        catch(IOException ignored) { }
+        finally {
+            try {
+                if (fos != null)
+                    fos.close();
+            }
+            catch(IOException ignored) { }
+        }
+        Toast.makeText(this, "Text saved", Toast.LENGTH_SHORT).show();
     }
 }
