@@ -1,5 +1,6 @@
 package com.olympiad_algorithms.visualgol_android;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -53,7 +54,13 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
 
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
+
     }
+    /*@Override
+    public void onBackPressed() {
+        Intent intent = new Intent(BubbleSort.this,Algorithms.class);
+        startActivity(intent);
+    }*/
 
     @Override
     public void onClick(View v) {
