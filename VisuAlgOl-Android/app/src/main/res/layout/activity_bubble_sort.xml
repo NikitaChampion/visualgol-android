@@ -25,7 +25,7 @@
                 android:textAllCaps="false"
                 android:textColor="?android:attr/colorForeground"
                 android:textSize="20sp"
-                android:textStyle="italic" />
+                app:fontFamily="@font/rubik_italic" />
 
             <LinearLayout
                 android:layout_width="match_parent"

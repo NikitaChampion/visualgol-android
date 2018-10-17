@@ -22,7 +22,7 @@ public class Algorithms extends AppCompatActivity {
     HashMap<String, List<String>> listDataChild;
     String setter;
 
-    private final static String FILE_NAME = "content.txt";
+    private final static String FILE_NAME = "qwerty.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +146,10 @@ public class Algorithms extends AppCompatActivity {
             return new String(bytes);
         } catch (IOException ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            return FILE_NAME;
+            StringBuilder curBuilder = new StringBuilder();
+            for (int i = 0; i < listDataChild.size()*10; ++i)
+                curBuilder.append('0');
+            return curBuilder.toString();
         } finally {
             try {
                 if (fin != null)

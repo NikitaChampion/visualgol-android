@@ -25,10 +25,7 @@
                 android:textAllCaps="false"
                 android:textColor="?android:attr/colorForeground"
                 android:textSize="20sp"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:fontFamily="@font/rubik_italic" />
 
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/MergeSort"

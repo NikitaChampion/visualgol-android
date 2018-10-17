@@ -24,7 +24,7 @@
                 android:text="@string/first_intro"
                 android:textColor="#000000"
                 android:textSize="20sp"
-                android:textStyle="italic" />
+                app:fontFamily="@font/rubik_mediumitalic" />
 
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/SimulatedAnnealing"

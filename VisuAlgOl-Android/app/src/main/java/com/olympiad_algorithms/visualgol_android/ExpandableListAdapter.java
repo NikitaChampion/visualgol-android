@@ -56,8 +56,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         txtListChild.setText(childText);
 
         if (setter.charAt(groupPosition*10+childPosition)=='1')
-            txtListChild.setBackgroundResource(R.color.green);
-        else txtListChild.setBackgroundResource(R.color.white);
+            txtListChild.setTextColor(_context.getResources().getColor(R.color.green));
+        else txtListChild.setTextColor(_context.getResources().getColor(R.color.colorAccent));
 
         return convertView;
     }
