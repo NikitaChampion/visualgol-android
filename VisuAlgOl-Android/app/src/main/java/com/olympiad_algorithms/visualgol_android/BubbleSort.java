@@ -187,6 +187,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
             }
             catch(IOException ignored) { }
         }
-        Toast.makeText(this, "Text saved", Toast.LENGTH_SHORT).show();
+        if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this, "Wrong answer", Toast.LENGTH_SHORT).show();
     }
 }
