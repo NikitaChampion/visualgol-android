@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Prefix_fun">
+    tools:context=".SelectionSort">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:gravity="center_horizontal"
-                android:text="@string/prefix"
+                android:text="@string/selection_sort"
                 android:textAllCaps="false"
                 android:textColor="?android:attr/colorForeground"
                 android:textSize="20sp"
@@ -31,162 +31,103 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center_horizontal">
 
                 <TextView
                     android:id="@+id/txt_num1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/rectangle_blue"
+                    android:background="@drawable/rectangle_gray"
                     android:gravity="center"
-                    android:text="@string/symbol"
-                    android:textColor="#000000"
-                    android:textSize="24sp" />
+                    android:text="@string/one"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txt_num2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/rectangle_blue"
+                    android:background="@drawable/rectangle_gray"
                     android:gravity="center"
-                    android:text="@string/symbol"
-                    android:textColor="#000000"
-                    android:textSize="24sp" />
+                    android:text="@string/one"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txt_num3"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/rectangle_blue"
+                    android:background="@drawable/rectangle_gray"
                     android:gravity="center"
-                    android:text="@string/symbol"
-                    android:textColor="#000000"
-                    android:textSize="24sp" />
+                    android:text="@string/one"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txt_num4"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/rectangle_blue"
+                    android:background="@drawable/rectangle_gray"
                     android:gravity="center"
-                    android:text="@string/symbol"
-                    android:textColor="#000000"
-                    android:textSize="24sp" />
+                    android:text="@string/one"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txt_num5"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/rectangle_blue"
+                    android:background="@drawable/rectangle_gray"
                     android:gravity="center"
-                    android:text="@string/symbol"
-                    android:textColor="#000000"
-                    android:textSize="24sp" />
+                    android:text="@string/one"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txt_num6"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/rectangle_blue"
+                    android:background="@drawable/rectangle_gray"
                     android:gravity="center"
-                    android:text="@string/symbol"
-                    android:textColor="#000000"
-                    android:textSize="24sp" />
+                    android:text="@string/one"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txt_num7"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/rectangle_blue"
-                    android:gravity="center"
-                    android:text="@string/symbol"
-                    android:textColor="#000000"
-                    android:textSize="24sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:id="@+id/pr_1"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/rectangle_white"
+                    android:background="@drawable/rectangle_gray"
                     android:gravity="center"
                     android:text="@string/one"
-                    android:textColor="#000000"
+                    android:textColor="#ffffff"
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/pr_2"
+                    android:id="@+id/txt_num8"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/rectangle_white"
+                    android:background="@drawable/rectangle_gray"
                     android:gravity="center"
                     android:text="@string/one"
-                    android:textColor="#000000"
+                    android:textColor="#ffffff"
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/pr_3"
+                    android:id="@+id/txt_num9"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/rectangle_white"
+                    android:background="@drawable/rectangle_gray"
                     android:gravity="center"
                     android:text="@string/one"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/pr_4"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/rectangle_white"
-                    android:gravity="center"
-                    android:text="@string/one"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/pr_5"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/rectangle_white"
-                    android:gravity="center"
-                    android:text="@string/one"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/pr_6"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/rectangle_white"
-                    android:gravity="center"
-                    android:text="@string/one"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/pr_7"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/rectangle_white"
-                    android:gravity="center"
-                    android:text="@string/one"
-                    android:textColor="#000000"
+                    android:textColor="#ffffff"
                     android:textSize="18sp" />
 
             </LinearLayout>
 
             <Button
-                android:id="@+id/pr_fun"
+                android:id="@+id/bub_sort"
                 style="@android:style/Widget.Holo.Light.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -194,27 +135,47 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/button_shape"
                 android:gravity="center"
-                android:text="@string/prefix"
+                android:text="@string/selection_sort"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/SortIntroduction"
+                android:id="@+id/SortBub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:text="@string/prefix_fun"
+                android:text="@string/basic_sort2"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editText"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="@string/answer" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <EditText
+                    android:id="@+id/edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="12"
+                    android:hint="@string/answer"
+                    android:inputType="textPersonName" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    style="@android:style/Widget.Holo.Light.Button.Toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shape"
+                    android:gravity="center"
+                    android:text="@string/check"
+                    android:textColor="#ffffff"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

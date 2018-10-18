@@ -23,7 +23,7 @@
                 android:gravity="center"
                 android:text="@string/first_intro"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 app:fontFamily="@font/rubik_mediumitalic" />
 
             <pl.droidsonroids.gif.GifImageView

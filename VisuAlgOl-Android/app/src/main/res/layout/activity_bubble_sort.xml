@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center_horizontal">
 
                 <TextView
@@ -143,7 +143,9 @@
                 android:id="@+id/SortBub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
                 android:text="@string/sort_bub"
                 android:textColor="#000000"

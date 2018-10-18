@@ -14,7 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class BubbleSort extends AppCompatActivity implements View.OnClickListener {
+public class SelectionSort extends AppCompatActivity implements View.OnClickListener {
 
     Button bub_sort;
     Button btnSave;
@@ -30,7 +30,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bubble_sort);
+        setContentView(R.layout.activity_selection_sort);
 
         txt_num = new TextView[9];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -58,7 +58,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     }
     /*@Override
     public void onBackPressed() {
-        Intent intent = new Intent(BubbleSort.this, Algorithms.class);
+        Intent intent = new Intent(SelectionSort.this, Algorithms.class);
         startActivity(intent);
     }*/
 

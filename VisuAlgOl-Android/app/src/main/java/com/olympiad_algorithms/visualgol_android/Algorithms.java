@@ -53,15 +53,15 @@ public class Algorithms extends AppCompatActivity {
                         case 1:
                             intent = new Intent(Algorithms.this, BubbleSort.class);
                             break;
-                        case 2:
-                            intent = new Intent(Algorithms.this, MergeSort.class);
+                        /*case 2:
+                            intent = new Intent(Algorithms.this, SelectionSort.class);
                             break;
                         case 3:
-                            intent = new Intent(Algorithms.this, HeapSort.class);
+                            intent = new Intent(Algorithms.this, MergeSort.class);
                             break;
                         case 4:
                             intent = new Intent(Algorithms.this, QuickSort.class);
-                            break;
+                            break;*/
                         default:
                             intent = new Intent(Algorithms.this, StupidSort.class);
                             break;
@@ -108,8 +108,8 @@ public class Algorithms extends AppCompatActivity {
         List<String> SortArray = new ArrayList<>();
         SortArray.add(getString(R.string.what));
         SortArray.add(getString(R.string.bubble_sort));
+        SortArray.add(getString(R.string.selection_sort));
         SortArray.add(getString(R.string.merge_sort));
-        SortArray.add(getString(R.string.heap_sort));
         SortArray.add(getString(R.string.quick_sort));
 
         List<String> SearchArray = new ArrayList<>();

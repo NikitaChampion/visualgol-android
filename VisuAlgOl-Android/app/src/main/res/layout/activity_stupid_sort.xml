@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center_horizontal">
 
                 <TextView
@@ -120,10 +120,22 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/SortIntroduction"
+                android:id="@+id/whatIsIt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="@string/whatIsSort"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/SortIntroduction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
                 android:text="@string/sort_introduction"
                 android:textColor="#000000"
