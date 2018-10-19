@@ -127,7 +127,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/bub_sort"
+                android:id="@+id/sel_sort"
                 style="@android:style/Widget.Holo.Light.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/SortBub"
+                android:id="@+id/SortSel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

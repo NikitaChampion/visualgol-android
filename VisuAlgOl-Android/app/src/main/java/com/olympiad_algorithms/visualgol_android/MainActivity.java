@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         toAlgorithms = findViewById(R.id.toAlgorithms);
         toAlgorithms.setOnClickListener(this);
+
         giff = findViewById(R.id.SimulatedAnnealing);
         giff.setOnClickListener(this);
     }

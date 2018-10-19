@@ -146,48 +146,38 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
             }
         }
     }
+
+    static String convertStreamToString(FileInputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
     public String loadText() {
-        FileInputStream fin = null;
         try {
-            fin = openFileInput(FILE_NAME);
-            byte[] bytes = new byte[fin.available()];
-            fin.read(bytes);
-            return new String(bytes);
-        }
-        catch(IOException ex) {
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            FileInputStream fin = openFileInput(FILE_NAME);
+            String str = convertStreamToString(fin);
+            fin.close();
+            return str;
+        } catch(IOException ex) {
+            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
                 curBuilder.append('0');
             return curBuilder.toString();
-        }
-        finally {
-            try {
-                if (fin != null)
-                    fin.close();
-            } catch (IOException ex) {
-                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            }
         }
     }
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
         c[1] = ch;
         String str = new String(c);
-        FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
-        }
-        catch(IOException ignored) { }
-        finally {
-            try {
-                if (fos != null)
-                    fos.close();
-            }
-            catch(IOException ignored) { }
+            fos.close();
+        } catch(IOException ex) {
+            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this, "Wrong answer", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
     }
 }

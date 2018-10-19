@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class SelectionSort extends AppCompatActivity implements View.OnClickListener {
 
-    Button bub_sort;
+    Button sel_sort;
     Button btnSave;
     EditText edit_text;
     private TextView [] txt_num;
@@ -47,8 +47,8 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
             txt_num[i].setText(String.valueOf(numbers[i]));
         }
 
-        bub_sort = findViewById(R.id.bub_sort);
-        bub_sort.setOnClickListener(this);
+        sel_sort = findViewById(R.id.sel_sort);
+        sel_sort.setOnClickListener(this);
 
         edit_text = findViewById(R.id.edit_text);
 
@@ -65,7 +65,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bub_sort:
+            case R.id.sel_sort:
                 ++num_of_clicks;
                 for (int i = 0; i < numbers.length; ++i) {
                     txt_num[i].setText(String.valueOf(numbers[i]));

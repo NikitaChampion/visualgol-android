@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class Algorithms extends AppCompatActivity {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     String setter;
+    int sizer = 0;
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -40,7 +42,7 @@ public class Algorithms extends AppCompatActivity {
         // setting list adapter
         expListView.setAdapter(listAdapter);
 
-        // ListView Group click listener
+        // ListView child click listener
         expListView.setOnChildClickListener(new OnChildClickListener() {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 if (groupPosition == 0)
@@ -134,29 +136,46 @@ public class Algorithms extends AppCompatActivity {
         listDataChild.put(listDataHeader.get(3), GraphsArray);
         listDataChild.put(listDataHeader.get(4), StringArray);
 
+        sizer = SortArray.size()+SearchArray.size()+RecursionArray.size()+GraphsArray.size()+StringArray.size();
+
         setter = loadText();
+
+        Toast.makeText(this, setter, Toast.LENGTH_SHORT).show();
+    }
+
+    static String convertStreamToString(FileInputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
     }
 
     public String loadText() {
         FileInputStream fin = null;
         try {
             fin = openFileInput(FILE_NAME);
-            byte[] bytes = new byte[fin.available()];
-            fin.read(bytes);
-            return new String(bytes);
+            return convertStreamToString(fin);
         } catch (IOException ex) {
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
-            for (int i = 0; i < listDataChild.size()*10; ++i)
+            for (int i = 0; i < sizer; ++i)
                 curBuilder.append('0');
+            saveText(curBuilder.toString());
             return curBuilder.toString();
         } finally {
             try {
                 if (fin != null)
                     fin.close();
             } catch (IOException ex) {
-                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+    public void saveText(String s) {
+        try {
+            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(s.getBytes());
+            fos.close();
+        } catch(IOException ex) {
+            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }
