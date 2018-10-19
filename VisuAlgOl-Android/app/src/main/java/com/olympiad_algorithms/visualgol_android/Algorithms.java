@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 public class Algorithms extends AppCompatActivity {
 
@@ -149,9 +149,8 @@ public class Algorithms extends AppCompatActivity {
     }
 
     public String loadText() {
-        FileInputStream fin = null;
         try {
-            fin = openFileInput(FILE_NAME);
+            FileInputStream fin = openFileInput(FILE_NAME);
             String str =  convertStreamToString(fin);
             fin.close();
             return str;
