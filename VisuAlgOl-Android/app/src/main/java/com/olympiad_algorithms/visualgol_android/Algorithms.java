@@ -152,7 +152,9 @@ public class Algorithms extends AppCompatActivity {
         FileInputStream fin = null;
         try {
             fin = openFileInput(FILE_NAME);
-            return convertStreamToString(fin);
+            String str =  convertStreamToString(fin);
+            fin.close();
+            return str;
         } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
@@ -160,13 +162,6 @@ public class Algorithms extends AppCompatActivity {
                 curBuilder.append('0');
             saveText(curBuilder.toString());
             return curBuilder.toString();
-        } finally {
-            try {
-                if (fin != null)
-                    fin.close();
-            } catch (IOException ex) {
-                //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            }
         }
     }
     public void saveText(String s) {
