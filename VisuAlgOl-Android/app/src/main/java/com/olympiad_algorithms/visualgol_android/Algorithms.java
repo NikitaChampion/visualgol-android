@@ -140,7 +140,7 @@ public class Algorithms extends AppCompatActivity {
 
         setter = loadText();
 
-        Toast.makeText(this, setter, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, setter, Toast.LENGTH_SHORT).show();
     }
 
     static String convertStreamToString(FileInputStream is) {
