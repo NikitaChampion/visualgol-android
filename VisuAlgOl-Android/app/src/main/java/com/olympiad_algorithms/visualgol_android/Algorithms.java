@@ -70,6 +70,12 @@ public class Algorithms extends AppCompatActivity {
                     }
                     startActivity(intent);
                 }
+                else if (groupPosition == 3)
+                {
+                    Intent intent = new Intent(Algorithms.this, Graph.class);
+                    intent.putExtra("num", childPosition);
+                    startActivity(intent);
+                }
                 else if (groupPosition == 4)
                 {
                     Intent intent;

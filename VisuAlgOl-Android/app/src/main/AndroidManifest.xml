@@ -39,7 +39,8 @@
         <activity
             android:name=".Z_fun"
             android:screenOrientation="portrait" />
-        <activity android:name=".SelectionSort"></activity>
+        <activity android:name=".SelectionSort" />
+        <activity android:name=".Graph"></activity>
     </application>
 
 </manifest>
