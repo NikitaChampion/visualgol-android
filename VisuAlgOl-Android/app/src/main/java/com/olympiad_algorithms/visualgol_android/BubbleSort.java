@@ -58,12 +58,6 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
         btnSave.setOnClickListener(this);
 
     }
-    /*@Override
-    public void onBackPressed() {
-        Intent intent = new Intent(BubbleSort.this, Algorithms.class);
-        finish();
-        this.startActivity(intent);
-    }*/
 
     @Override
     public void onClick(View v) {
@@ -92,8 +86,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
 
     public void animation_bubble(final long cur) {
         long current = 0;
-        for (int i = 0; i < numbers.length; ++i)
-        {
+        for (int i = 0; i < numbers.length; ++i) {
             for (int j = 1; j < (numbers.length-i); ++j) {
                 final int x = j, y = i;
                 if (cur != num_of_clicks) return;

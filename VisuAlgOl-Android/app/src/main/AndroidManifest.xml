@@ -40,7 +40,8 @@
             android:name=".Z_fun"
             android:screenOrientation="portrait" />
         <activity android:name=".SelectionSort" />
-        <activity android:name=".Graph"></activity>
+        <activity android:name=".Graph" />
+        <activity android:name=".LinSearch"></activity>
     </application>
 
 </manifest>

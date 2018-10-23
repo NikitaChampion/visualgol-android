@@ -80,6 +80,25 @@ public class Algorithms extends AppCompatActivity {
                     }
                     startActivity(intent);
                 }
+                else if (groupPosition == 1)
+                {
+                    Intent intent;
+                    switch (childPosition) {
+                        case 0:
+                            intent = new Intent(Algorithms.this, LinSearch.class);
+                            break;
+                        /*case 1:
+                            intent = new Intent(Algorithms.this, BinSearch.class);
+                            break;
+                        case 2:
+                            intent = new Intent(Algorithms.this, TerSearch.class);
+                            break;*/
+                        default:
+                            intent = new Intent(Algorithms.this, StupidSort.class);
+                            break;
+                    }
+                    startActivity(intent);
+                }
                 else if (groupPosition == 3)
                 {
                     Intent intent = new Intent(Algorithms.this, Graph.class);
