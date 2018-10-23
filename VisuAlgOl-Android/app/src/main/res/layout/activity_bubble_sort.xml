@@ -160,7 +160,7 @@
                 app:srcCompat="@drawable/bubble" />
 
             <TextView
-                android:id="@+id/SortBub2"
+                android:id="@+id/task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -177,7 +177,7 @@
 
                 <EditText
                     android:id="@+id/edit_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:ems="12"
                     android:hint="@string/answer"

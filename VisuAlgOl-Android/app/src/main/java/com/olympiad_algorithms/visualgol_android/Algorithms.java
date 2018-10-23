@@ -29,6 +29,16 @@ public class Algorithms extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        allThings();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();  // Always call the superclass method first
+        allThings();
+    }
+
+    public void allThings() {
         setContentView(R.layout.activity_algorithms);
 
         // get the listView
@@ -55,7 +65,7 @@ public class Algorithms extends AppCompatActivity {
                         case 1:
                             intent = new Intent(Algorithms.this, BubbleSort.class);
                             break;
-                        /*case 2:
+                        case 2:
                             intent = new Intent(Algorithms.this, SelectionSort.class);
                             break;
                         case 3:
@@ -63,7 +73,7 @@ public class Algorithms extends AppCompatActivity {
                             break;
                         case 4:
                             intent = new Intent(Algorithms.this, QuickSort.class);
-                            break;*/
+                            break;
                         default:
                             intent = new Intent(Algorithms.this, StupidSort.class);
                             break;

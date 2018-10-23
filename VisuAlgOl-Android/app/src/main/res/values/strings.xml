@@ -34,16 +34,20 @@
     <string name="whatIsSort">What is sorting?</string>
     <string name="sort_introduction">Sorting is ordering: arranging items in a sequence ordered by some criterion. For example, people at school in pe lessons and in the army are lined up by height, because the order is needed.</string>
     <string name="soldiers">Soldiers lined up in a row</string>
+    <string name="sort_stupid">....</string>
 
     <string name="prefix_fun"></string>
 
     <string name="basic_sort">something</string>
     <string name="sort_bub">Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list to be sorted, compares each pair of adjacent items and swaps them if they are in the wrong order. The pass through the list is repeated until no swaps are needed, which indicates that the list is sorted.</string>
     <string name="sort_bub_2">....</string>
+
     <string name="basic_sort2">.....................</string>
     <string name="one">1</string>
     <string name="symbol">a</string>
     <string name="answer">Answer:</string>
     <string name="check">Check</string>
+
+    <string name="task1">Sort the following array of numbers in ascending order: 2 1 3</string>
     <string name="task2">Sort the following array of numbers in ascending order: 2 1 3</string>
 </resources>

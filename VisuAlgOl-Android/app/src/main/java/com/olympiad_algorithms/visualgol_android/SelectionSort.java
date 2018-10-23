@@ -1,6 +1,6 @@
 package com.olympiad_algorithms.visualgol_android;
 
-import android.content.Intent;
+//import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +32,8 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_sort);
 
+        num_of_clicks = 0;
+
         txt_num = new TextView[9];
         txt_num[0] = findViewById(R.id.txt_num1);
         txt_num[1] = findViewById(R.id.txt_num2);
@@ -56,11 +58,6 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         btnSave.setOnClickListener(this);
 
     }
-    /*@Override
-    public void onBackPressed() {
-        Intent intent = new Intent(SelectionSort.this, Algorithms.class);
-        startActivity(intent);
-    }*/
 
     @Override
     public void onClick(View v) {
@@ -72,7 +69,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                     txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
                     numbers_2[i] = numbers[i];
                 }
-                handler.postDelayed(new Runnable() { public void run() { bubble_sort(num_of_clicks); } }, 600);
+                handler.postDelayed(new Runnable() { public void run() { selection_sort(num_of_clicks); } }, 600);
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))
@@ -83,11 +80,11 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void bubble_sort(long cur){
-        animation_bubble(cur);
+    public void selection_sort(long cur){
+        animation_selection(cur);
     }
 
-    public void animation_bubble(final long cur) {
+    public void animation_selection(final long cur) {
         long current = 0;
         for (int i = 0; i < numbers.length; ++i)
         {
@@ -146,48 +143,38 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
             }
         }
     }
+
+    static String convertStreamToString(FileInputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
     public String loadText() {
-        FileInputStream fin = null;
         try {
-            fin = openFileInput(FILE_NAME);
-            byte[] bytes = new byte[fin.available()];
-            fin.read(bytes);
-            return new String(bytes);
-        }
-        catch(IOException ex) {
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            FileInputStream fin = openFileInput(FILE_NAME);
+            String str = convertStreamToString(fin);
+            fin.close();
+            return str;
+        } catch(IOException ex) {
+            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
                 curBuilder.append('0');
             return curBuilder.toString();
         }
-        finally {
-            try {
-                if (fin != null)
-                    fin.close();
-            } catch (IOException ex) {
-                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
     }
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[1] = ch;
+        c[2] = ch;
         String str = new String(c);
-        FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
-        }
-        catch(IOException ignored) { }
-        finally {
-            try {
-                if (fos != null)
-                    fos.close();
-            }
-            catch(IOException ignored) { }
+            fos.close();
+        } catch(IOException ex) {
+            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this, "Wrong answer", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
     }
 }

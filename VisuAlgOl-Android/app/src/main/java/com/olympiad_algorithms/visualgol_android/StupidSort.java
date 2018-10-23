@@ -36,15 +36,6 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
 
         st_sort = findViewById(R.id.st_sort);
         st_sort.setOnClickListener(this);
-
-        /*EditText editTxt = findViewById(R.id.editText);
-
-        //Если кнопка нажата, то начинается Algorithms activity
-        if(editTxt.getText().toString().equals("test")){
-            Intent intent = new Intent(this, Algorithms.class);
-            intent.putExtra("isTrue",true);
-            startActivity(intent);
-        }*/
     }
 
     @Override

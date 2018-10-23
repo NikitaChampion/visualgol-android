@@ -1,6 +1,6 @@
 package com.olympiad_algorithms.visualgol_android;
 
-import android.content.Intent;
+//import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +32,8 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bubble_sort);
 
+        num_of_clicks = 0;
+
         txt_num = new TextView[9];
         txt_num[0] = findViewById(R.id.txt_num1);
         txt_num[1] = findViewById(R.id.txt_num2);
@@ -59,7 +61,8 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     /*@Override
     public void onBackPressed() {
         Intent intent = new Intent(BubbleSort.this, Algorithms.class);
-        startActivity(intent);
+        finish();
+        this.startActivity(intent);
     }*/
 
     @Override
