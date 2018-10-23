@@ -1,28 +1,29 @@
 package com.olympiad_algorithms.visualgol_android;
 
-//import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class LinSearch extends AppCompatActivity implements View.OnClickListener {
+public class Search extends AppCompatActivity implements View.OnClickListener {
 
-    Button lin_search;
+    TextView title;
+    Button search;
     Button btnSave;
     EditText edit_text;
-    int CompareWith = 0;
+    int cur = 0;
     private TextView [] txt_num;
     private long num_of_clicks = 0;
     private int []numbers = {7,2,1,3,9,0,8,3,4, 9};
+    private int []numbers_2 = {1,2,3,4,5,6,7,8,9, 4};
     private Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
@@ -30,7 +31,13 @@ public class LinSearch extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lin_search);
+        setContentView(R.layout.activity_search);
+
+        Bundle arguments = getIntent().getExtras();
+        if (arguments != null)
+            cur = arguments.getInt("num", 1);
+
+        //Toast.makeText(this, ""+cur, Toast.LENGTH_SHORT).show();
 
         num_of_clicks = 0;
 
@@ -46,30 +53,29 @@ public class LinSearch extends AppCompatActivity implements View.OnClickListener
         txt_num[8] = findViewById(R.id.txt_num9);
         txt_num[9] = findViewById(R.id.txt_num10);
 
-        for (int i = 0; i < numbers.length; ++i) {
-            txt_num[i].setText(String.valueOf(numbers[i]));
-        }
+        title = findViewById(R.id.title);
 
-        lin_search = findViewById(R.id.lin_search);
-        lin_search.setOnClickListener(this);
+        search = findViewById(R.id.search);
+        search.setOnClickListener(this);
 
         edit_text = findViewById(R.id.edit_text);
 
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
 
+        ContestSet();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.lin_search:
+            case R.id.search:
                 ++num_of_clicks;
-                for (int i = 0; i < numbers.length; ++i) {
-                    txt_num[i].setText(String.valueOf(numbers[i]));
-                    txt_num[i].setBackgroundResource(R.drawable.rectangle_2_gray);
-                }
-                handler.postDelayed(new Runnable() { public void run() { linear_search(num_of_clicks); } }, 600);
+                ContestSet();
+                if (cur == 0)
+                    handler.postDelayed(new Runnable() { public void run() { linear_search(num_of_clicks); } }, 600);
+                else
+                    handler.postDelayed(new Runnable() { public void run() { binary_search(num_of_clicks); } }, 600);
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))
@@ -77,6 +83,26 @@ public class LinSearch extends AppCompatActivity implements View.OnClickListener
                 else saveText('0');
             default:
                 break;
+        }
+    }
+
+    public void ContestSet() {
+        //linear search == 0, binary search == 1
+        if (cur == 0) {
+            for (int i = 0; i < numbers.length; ++i) {
+                txt_num[i].setText(String.valueOf(numbers[i]));
+                txt_num[i].setBackgroundResource(R.drawable.rectangle_2_gray);
+            }
+            title.setText(R.string.lin_search);
+            search.setText(R.string.lin_search);
+        }
+        else {
+            for (int i = 0; i < numbers_2.length; ++i) {
+                txt_num[i].setText(String.valueOf(numbers_2[i]));
+                txt_num[i].setBackgroundResource(R.drawable.rectangle_2_gray);
+            }
+            title.setText(R.string.bin_search);
+            search.setText(R.string.bin_search);
         }
     }
 
@@ -123,6 +149,53 @@ public class LinSearch extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+    public void binary_search(long cur){
+        animation_bin(cur);
+    }
+
+    public void animation_bin(final long cur) {
+        long current = 0;
+        int l = -1, r = numbers_2.length, mid = 0;
+        while (l < r-1)
+        {
+            mid = (l+r)/2;
+            final int x = mid;
+            if (cur != num_of_clicks) return;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (cur != num_of_clicks) return;
+                    txt_num[x].setBackgroundResource(R.drawable.rectangle_yellow);
+                }
+            }, 1250*current);
+            ++current;
+            if (cur != num_of_clicks) return;
+            if (numbers_2[mid] == numbers_2[numbers_2.length-1]) {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (cur != num_of_clicks) return;
+                        txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
+                    }
+                }, 1250*current);
+                return;
+            }
+            else {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (cur != num_of_clicks) return;
+                        txt_num[x].setBackgroundResource(R.drawable.rectangle_2_gray);
+                        txt_num[numbers_2.length-1].setBackgroundResource(R.drawable.rectangle_2_gray);
+                    }
+                }, 1250*current);
+            }
+            ++current;
+            if (numbers_2[mid] < numbers_2[numbers_2.length-1]) l = mid;
+            else r = mid;
+        }
+    }
+
     static String convertStreamToString(FileInputStream is) {
         java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
@@ -144,7 +217,7 @@ public class LinSearch extends AppCompatActivity implements View.OnClickListener
     }
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[1] = ch;
+        c[5+cur] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

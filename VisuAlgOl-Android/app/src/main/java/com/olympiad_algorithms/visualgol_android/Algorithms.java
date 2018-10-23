@@ -82,21 +82,8 @@ public class Algorithms extends AppCompatActivity {
                 }
                 else if (groupPosition == 1)
                 {
-                    Intent intent;
-                    switch (childPosition) {
-                        case 0:
-                            intent = new Intent(Algorithms.this, LinSearch.class);
-                            break;
-                        /*case 1:
-                            intent = new Intent(Algorithms.this, BinSearch.class);
-                            break;
-                        case 2:
-                            intent = new Intent(Algorithms.this, TerSearch.class);
-                            break;*/
-                        default:
-                            intent = new Intent(Algorithms.this, StupidSort.class);
-                            break;
-                    }
+                    Intent intent = new Intent(Algorithms.this, Search.class);
+                    intent.putExtra("num", childPosition);
                     startActivity(intent);
                 }
                 else if (groupPosition == 3)
@@ -152,7 +139,6 @@ public class Algorithms extends AppCompatActivity {
         List<String> SearchArray = new ArrayList<>();
         SearchArray.add(getString(R.string.lin_search));
         SearchArray.add(getString(R.string.bin_search));
-        SearchArray.add(getString(R.string.ter_search));
 
         List<String> RecursionArray = new ArrayList<>();
         RecursionArray.add(getString(R.string.what));
