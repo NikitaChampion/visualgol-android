@@ -24,6 +24,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     private int []numbers = {7,2,1,3,9,0,8,3,4};
     private int []numbers_2 = {7,2,1,3,9,0,8,3,4};
     private Handler handler = new Handler();
+    int maxim = 10, j1 = 0, j2 = 0;
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -88,59 +89,66 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         long current = 0;
         for (int i = 0; i < numbers.length; ++i)
         {
-            for (int j = 1; j < (numbers.length-i); ++j) {
-                final int x = j, y = i;
+            final int y = i;
+            maxim = 10;
+            j1 = i;
+            if (cur != num_of_clicks) return;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    txt_num[y].setBackgroundResource(R.drawable.rectangle_red);
+                    j2 = y;
+                }
+            }, 1250*current);
+            ++current;
+            for (int j = i+1; j < numbers.length; ++j) {
+                final int x = j;
                 if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         if (cur != num_of_clicks) return;
-                        txt_num[x-1].setBackgroundResource(R.drawable.rectangle_orange);
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                     }
                 }, 1250*current);
-                if (numbers_2[j-1] > numbers_2[j]) {
-                    int temp = numbers_2[j-1];
-                    numbers_2[j-1] = numbers_2[j];
-                    numbers_2[j] = temp;
-
-                    ++current;
-                    if (cur != num_of_clicks) return;
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (cur != num_of_clicks) return;
-                            txt_num[x-1].setBackgroundResource(R.drawable.rectangle_red);
-                            txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
-                        }
-                    }, 1250*current);
-                    ++current;
-                    if (cur != num_of_clicks) return;
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (cur != num_of_clicks) return;
-                            String temp = txt_num[x-1].getText().toString();
-                            txt_num[x-1].setText(txt_num[x].getText().toString()); // swap
-                            txt_num[x].setText(temp);
-                        }
-                    }, 1250*current);
+                if (numbers_2[j] < maxim) {
+                    maxim = numbers_2[j];
+                    j1 = j;
                 }
                 ++current;
                 if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
-                        txt_num[x-1].setBackgroundResource(R.drawable.rectangle_gray);
-                        txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
-                        if (x == numbers.length - y - 1)
-                            txt_num[x].setBackgroundResource(R.drawable.rectangle_dark);
-                        if (x == 1 && y == numbers.length-2)
-                            txt_num[x-1].setBackgroundResource(R.drawable.rectangle_dark);
+                        if (Integer.parseInt(txt_num[j2].getText().toString()) > Integer.parseInt(txt_num[x].getText().toString())) {
+                            txt_num[j2].setBackgroundResource(R.drawable.rectangle_gray);
+                            j2 = x;
+                            txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
+                        }
+                        else {
+                            txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
+                        }
                     }
                 }, 1250*current);
+                ++current;
             }
+            int u = numbers_2[i];
+            numbers_2[i] = numbers_2[j1];
+            numbers_2[j1] = u;
+
+            if (cur != num_of_clicks) return;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (cur != num_of_clicks) return;
+                    String temp = txt_num[y].getText().toString();
+                    txt_num[y].setText(txt_num[j2].getText().toString()); // swap
+                    txt_num[j2].setText(temp);
+                    txt_num[j2].setBackgroundResource(R.drawable.rectangle_gray);
+                    txt_num[y].setBackgroundResource(R.drawable.rectangle_dark);
+                }
+            }, 1250*current);
+            ++current;
         }
     }
 
