@@ -48,6 +48,7 @@
         <activity
             android:name=".Search"
             android:screenOrientation="portrait" />
+        <activity android:name=".Recursion"></activity>
     </application>
 
 </manifest>

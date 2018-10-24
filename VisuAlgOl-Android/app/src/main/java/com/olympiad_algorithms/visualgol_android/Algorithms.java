@@ -86,6 +86,11 @@ public class Algorithms extends AppCompatActivity {
                     intent.putExtra("num", childPosition);
                     startActivity(intent);
                 }
+                else if (groupPosition == 2)
+                {
+                    Intent intent = new Intent(Algorithms.this, Recursion.class);
+                    startActivity(intent);
+                }
                 else if (groupPosition == 3)
                 {
                     Intent intent = new Intent(Algorithms.this, Graph.class);
