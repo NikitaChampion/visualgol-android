@@ -20,38 +20,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@string/merge_sort"
-                android:textAllCaps="false"
                 android:textColor="?android:attr/colorForeground"
-                android:textSize="20sp"
+                android:textSize="21sp"
                 app:fontFamily="@font/rubik_italic" />
-
-            <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/MergeSort"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center_horizontal"
-                android:src="@drawable/merge_sort"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
-
-            <TextView
-                android:id="@+id/SortIntroduction"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center_horizontal"
-                android:text="@string/basic_sort2"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/MergeSort" />
 
         </LinearLayout>
     </ScrollView>

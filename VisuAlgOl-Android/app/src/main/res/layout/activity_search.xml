@@ -21,19 +21,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@string/search"
-                android:textAllCaps="false"
                 android:textColor="?android:attr/colorForeground"
-                android:textSize="20sp"
+                android:textSize="21sp"
                 app:fontFamily="@font/rubik_italic" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="24dp"
-                android:gravity="center_horizontal">
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/txt_num1"
@@ -157,7 +156,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@string/basic_sort2"
                 android:textColor="#000000"
                 android:textSize="16sp" />
@@ -166,8 +165,10 @@
                 android:id="@+id/task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
                 android:text="@string/basic_sort2"
                 android:textColor="#000000"
                 android:textSize="16sp" />
@@ -175,8 +176,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:gravity="center">
 
                 <EditText
                     android:id="@+id/edit_text"

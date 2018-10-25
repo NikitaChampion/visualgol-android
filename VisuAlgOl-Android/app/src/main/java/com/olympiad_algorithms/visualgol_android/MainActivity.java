@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toAlgorithms.setOnClickListener(this);
 
         giff = findViewById(R.id.SimulatedAnnealing);
-        giff.setOnClickListener(this);
     }
 
     @Override

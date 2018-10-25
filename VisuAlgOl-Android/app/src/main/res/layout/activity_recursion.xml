@@ -21,33 +21,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@string/recursion"
-                android:textAllCaps="false"
                 android:textColor="?android:attr/colorForeground"
-                android:textSize="20sp"
+                android:textSize="21sp"
                 app:fontFamily="@font/rubik_italic" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
-                android:contentDescription="@string/bubble_sort"
                 app:srcCompat="@drawable/knapsack" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_marginTop="5dp"
-                android:gravity="center_horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <ImageView
                     android:id="@+id/knapsack_1"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:contentDescription="@string/bubble_sort"
                     app:srcCompat="@drawable/knapsack_1" />
 
                 <ImageView
@@ -55,7 +52,6 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:contentDescription="@string/bubble_sort"
                     app:srcCompat="@drawable/knapsack_2" />
 
                 <ImageView
@@ -63,7 +59,6 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:contentDescription="@string/bubble_sort"
                     app:srcCompat="@drawable/knapsack_3" />
 
                 <ImageView
@@ -71,7 +66,6 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:contentDescription="@string/bubble_sort"
                     app:srcCompat="@drawable/knapsack_4" />
 
                 <ImageView
@@ -79,16 +73,16 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:contentDescription="@string/bubble_sort"
                     app:srcCompat="@drawable/knapsack_5" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_marginTop="5dp"
-                android:gravity="center_horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/txt_num1"
@@ -162,8 +156,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:gravity="center">
 
                 <EditText
                     android:id="@+id/edit_text"
