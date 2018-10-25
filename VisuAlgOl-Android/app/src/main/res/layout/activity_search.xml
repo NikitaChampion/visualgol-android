@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:gravity="center_horizontal"
-                android:text="@string/lin_search"
+                android:text="@string/search"
                 android:textAllCaps="false"
                 android:textColor="?android:attr/colorForeground"
                 android:textSize="20sp"
@@ -146,7 +146,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/button_shape"
                 android:gravity="center"
-                android:text="@string/lin_search"
+                android:text="@string/search"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 

@@ -41,7 +41,6 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
         num_of_clicks = 0;
 
         title = findViewById(R.id.title);
-        title.setOnClickListener(this);
 
         imageView = findViewById(R.id.imageView);
 
@@ -68,7 +67,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
                     handler.postDelayed(new Runnable() { public void run() { bfs(num_of_clicks); } }, 600);
                 break;
             case R.id.btnSave:
-                if (edit_text.getText().toString().equals("1 2 3"))
+                if (edit_text.getText().toString().equals("....."))
                     saveText('1');
                 else saveText('0');
             default:
@@ -115,6 +114,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
             }, 1250*current);
         }
     }
+
     public void bfs(long cur) {
         animation_bfs(cur);
     }
@@ -155,9 +155,10 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
             return curBuilder.toString();
         }
     }
+
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[1] = ch;
+        c[8+cur] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
