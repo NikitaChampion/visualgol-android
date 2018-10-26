@@ -28,27 +28,26 @@
             android:name=".BubbleSort"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".QuickSort"
+            android:name=".SelectionSort"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MergeSort"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Prefix_fun"
+            android:name=".QuickSort"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Z_fun"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".SelectionSort"
+            android:name=".Search"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Graph"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Search"
+            android:name=".Recursion"
             android:screenOrientation="portrait" />
-        <activity android:name=".Recursion"></activity>
+        <activity
+            android:name=".Strings"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

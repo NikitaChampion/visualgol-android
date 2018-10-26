@@ -99,18 +99,8 @@ public class Algorithms extends AppCompatActivity {
                 }
                 else if (groupPosition == 4)
                 {
-                    Intent intent;
-                    switch (childPosition) {
-                        case 0:
-                            intent = new Intent(Algorithms.this, Prefix_fun.class);
-                            break;
-                        case 1:
-                            intent = new Intent(Algorithms.this, Z_fun.class);
-                            break;
-                        default:
-                            intent = new Intent(Algorithms.this, Prefix_fun.class);
-                            break;
-                    }
+                    Intent intent = new Intent(Algorithms.this, Strings.class);
+                    intent.putExtra("num", childPosition);
                     startActivity(intent);
                 }
                 return false;
