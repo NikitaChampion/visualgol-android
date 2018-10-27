@@ -12,6 +12,9 @@ import android.widget.Toast;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
+
+import static java.lang.Math.abs;
 
 public class Search extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,10 +25,11 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     int cur = 0;
     private TextView []txt_num;
     private long num_of_clicks = 0;
-    private int WhatToFind = 8;
     private TextView txt_num_find;
-    private int []numbers = {7,2,1,3,9,0,8,3,4};
+    final Random random = new Random();
+    private int []numbers = new int[9];
     private int []numbers_2 = {1,2,3,4,5,6,7,8,9};
+    private int WhatToFind;
     private Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
@@ -45,7 +49,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
 
         title = findViewById(R.id.title);
 
-        txt_num = new TextView[10];
+        txt_num = new TextView[9];
         txt_num[0] = findViewById(R.id.txt_num1);
         txt_num[1] = findViewById(R.id.txt_num2);
         txt_num[2] = findViewById(R.id.txt_num3);
@@ -56,6 +60,14 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         txt_num[7] = findViewById(R.id.txt_num8);
         txt_num[8] = findViewById(R.id.txt_num9);
         txt_num_find = findViewById(R.id.txt_num10);
+
+        for (int i = 0; i < numbers.length; ++i) {
+            numbers[i] = random.nextInt() % 10;
+        }
+        if (cur == 0)
+            WhatToFind = numbers[abs(random.nextInt())%numbers.length];
+        else
+            WhatToFind = numbers_2[abs(random.nextInt())%numbers_2.length];
 
         search = findViewById(R.id.search);
         search.setOnClickListener(this);

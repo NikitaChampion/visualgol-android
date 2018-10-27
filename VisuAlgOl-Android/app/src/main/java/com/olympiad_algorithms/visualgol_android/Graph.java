@@ -83,7 +83,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
             title.setText(R.string.dfs);
         }
         else {
-            imageView.setBackgroundResource(R.drawable.d1);
+            imageView.setBackgroundResource(R.drawable.b1);
             graphs.setText(R.string.bfs);
             title.setText(R.string.bfs);
         }
@@ -91,8 +91,8 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
 
     int[] d = {R.drawable.d2, R.drawable.d3, R.drawable.d4, R.drawable.d5, R.drawable.d6,
                R.drawable.d7, R.drawable.d8, R.drawable.d9, R.drawable.d10, R.drawable.d11, R.drawable.d12};
-    int[] b = {R.drawable.d2, R.drawable.d3, R.drawable.d4, R.drawable.d5, R.drawable.d6,
-            R.drawable.d7, R.drawable.d8, R.drawable.d9, R.drawable.d10, R.drawable.d11, R.drawable.d12};
+    int[] b = {R.drawable.b2, R.drawable.b3, R.drawable.b4, R.drawable.b5, R.drawable.b6,
+            R.drawable.b7, R.drawable.b8, R.drawable.b9, R.drawable.b10, R.drawable.b11, R.drawable.b12};
 
     public void dfs(long cur) {
         animation_dfs(cur);
