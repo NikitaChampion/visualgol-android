@@ -69,7 +69,8 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("....."))
                     saveText('1');
-                else saveText('0');
+                else
+                    saveText('0');
             default:
                 break;
         }
