@@ -54,14 +54,20 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         txtListChild.setText(childText);
 
+        int PozAll = getPozAll(groupPosition);
+        if (setter.charAt(PozAll+childPosition) == '1')
+            txtListChild.setTextColor(_context.getResources().getColor(R.color.green));
+        else
+            txtListChild.setTextColor(_context.getResources().getColor(R.color.colorAccent));
+
+        return convertView;
+    }
+
+    public int getPozAll(int groupPosition) {
         int sum = 0;
         for (int i = 0; i < groupPosition; ++i)
             sum += getChildrenCount(i);
-        if (setter.charAt(sum+childPosition)=='1')
-            txtListChild.setTextColor(_context.getResources().getColor(R.color.green));
-        else txtListChild.setTextColor(_context.getResources().getColor(R.color.colorAccent));
-
-        return convertView;
+        return sum;
     }
 
     @Override

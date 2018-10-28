@@ -21,8 +21,8 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     EditText edit_text;
     private TextView [] txt_num;
     private long num_of_clicks = 0;
-    private int []numbers = {7,2,1,3,9,0,8,3,4};
-    private int []numbers_2 = {7,2,1,3,9,0,8,3,4};
+    private int []numbers = {7,2,1,3,9,0,8,3};
+    private int []numbers_2 = {7,2,1,3,9,0,8,3};
     private Handler handler = new Handler();
     int maxim = 10, j1 = 0, j2 = 0;
 
@@ -35,7 +35,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
 
         num_of_clicks = 0;
 
-        txt_num = new TextView[9];
+        txt_num = new TextView[8];
         txt_num[0] = findViewById(R.id.txt_num1);
         txt_num[1] = findViewById(R.id.txt_num2);
         txt_num[2] = findViewById(R.id.txt_num3);
@@ -44,7 +44,6 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         txt_num[5] = findViewById(R.id.txt_num6);
         txt_num[6] = findViewById(R.id.txt_num7);
         txt_num[7] = findViewById(R.id.txt_num8);
-        txt_num[8] = findViewById(R.id.txt_num9);
 
         for (int i = 0; i < numbers.length; ++i) {
             txt_num[i].setText(String.valueOf(numbers[i]));

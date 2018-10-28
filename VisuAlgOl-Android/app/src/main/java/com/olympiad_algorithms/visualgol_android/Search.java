@@ -22,13 +22,13 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     Button search;
     Button btnSave;
     EditText edit_text;
-    int cur = 0;
+    int cur = 0, groupPosition = 0;
     private TextView []txt_num;
     private long num_of_clicks = 0;
     private TextView txt_num_find;
     final Random random = new Random();
-    private int []numbers = new int[9];
-    private int []numbers_2 = {1,2,3,4,5,6,7,8,9};
+    private int []numbers = new int[8];
+    private int []numbers_2 = {1,2,3,4,5,6,7,8};
     private int WhatToFind;
     private Handler handler = new Handler();
 
@@ -40,8 +40,10 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_search);
 
         Bundle arguments = getIntent().getExtras();
-        if (arguments != null)
+        if (arguments != null) {
             cur = arguments.getInt("num", 1);
+            groupPosition = arguments.getInt("num_2", 0);
+        }
 
         //Toast.makeText(this, ""+cur, Toast.LENGTH_SHORT).show();
 
@@ -49,7 +51,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
 
         title = findViewById(R.id.title);
 
-        txt_num = new TextView[9];
+        txt_num = new TextView[8];
         txt_num[0] = findViewById(R.id.txt_num1);
         txt_num[1] = findViewById(R.id.txt_num2);
         txt_num[2] = findViewById(R.id.txt_num3);
@@ -58,7 +60,6 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         txt_num[5] = findViewById(R.id.txt_num6);
         txt_num[6] = findViewById(R.id.txt_num7);
         txt_num[7] = findViewById(R.id.txt_num8);
-        txt_num[8] = findViewById(R.id.txt_num9);
         txt_num_find = findViewById(R.id.txt_num10);
 
         for (int i = 0; i < numbers.length; ++i) {
@@ -107,20 +108,20 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
             title.setText(R.string.lin_search);
             for (int i = 0; i < numbers.length; ++i) {
                 txt_num[i].setText(String.valueOf(numbers[i]));
-                txt_num[i].setBackgroundResource(R.drawable.rectangle_2_gray);
+                txt_num[i].setBackgroundResource(R.drawable.rectangle_search_1);
             }
             txt_num_find.setText(String.valueOf(WhatToFind));
-            txt_num_find.setBackgroundResource(R.drawable.rectangle_2_gray);
+            txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
             search.setText(R.string.lin_search);
         }
         else {
             title.setText(R.string.bin_search);
             for (int i = 0; i < numbers_2.length; ++i) {
                 txt_num[i].setText(String.valueOf(numbers_2[i]));
-                txt_num[i].setBackgroundResource(R.drawable.rectangle_2_gray);
+                txt_num[i].setBackgroundResource(R.drawable.rectangle_search_1);
             }
             txt_num_find.setText(String.valueOf(WhatToFind));
-            txt_num_find.setBackgroundResource(R.drawable.rectangle_2_gray);
+            txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
             search.setText(R.string.bin_search);
         }
     }
@@ -138,8 +139,8 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void run() {
                     if (cur != num_of_clicks) return;
-                    txt_num[x].setBackgroundResource(R.drawable.rectangle_yellow);
-                    txt_num_find.setBackgroundResource(R.drawable.rectangle_orange);
+                    txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
+                    txt_num_find.setBackgroundResource(R.drawable.rectangle_search_4);
                 }
             }, 1250*current);
             ++current;
@@ -149,7 +150,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void run() {
                         if (cur != num_of_clicks) return;
-                        txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
+                        txt_num[x].setBackgroundResource(R.drawable.rectangle_search_4);
                     }
                 }, 1250*current);
                 return;
@@ -159,8 +160,8 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void run() {
                         if (cur != num_of_clicks) return;
-                        txt_num[x].setBackgroundResource(R.drawable.rectangle_2_gray);
-                        txt_num_find.setBackgroundResource(R.drawable.rectangle_2_gray);
+                        txt_num[x].setBackgroundResource(R.drawable.rectangle_search_2);
+                        txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
                     }
                 }, 1250*current);
             }
@@ -184,7 +185,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void run() {
                     if (cur != num_of_clicks) return;
-                    txt_num[x].setBackgroundResource(R.drawable.rectangle_yellow);
+                    txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
                 }
             }, 1250*current);
             ++current;
@@ -194,7 +195,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void run() {
                         if (cur != num_of_clicks) return;
-                        txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
+                        txt_num[x].setBackgroundResource(R.drawable.rectangle_search_4);
                     }
                 }, 1250*current);
                 return;
@@ -204,8 +205,8 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void run() {
                         if (cur != num_of_clicks) return;
-                        txt_num[x].setBackgroundResource(R.drawable.rectangle_2_gray);
-                        txt_num_find.setBackgroundResource(R.drawable.rectangle_2_gray);
+                        txt_num[x].setBackgroundResource(R.drawable.rectangle_search_1);
+                        txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
                     }
                 }, 1250*current);
             }
@@ -237,7 +238,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
 
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[5+cur] = ch;
+        c[groupPosition+cur] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

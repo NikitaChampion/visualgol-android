@@ -23,7 +23,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
     private TextView[] txt_num;
     private TextView[] st;
     private char[] chars = {'a', 'b', 'a', 'c', 'a', 'b', 'a'};
-    int cur = 0;
+    int cur = 0, groupPosition = 0;
     private long num_of_clicks = 0;
     private Handler handler = new Handler();
 
@@ -35,8 +35,10 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_strings);
 
         Bundle arguments = getIntent().getExtras();
-        if (arguments != null)
+        if (arguments != null) {
             cur = arguments.getInt("num", 1);
+            groupPosition = arguments.getInt("num_2", 0);
+        }
 
         //Toast.makeText(this, ""+cur, Toast.LENGTH_SHORT).show();
 
@@ -223,7 +225,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
 
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[8+cur] = ch;
+        c[groupPosition+cur] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

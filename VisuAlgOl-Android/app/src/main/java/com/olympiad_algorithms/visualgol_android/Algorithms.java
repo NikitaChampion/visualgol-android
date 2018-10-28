@@ -84,23 +84,27 @@ public class Algorithms extends AppCompatActivity {
                 {
                     Intent intent = new Intent(Algorithms.this, Search.class);
                     intent.putExtra("num", childPosition);
+                    intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
                 }
                 else if (groupPosition == 2)
                 {
                     Intent intent = new Intent(Algorithms.this, Recursion.class);
                     startActivity(intent);
+                    intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                 }
                 else if (groupPosition == 3)
                 {
                     Intent intent = new Intent(Algorithms.this, Graph.class);
                     intent.putExtra("num", childPosition);
+                    intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
                 }
                 else if (groupPosition == 4)
                 {
                     Intent intent = new Intent(Algorithms.this, Strings.class);
                     intent.putExtra("num", childPosition);
+                    intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
                 }
                 return false;
@@ -179,6 +183,7 @@ public class Algorithms extends AppCompatActivity {
             return curBuilder.toString();
         }
     }
+
     public void saveText(String s) {
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
