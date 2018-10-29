@@ -40,9 +40,12 @@
 
     <string name="prefix_fun"></string>
 
-    <string name="basic_sort">something</string>
     <string name="sort_bub">Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list to be sorted, compares each pair of adjacent items and swaps them if they are in the wrong order. The pass through the list is repeated until no swaps are needed, which indicates that the list is sorted.</string>
-    <string name="sort_bub_2">....</string>
+
+    <string name="sort_sel">.....................</string>
+
+    <string name="sort_ins">.....................</string>
+
 
     <string name="basic_sort2">.....................</string>
     <string name="one">1</string>

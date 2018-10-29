@@ -136,7 +136,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:gravity="center"
-                android:text="@string/basic_sort2"
+                android:text="@string/sort_sel"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
