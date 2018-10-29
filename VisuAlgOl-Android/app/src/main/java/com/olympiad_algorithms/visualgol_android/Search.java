@@ -22,9 +22,9 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     Button search;
     Button btnSave;
     EditText edit_text;
-    int cur = 0, groupPosition = 0;
+    private int cur = 0, groupPosition = 0;
+    private int num_of_clicks = 0;
     private TextView []txt_num;
-    private long num_of_clicks = 0;
     private TextView txt_num_find;
     final Random random = new Random();
     private int []numbers = new int[8];
@@ -62,9 +62,8 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         txt_num[7] = findViewById(R.id.txt_num8);
         txt_num_find = findViewById(R.id.txt_num10);
 
-        for (int i = 0; i < numbers.length; ++i) {
+        for (int i = 0; i < numbers.length; ++i)
             numbers[i] = random.nextInt() % 10;
-        }
         if (cur == 0)
             WhatToFind = numbers[abs(random.nextInt())%numbers.length];
         else
@@ -86,6 +85,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.search:
                 ++num_of_clicks;
+                num_of_clicks %= 1e6;
                 ContestSet();
                 if (cur == 0)
                     handler.postDelayed(new Runnable() { public void run() { linear_search(num_of_clicks); } }, 600);
@@ -110,8 +110,6 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                 txt_num[i].setText(String.valueOf(numbers[i]));
                 txt_num[i].setBackgroundResource(R.drawable.rectangle_search_1);
             }
-            txt_num_find.setText(String.valueOf(WhatToFind));
-            txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
             search.setText(R.string.lin_search);
         }
         else {
@@ -120,10 +118,10 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                 txt_num[i].setText(String.valueOf(numbers_2[i]));
                 txt_num[i].setBackgroundResource(R.drawable.rectangle_search_1);
             }
-            txt_num_find.setText(String.valueOf(WhatToFind));
-            txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
             search.setText(R.string.bin_search);
         }
+        txt_num_find.setText(String.valueOf(WhatToFind));
+        txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
     }
 
     public void linear_search(long cur){
@@ -145,26 +143,19 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
             }, 1250*current);
             ++current;
             if (cur != num_of_clicks) return;
-            if (numbers[i] == WhatToFind) {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (cur != num_of_clicks) return;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (cur != num_of_clicks) return;
+                    if (numbers[x] == WhatToFind)
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_search_4);
-                    }
-                }, 1250*current);
-                return;
-            }
-            else {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (cur != num_of_clicks) return;
+                    else {
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_search_2);
                         txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
                     }
-                }, 1250*current);
-            }
+                }
+            }, 1250*current);
+            if (numbers[i] == WhatToFind) return;
             ++current;
         }
     }
@@ -186,30 +177,32 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                 public void run() {
                     if (cur != num_of_clicks) return;
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
+                    txt_num_find.setBackgroundResource(R.drawable.rectangle_search_4);
                 }
             }, 1250*current);
             ++current;
             if (cur != num_of_clicks) return;
-            if (numbers_2[mid] == WhatToFind) {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (cur != num_of_clicks) return;
-                        txt_num[x].setBackgroundResource(R.drawable.rectangle_search_4);
-                    }
-                }, 1250*current);
-                return;
-            }
-            else {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (cur != num_of_clicks) return;
-                        txt_num[x].setBackgroundResource(R.drawable.rectangle_search_1);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (cur != num_of_clicks) return;
+                    if (numbers_2[x] < WhatToFind) {
+                        for (int i = 0; i <= x; ++i) {
+                            txt_num[i].setBackgroundResource(R.drawable.rectangle_search_2);
+                        }
                         txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
                     }
-                }, 1250*current);
-            }
+                    else if (numbers_2[x] > WhatToFind) {
+                        for (int i = txt_num.length-1; i >= x; --i) {
+                            txt_num[i].setBackgroundResource(R.drawable.rectangle_search_2);
+                        }
+                        txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
+                    }
+                    else
+                        txt_num[x].setBackgroundResource(R.drawable.rectangle_search_4);
+                }
+            }, 1250*current);
+            if (numbers_2[mid] == WhatToFind) return;
             ++current;
             if (numbers_2[mid] < WhatToFind) l = mid;
             else r = mid;

@@ -13,18 +13,19 @@ import android.widget.Toast;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 public class SelectionSort extends AppCompatActivity implements View.OnClickListener {
 
     Button sel_sort;
     Button btnSave;
     EditText edit_text;
+    private int num_of_clicks = 0;
     private TextView [] txt_num;
-    private long num_of_clicks = 0;
-    private int []numbers = {7,2,1,3,9,0,8,3};
-    private int []numbers_2 = {7,2,1,3,9,0,8,3};
+    final Random random = new Random();
+    private int []numbers = new int[8];
     private Handler handler = new Handler();
-    int maxim = 10, j1 = 0, j2 = 0;
+    int poz = 0;
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -45,9 +46,8 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         txt_num[6] = findViewById(R.id.txt_num7);
         txt_num[7] = findViewById(R.id.txt_num8);
 
-        for (int i = 0; i < numbers.length; ++i) {
-            txt_num[i].setText(String.valueOf(numbers[i]));
-        }
+        for (int i = 0; i < numbers.length; ++i)
+            numbers[i] = random.nextInt() % 10;
 
         sel_sort = findViewById(R.id.sel_sort);
         sel_sort.setOnClickListener(this);
@@ -57,6 +57,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
 
+        ContestSet();
     }
 
     @Override
@@ -64,11 +65,8 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.sel_sort:
                 ++num_of_clicks;
-                for (int i = 0; i < numbers.length; ++i) {
-                    txt_num[i].setText(String.valueOf(numbers[i]));
-                    txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
-                    numbers_2[i] = numbers[i];
-                }
+                num_of_clicks %= 1e6;
+                ContestSet();
                 handler.postDelayed(new Runnable() { public void run() { selection_sort(num_of_clicks); } }, 600);
                 break;
             case R.id.btnSave:
@@ -77,6 +75,13 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                 else saveText('0');
             default:
                 break;
+        }
+    }
+
+    public void ContestSet() {
+        for (int i = 0; i < numbers.length; ++i) {
+            txt_num[i].setText(String.valueOf(numbers[i]));
+            txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
         }
     }
 
@@ -89,14 +94,13 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         for (int i = 0; i < numbers.length; ++i)
         {
             final int y = i;
-            maxim = 10;
-            j1 = i;
             if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    if (cur != num_of_clicks) return;
                     txt_num[y].setBackgroundResource(R.drawable.rectangle_red);
-                    j2 = y;
+                    poz = y;
                 }
             }, 1250*current);
             ++current;
@@ -110,40 +114,35 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                     }
                 }, 1250*current);
-                if (numbers_2[j] < maxim) {
-                    maxim = numbers_2[j];
-                    j1 = j;
-                }
                 ++current;
                 if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (Integer.parseInt(txt_num[j2].getText().toString()) > Integer.parseInt(txt_num[x].getText().toString())) {
-                            txt_num[j2].setBackgroundResource(R.drawable.rectangle_gray);
-                            j2 = x;
-                            txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
+                        if (cur != num_of_clicks) return;
+                        if (Integer.parseInt(txt_num[x].getText().toString()) < Integer.parseInt(txt_num[poz].getText().toString())) {
+                            if (poz != y)
+                                txt_num[poz].setBackgroundResource(R.drawable.rectangle_gray);
+                            else
+                                txt_num[poz].setBackgroundResource(R.drawable.rectangle_purple);
+                            poz = x;
+                            txt_num[poz].setBackgroundResource(R.drawable.rectangle_red);
                         }
-                        else {
+                        else
                             txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
-                        }
                     }
                 }, 1250*current);
                 ++current;
             }
-            int u = numbers_2[i];
-            numbers_2[i] = numbers_2[j1];
-            numbers_2[j1] = u;
-
             if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     if (cur != num_of_clicks) return;
                     String temp = txt_num[y].getText().toString();
-                    txt_num[y].setText(txt_num[j2].getText().toString()); // swap
-                    txt_num[j2].setText(temp);
-                    txt_num[j2].setBackgroundResource(R.drawable.rectangle_gray);
+                    txt_num[y].setText(txt_num[poz].getText().toString()); // swap
+                    txt_num[poz].setText(temp);
+                    txt_num[poz].setBackgroundResource(R.drawable.rectangle_gray);
                     txt_num[y].setBackgroundResource(R.drawable.rectangle_dark);
                 }
             }, 1250*current);
