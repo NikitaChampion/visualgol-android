@@ -77,6 +77,9 @@ public class Algorithms extends AppCompatActivity {
                         case 5:
                             intent = new Intent(Algorithms.this, QuickSort.class);
                             break;
+                        case 6:
+                            intent = new Intent(Algorithms.this, CountingSort.class);
+                            break;
                         default:
                             intent = new Intent(Algorithms.this, StupidSort.class);
                             break;
@@ -139,6 +142,7 @@ public class Algorithms extends AppCompatActivity {
         SortArray.add(getString(R.string.insertion_sort));
         SortArray.add(getString(R.string.merge_sort));
         SortArray.add(getString(R.string.quick_sort));
+        SortArray.add(getString(R.string.counting_sort));
 
         List<String> SearchArray = new ArrayList<>();
         SearchArray.add(getString(R.string.lin_search));

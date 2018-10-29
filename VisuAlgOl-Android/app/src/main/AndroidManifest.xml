@@ -40,6 +40,9 @@
             android:name=".QuickSort"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".CountingSort"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Search"
             android:screenOrientation="portrait" />
         <activity

@@ -13,6 +13,7 @@
     <string name="insertion_sort">Сортировка вставками</string>
     <string name="merge_sort">Сортировка слиянием</string>
     <string name="quick_sort">Быстрая сортировка</string>
+    <string name="counting_sort">Сортировка подсчётом</string>
 
     <string name="search">Поиск</string>
     <string name="lin_search">Линейный поиск</string>

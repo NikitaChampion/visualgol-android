@@ -20,7 +20,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
     Button strings;
     Button btnSave;
     EditText edit_text;
-    private int cur = 0, groupPosition = 0;
+    private int childPosition = 0, groupPosition = 0;
     private int num_of_clicks = 0;
     private TextView []txt_num;
     private TextView []st;
@@ -36,7 +36,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null) {
-            cur = arguments.getInt("num", 1);
+            childPosition = arguments.getInt("num", 1);
             groupPosition = arguments.getInt("num_2", 0);
         }
 
@@ -80,14 +80,10 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
                 ++num_of_clicks;
                 num_of_clicks %= 1e6;
                 ContestSet();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        if (cur == 0)
-                            prefix(num_of_clicks);
-                        else
-                            z(num_of_clicks);
-                    }
-                }, 600);
+                if (childPosition == 0)
+                    prefix(num_of_clicks);
+                else
+                    z(num_of_clicks);
                 break;
             default:
                 break;
@@ -101,7 +97,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
             st[i].setText("0");
             st[i].setBackgroundResource(R.drawable.rectangle_white);
         }
-        if (cur == 0) {
+        if (childPosition == 0) {
             title.setText(R.string.prefix);
             strings.setText(R.string.prefix);
         }
@@ -117,7 +113,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
 
     public void animation_prefix(final long cur) {
         st[0].setBackgroundResource(R.drawable.rectangle_2_gray);
-        long current = 0;
+        long current = 1;
         for (int i = 1; i < st.length; ++i) {
             final int y = i;
             for (int j = 1; j <= i; ++j) {
@@ -224,7 +220,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
 
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[groupPosition+cur] = ch;
+        c[groupPosition+childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

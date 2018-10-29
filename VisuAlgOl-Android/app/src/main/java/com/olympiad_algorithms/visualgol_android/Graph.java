@@ -21,7 +21,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
     Button graphs;
     Button btnSave;
     EditText edit_text;
-    private int cur = 0, groupPosition = 0;
+    private int childPosition = 0, groupPosition = 0;
     private int num_of_clicks = 0;
     private Handler handler = new Handler();
 
@@ -34,7 +34,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null) {
-            cur = arguments.getInt("num", 1);
+            childPosition = arguments.getInt("num", 1);
             groupPosition = arguments.getInt("num_2", 0);
         }
 
@@ -64,10 +64,10 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
                 ++num_of_clicks;
                 num_of_clicks %= 1e6;
                 ContestSet();
-                if (cur == 0)
-                    handler.postDelayed(new Runnable() { public void run() { dfs(num_of_clicks); } }, 600);
+                if (childPosition == 0)
+                    dfs(num_of_clicks);
                 else
-                    handler.postDelayed(new Runnable() { public void run() { bfs(num_of_clicks); } }, 600);
+                    bfs(num_of_clicks);
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("....."))
@@ -82,7 +82,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
 
     public void ContestSet() {
         //DFS == 0, BFS == 1
-        if (cur == 0) {
+        if (childPosition == 0) {
             imageView.setBackgroundResource(R.drawable.d1);
             graphs.setText(R.string.dfs);
             title.setText(R.string.dfs);
@@ -104,7 +104,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void animation_dfs(final long cur) {
-        long current = 0;
+        long current = 1;
         for (int i = 0; i < d.length; ++i)
         {
             if (cur != num_of_clicks) return;
@@ -163,7 +163,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
 
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[groupPosition+cur] = ch;
+        c[groupPosition+childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

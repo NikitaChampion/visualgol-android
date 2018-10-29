@@ -20,9 +20,8 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
     Button ins_sort;
     Button btnSave;
     EditText edit_text;
-    private int cur = 0;
+    private int childPosition = 0;
     private int num_of_clicks = 0;
-    private int poz = 0;
     private TextView []txt_num;
     final Random random = new Random();
     private int []numbers = new int[8];
@@ -38,7 +37,7 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null)
-            cur = arguments.getInt("num", 0);
+            childPosition = arguments.getInt("num", 0);
 
         num_of_clicks = 0;
 
@@ -73,7 +72,7 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
                 ++num_of_clicks;
                 num_of_clicks %= 1e6;
                 ContestSet();
-                handler.postDelayed(new Runnable() { public void run() { insertion_sort(num_of_clicks); } }, 600);
+                insertion_sort(num_of_clicks);
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))
@@ -98,10 +97,8 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
     }
 
     public void animation_insertion(final long cur) {
-        long current = 0;
-        txt_num[0].setBackgroundResource(R.drawable.rectangle_purple);
-        ++current;
-        for (int i = 1; i < numbers.length; ++i)
+        long current = 1;
+        for (int i = 0; i < numbers.length; ++i)
         {
             final int y = i;
             for (int j = i; j >= 1; --j) {
@@ -180,7 +177,7 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
     }
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[cur] = ch;
+        c[childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

@@ -22,7 +22,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     Button search;
     Button btnSave;
     EditText edit_text;
-    private int cur = 0, groupPosition = 0;
+    private int childPosition = 0, groupPosition = 0;
     private int num_of_clicks = 0;
     private TextView []txt_num;
     private TextView txt_num_find;
@@ -41,7 +41,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null) {
-            cur = arguments.getInt("num", 1);
+            childPosition = arguments.getInt("num", 1);
             groupPosition = arguments.getInt("num_2", 0);
         }
 
@@ -64,7 +64,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
 
         for (int i = 0; i < numbers.length; ++i)
             numbers[i] = random.nextInt() % 10;
-        if (cur == 0)
+        if (childPosition == 0)
             WhatToFind = numbers[abs(random.nextInt())%numbers.length];
         else
             WhatToFind = numbers_2[abs(random.nextInt())%numbers_2.length];
@@ -87,10 +87,10 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                 ++num_of_clicks;
                 num_of_clicks %= 1e6;
                 ContestSet();
-                if (cur == 0)
-                    handler.postDelayed(new Runnable() { public void run() { linear_search(num_of_clicks); } }, 600);
+                if (childPosition == 0)
+                    linear_search(num_of_clicks);
                 else
-                    handler.postDelayed(new Runnable() { public void run() { binary_search(num_of_clicks); } }, 600);
+                    binary_search(num_of_clicks);
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("....."))
@@ -105,7 +105,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
 
     public void ContestSet() {
         //linear search == 0, binary search == 1
-        if (cur == 0) {
+        if (childPosition == 0) {
             title.setText(R.string.lin_search);
             for (int i = 0; i < numbers.length; ++i) {
                 txt_num[i].setText(String.valueOf(numbers[i]));
@@ -130,7 +130,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void animation_lin(final long cur) {
-        long current = 0;
+        long current = 1;
         for (int i = 0; i < numbers.length; ++i) {
             final int x = i;
             if (cur != num_of_clicks) return;
@@ -232,7 +232,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
 
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[groupPosition+cur] = ch;
+        c[groupPosition+childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

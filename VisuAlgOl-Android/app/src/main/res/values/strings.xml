@@ -13,6 +13,7 @@
     <string name="insertion_sort">Insertion sort</string>
     <string name="merge_sort">Merge sort</string>
     <string name="quick_sort">Quick sort</string>
+    <string name="counting_sort">Counting sort</string>
 
     <string name="search">Search algorithms</string>
     <string name="lin_search">Linear search</string>

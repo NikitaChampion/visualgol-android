@@ -23,7 +23,7 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
     Button recursion;
     Button btnSave;
     EditText edit_text;
-    int cur = 0;
+    private int childPosition = 0, groupPosition = 0;
     private int num_of_clicks = 0;
     private TextView []txt_num;
     private int []numbers = {1,2,3,4,5};
@@ -37,8 +37,10 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_recursion);
 
         Bundle arguments = getIntent().getExtras();
-        if (arguments != null)
-            cur = arguments.getInt("num", 1);
+        if (arguments != null) {
+            childPosition = arguments.getInt("num", 1);
+            groupPosition = arguments.getInt("num_2", 0);
+        }
 
         //Toast.makeText(this, ""+cur, Toast.LENGTH_SHORT).show();
 
@@ -73,7 +75,7 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
                 ++num_of_clicks;
                 num_of_clicks %= 1e6;
                 ContestSet();
-                handler.postDelayed(new Runnable() { public void run() { rec(num_of_clicks); } }, 600);
+                rec(num_of_clicks);
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))
@@ -144,7 +146,7 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
     }
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[1] = ch;
+        c[groupPosition+childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

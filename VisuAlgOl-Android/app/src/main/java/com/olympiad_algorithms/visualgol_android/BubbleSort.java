@@ -20,7 +20,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     Button bub_sort;
     Button btnSave;
     EditText edit_text;
-    private int cur = 0;
+    private int childPosition = 0;
     private int num_of_clicks = 0;
     private TextView []txt_num;
     final Random random = new Random();
@@ -37,7 +37,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null)
-            cur = arguments.getInt("num", 0);
+            childPosition = arguments.getInt("num", 0);
 
         num_of_clicks = 0;
 
@@ -72,7 +72,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
                 ++num_of_clicks;
                 num_of_clicks %= 1e6;
                 ContestSet();
-                handler.postDelayed(new Runnable() { public void run() { bubble_sort(num_of_clicks); } }, 600);
+                bubble_sort(num_of_clicks);
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))
@@ -97,7 +97,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     }
 
     public void animation_bubble(final long cur) {
-        long current = 0;
+        long current = 1;
         for (int i = 0; i < numbers.length; ++i) {
             for (int j = 1; j < (numbers.length-i); ++j) {
                 final int x = j, y = i;
@@ -176,7 +176,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     }
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[cur] = ch;
+        c[childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

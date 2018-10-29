@@ -19,7 +19,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     Button st_sort;
     Button btnSave;
     EditText edit_text;
-    private int cur = 0;
+    private int childPosition = 0;
     private int num_of_clicks = 0;
     private TextView []txt_num;
     final Random random = new Random();
@@ -36,7 +36,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null)
-            cur = arguments.getInt("num", 0);
+            childPosition = arguments.getInt("num", 0);
 
         num_of_clicks = 0;
 
@@ -70,7 +70,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
                 ++num_of_clicks;
                 num_of_clicks %= 1e6;
                 ContestSet();
-                handler.postDelayed(new Runnable() { public void run() { stupid_sort(num_of_clicks); } }, 600);
+                stupid_sort(num_of_clicks);
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))
@@ -95,7 +95,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     }
 
     public void animation_stupid(final long cur) {
-        long current = 0;
+        long current = 1;
         for (int j = 1; j < numbers.length; ++j) {
             final int x = j;
             if (cur != num_of_clicks) return;
@@ -175,7 +175,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     }
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[cur] = ch;
+        c[childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
