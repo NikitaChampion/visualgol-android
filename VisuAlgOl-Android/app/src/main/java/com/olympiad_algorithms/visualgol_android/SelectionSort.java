@@ -20,12 +20,13 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     Button sel_sort;
     Button btnSave;
     EditText edit_text;
+    private int cur = 0;
     private int num_of_clicks = 0;
-    private TextView [] txt_num;
+    private int poz = 0;
+    private TextView []txt_num;
     final Random random = new Random();
     private int []numbers = new int[8];
     private Handler handler = new Handler();
-    int poz = 0;
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -33,6 +34,10 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_sort);
+
+        Bundle arguments = getIntent().getExtras();
+        if (arguments != null)
+            cur = arguments.getInt("num", 0);
 
         num_of_clicks = 0;
 
@@ -73,6 +78,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                 if (edit_text.getText().toString().equals("1 2 3"))
                     saveText('1');
                 else saveText('0');
+                break;
             default:
                 break;
         }
@@ -171,7 +177,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     }
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[2] = ch;
+        c[cur] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

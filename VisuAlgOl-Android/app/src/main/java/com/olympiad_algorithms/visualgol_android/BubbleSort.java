@@ -13,16 +13,19 @@ import android.widget.Toast;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 public class BubbleSort extends AppCompatActivity implements View.OnClickListener {
 
     Button bub_sort;
     Button btnSave;
     EditText edit_text;
-    private TextView [] txt_num;
-    private long num_of_clicks = 0;
-    private int []numbers = {7,2,1,3,9,0,8,3};
-    private int []numbers_2 = {7,2,1,3,9,0,8,3};
+    private int cur = 0;
+    private int num_of_clicks = 0;
+    private TextView []txt_num;
+    final Random random = new Random();
+    private int []numbers = new int[8];
+    private int []numbers_2 = new int[8];
     private Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
@@ -31,6 +34,10 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bubble_sort);
+
+        Bundle arguments = getIntent().getExtras();
+        if (arguments != null)
+            cur = arguments.getInt("num", 0);
 
         num_of_clicks = 0;
 
@@ -44,9 +51,8 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
         txt_num[6] = findViewById(R.id.txt_num7);
         txt_num[7] = findViewById(R.id.txt_num8);
 
-        for (int i = 0; i < numbers.length; ++i) {
-            txt_num[i].setText(String.valueOf(numbers[i]));
-        }
+        for (int i = 0; i < numbers.length; ++i)
+            numbers[i] = random.nextInt() % 10;
 
         bub_sort = findViewById(R.id.bub_sort);
         bub_sort.setOnClickListener(this);
@@ -56,6 +62,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
 
+        ContestSet();
     }
 
     @Override
@@ -63,19 +70,25 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.bub_sort:
                 ++num_of_clicks;
-                for (int i = 0; i < numbers.length; ++i) {
-                    txt_num[i].setText(String.valueOf(numbers[i]));
-                    txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
-                    numbers_2[i] = numbers[i];
-                }
+                num_of_clicks %= 1e6;
+                ContestSet();
                 handler.postDelayed(new Runnable() { public void run() { bubble_sort(num_of_clicks); } }, 600);
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))
                     saveText('1');
                 else saveText('0');
+                break;
             default:
                 break;
+        }
+    }
+
+    public void ContestSet() {
+        for (int i = 0; i < numbers.length; ++i) {
+            txt_num[i].setText(String.valueOf(numbers[i]));
+            txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
+            numbers_2[i] = numbers[i];
         }
     }
 
@@ -163,7 +176,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     }
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[1] = ch;
+        c[cur] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);

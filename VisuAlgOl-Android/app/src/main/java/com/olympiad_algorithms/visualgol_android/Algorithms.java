@@ -78,6 +78,7 @@ public class Algorithms extends AppCompatActivity {
                             intent = new Intent(Algorithms.this, StupidSort.class);
                             break;
                     }
+                    intent.putExtra("num", childPosition);
                     startActivity(intent);
                 }
                 else if (groupPosition == 1)

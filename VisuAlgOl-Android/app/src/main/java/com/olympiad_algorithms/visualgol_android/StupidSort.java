@@ -5,21 +5,40 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Random;
 
 public class StupidSort extends AppCompatActivity implements View.OnClickListener {
 
     Button st_sort;
-    private TextView [] txt_num;
-    private long num_of_clicks = 0;
-    private int []numbers = {2,7,8,5,3,6,1};
-    private int []numbers_2 = {2,7,8,5,3,6,1};
+    Button btnSave;
+    EditText edit_text;
+    private int cur = 0;
+    private int num_of_clicks = 0;
+    private TextView []txt_num;
+    final Random random = new Random();
+    private int []numbers = new int[7];
+    private int []numbers_2 = new int[7];
     private Handler handler = new Handler();
+
+    private final static String FILE_NAME = "qwerty.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stupid_sort);
+
+        Bundle arguments = getIntent().getExtras();
+        if (arguments != null)
+            cur = arguments.getInt("num", 0);
+
+        num_of_clicks = 0;
 
         txt_num = new TextView[7];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -30,12 +49,18 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         txt_num[5] = findViewById(R.id.txt_num6);
         txt_num[6] = findViewById(R.id.txt_num7);
 
-        for (int i = 0; i < numbers.length; ++i) {
-            txt_num[i].setText(String.valueOf(numbers[i]));
-        }
+        for (int i = 0; i < numbers.length; ++i)
+            numbers[i] = random.nextInt() % 10;
 
         st_sort = findViewById(R.id.st_sort);
         st_sort.setOnClickListener(this);
+
+        edit_text = findViewById(R.id.edit_text);
+
+        btnSave = findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(this);
+
+        ContestSet();
     }
 
     @Override
@@ -43,15 +68,25 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.st_sort:
                 ++num_of_clicks;
-                for (int i = 0; i < numbers.length; ++i) {
-                    txt_num[i].setText(String.valueOf(numbers[i]));
-                    txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
-                    numbers_2[i] = numbers[i];
-                }
+                num_of_clicks %= 1e6;
+                ContestSet();
                 handler.postDelayed(new Runnable() { public void run() { stupid_sort(num_of_clicks); } }, 600);
+                break;
+            case R.id.btnSave:
+                if (edit_text.getText().toString().equals("1 2 3"))
+                    saveText('1');
+                else saveText('0');
                 break;
             default:
                 break;
+        }
+    }
+
+    public void ContestSet() {
+        for (int i = 0; i < numbers.length; ++i) {
+            txt_num[i].setText(String.valueOf(numbers[i]));
+            txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
+            numbers_2[i] = numbers[i];
         }
     }
 
@@ -68,13 +103,13 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void run() {
                     if (cur != num_of_clicks) return;
-                    txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_orange);
+                    txt_num[x-1].setBackgroundResource(R.drawable.rectangle_orange);
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                 }
-            }, 1250 * current);
-            if (numbers_2[j - 1] > numbers_2[j]) {
-                int temp = numbers_2[j - 1];
-                numbers_2[j - 1] = numbers_2[j];
+            }, 1250*current);
+            if (numbers_2[j-1] > numbers_2[j]) {
+                int temp = numbers_2[j-1];
+                numbers_2[j-1] = numbers_2[j];
                 numbers_2[j] = temp;
                 j = 0;
                 ++current;
@@ -83,21 +118,21 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void run() {
                         if (cur != num_of_clicks) return;
-                        txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_red);
+                        txt_num[x-1].setBackgroundResource(R.drawable.rectangle_red);
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
                     }
-                }, 1250 * current);
+                }, 1250*current);
                 ++current;
                 if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         if (cur != num_of_clicks) return;
-                        String temp = txt_num[x - 1].getText().toString();
-                        txt_num[x - 1].setText(txt_num[x].getText().toString()); // swap
+                        String temp = txt_num[x-1].getText().toString();
+                        txt_num[x-1].setText(txt_num[x].getText().toString()); // swap
                         txt_num[x].setText(temp);
                     }
-                }, 1250 * current);
+                }, 1250*current);
             }
             ++current;
             if (cur != num_of_clicks) return;
@@ -105,19 +140,51 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void run() {
                     if (cur != num_of_clicks) return;
-                    txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_gray);
+                    txt_num[x-1].setBackgroundResource(R.drawable.rectangle_gray);
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
                 }
-            }, 1250 * current);
+            }, 1250*current);
         }
-        for (int j = 0; j < numbers.length; ++j) {
-            final int x = j;
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    txt_num[x].setBackgroundResource(R.drawable.rectangle_dark);
-                }
-            }, 1250 * current);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (int j = 0; j < numbers.length; ++j)
+                    txt_num[j].setBackgroundResource(R.drawable.rectangle_dark);
+            }
+        }, 1250*current);
+    }
+
+    static String convertStreamToString(FileInputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
+    public String loadText() {
+        try {
+            FileInputStream fin = openFileInput(FILE_NAME);
+            String str = convertStreamToString(fin);
+            fin.close();
+            return str;
+        } catch(IOException ex) {
+            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            StringBuilder curBuilder = new StringBuilder();
+            for (int i = 0; i < 100; ++i)
+                curBuilder.append('0');
+            return curBuilder.toString();
         }
+    }
+    public void saveText(char ch) {
+        char[] c = loadText().toCharArray();
+        c[cur] = ch;
+        String str = new String(c);
+        try {
+            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(str.getBytes());
+            fos.close();
+        } catch(IOException ex) {
+            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
     }
 }

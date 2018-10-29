@@ -24,8 +24,8 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
     Button btnSave;
     EditText edit_text;
     int cur = 0;
-    private TextView [] txt_num;
-    private long num_of_clicks = 0;
+    private int num_of_clicks = 0;
+    private TextView []txt_num;
     private int []numbers = {1,2,3,4,5};
     private Handler handler = new Handler();
 
@@ -71,6 +71,7 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
         switch (v.getId()) {
             case R.id.recursion:
                 ++num_of_clicks;
+                num_of_clicks %= 1e6;
                 ContestSet();
                 handler.postDelayed(new Runnable() { public void run() { rec(num_of_clicks); } }, 600);
                 break;
@@ -78,6 +79,7 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
                 if (edit_text.getText().toString().equals("1 2 3"))
                     saveText('1');
                 else saveText('0');
+                break;
             default:
                 break;
         }

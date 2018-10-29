@@ -27,9 +27,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosititon) {
+    public Object getChild(int groupPosition, int childPosition) {
         return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .get(childPosititon);
+                .get(childPosition);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    public int getPozAll(int groupPosition) {
+    int getPozAll(int groupPosition) {
         int sum = 0;
         for (int i = 0; i < groupPosition; ++i)
             sum += getChildrenCount(i);

@@ -21,8 +21,8 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
     Button graphs;
     Button btnSave;
     EditText edit_text;
-    int cur = 0, groupPosition = 0;
-    private long num_of_clicks = 0;
+    private int cur = 0, groupPosition = 0;
+    private int num_of_clicks = 0;
     private Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
@@ -62,6 +62,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.graphs:
                 ++num_of_clicks;
+                num_of_clicks %= 1e6;
                 ContestSet();
                 if (cur == 0)
                     handler.postDelayed(new Runnable() { public void run() { dfs(num_of_clicks); } }, 600);
@@ -73,6 +74,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
                     saveText('1');
                 else
                     saveText('0');
+                break;
             default:
                 break;
         }

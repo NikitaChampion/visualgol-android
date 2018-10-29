@@ -97,6 +97,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                     saveText('1');
                 else
                     saveText('0');
+                break;
             default:
                 break;
         }

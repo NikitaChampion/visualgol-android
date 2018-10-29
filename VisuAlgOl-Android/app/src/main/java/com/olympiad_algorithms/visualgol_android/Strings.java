@@ -20,11 +20,11 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
     Button strings;
     Button btnSave;
     EditText edit_text;
-    private TextView[] txt_num;
-    private TextView[] st;
-    private char[] chars = {'a', 'b', 'a', 'c', 'a', 'b', 'a'};
-    int cur = 0, groupPosition = 0;
-    private long num_of_clicks = 0;
+    private int cur = 0, groupPosition = 0;
+    private int num_of_clicks = 0;
+    private TextView []txt_num;
+    private TextView []st;
+    private char []chars = {'a', 'b', 'a', 'c', 'a', 'b', 'a'};
     private Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
@@ -64,10 +64,8 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
         st[5] = findViewById(R.id.s_6);
         st[6] = findViewById(R.id.s_7);
 
-        for (int i = 0; i < st.length; ++i) {
-            st[i].setText("0");
+        for (int i = 0; i < st.length; ++i)
             txt_num[i].setText(String.valueOf(chars[i]));
-        }
 
         strings = findViewById(R.id.strings);
         strings.setOnClickListener(this);
@@ -80,6 +78,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.strings:
                 ++num_of_clicks;
+                num_of_clicks %= 1e6;
                 ContestSet();
                 handler.postDelayed(new Runnable() {
                     public void run() {
