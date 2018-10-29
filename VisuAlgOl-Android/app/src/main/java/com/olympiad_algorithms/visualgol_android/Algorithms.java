@@ -69,9 +69,12 @@ public class Algorithms extends AppCompatActivity {
                             intent = new Intent(Algorithms.this, SelectionSort.class);
                             break;
                         case 3:
-                            intent = new Intent(Algorithms.this, MergeSort.class);
+                            intent = new Intent(Algorithms.this, InsertionSort.class);
                             break;
                         case 4:
+                            intent = new Intent(Algorithms.this, MergeSort.class);
+                            break;
+                        case 5:
                             intent = new Intent(Algorithms.this, QuickSort.class);
                             break;
                         default:
@@ -133,6 +136,7 @@ public class Algorithms extends AppCompatActivity {
         SortArray.add(getString(R.string.what));
         SortArray.add(getString(R.string.bubble_sort));
         SortArray.add(getString(R.string.selection_sort));
+        SortArray.add(getString(R.string.insertion_sort));
         SortArray.add(getString(R.string.merge_sort));
         SortArray.add(getString(R.string.quick_sort));
 

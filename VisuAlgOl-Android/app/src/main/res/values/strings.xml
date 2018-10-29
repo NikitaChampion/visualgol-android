@@ -10,6 +10,7 @@
     <string name="stupid_sort">Stupid sort</string>
     <string name="bubble_sort">Bubble sort</string>
     <string name="selection_sort">Selection sort</string>
+    <string name="insertion_sort">Insertion sort</string>
     <string name="merge_sort">Merge sort</string>
     <string name="quick_sort">Quick sort</string>
 

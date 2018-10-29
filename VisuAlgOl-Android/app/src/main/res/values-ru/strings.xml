@@ -10,6 +10,7 @@
     <string name="stupid_sort">Глупая сортировка</string>
     <string name="bubble_sort">Сортировка пузырьком</string>
     <string name="selection_sort">Сортировка выбором</string>
+    <string name="insertion_sort">Сортировка вставками</string>
     <string name="merge_sort">Сортировка слиянием</string>
     <string name="quick_sort">Быстрая сортировка</string>
 
