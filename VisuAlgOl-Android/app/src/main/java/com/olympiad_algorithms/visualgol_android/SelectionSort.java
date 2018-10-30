@@ -75,7 +75,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                 selection_sort(num_of_clicks);
                 break;
             case R.id.btnSave:
-                if (edit_text.getText().toString().equals("1 2 3"))
+                if (edit_text.getText().toString().equals("1 2 4 3"))
                     saveText('1');
                 else saveText('0');
                 break;

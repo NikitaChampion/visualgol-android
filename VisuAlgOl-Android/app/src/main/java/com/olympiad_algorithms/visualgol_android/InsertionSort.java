@@ -75,7 +75,7 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
                 insertion_sort(num_of_clicks);
                 break;
             case R.id.btnSave:
-                if (edit_text.getText().toString().equals("1 2 3"))
+                if (edit_text.getText().toString().equals("3 4 2 1"))
                     saveText('1');
                 else saveText('0');
                 break;

@@ -19,6 +19,8 @@ import static java.lang.Math.abs;
 public class Search extends AppCompatActivity implements View.OnClickListener {
 
     TextView title;
+    TextView Search;
+    TextView task;
     Button search;
     Button btnSave;
     EditText edit_text;
@@ -62,6 +64,10 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         txt_num[7] = findViewById(R.id.txt_num8);
         txt_num_find = findViewById(R.id.txt_num10);
 
+        Search = findViewById(R.id.Search);
+
+        task = findViewById(R.id.task);
+
         for (int i = 0; i < numbers.length; ++i)
             numbers[i] = random.nextInt() % 10;
         if (childPosition == 0)
@@ -93,7 +99,9 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                     binary_search(num_of_clicks);
                 break;
             case R.id.btnSave:
-                if (edit_text.getText().toString().equals("....."))
+                if (childPosition == 0 && edit_text.getText().toString().equals("5"))
+                    saveText('1');
+                else if (childPosition == 1 && edit_text.getText().toString().equals("4"))
                     saveText('1');
                 else
                     saveText('0');
@@ -112,6 +120,8 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                 txt_num[i].setBackgroundResource(R.drawable.rectangle_search_1);
             }
             search.setText(R.string.lin_search);
+            Search.setText(R.string.lin_s);
+            task.setText(R.string.task8);
         }
         else {
             title.setText(R.string.bin_search);
@@ -120,12 +130,13 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                 txt_num[i].setBackgroundResource(R.drawable.rectangle_search_1);
             }
             search.setText(R.string.bin_search);
+            task.setText(R.string.task9);
         }
         txt_num_find.setText(String.valueOf(WhatToFind));
         txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
     }
 
-    public void linear_search(long cur){
+    public void linear_search(long cur) {
         animation_lin(cur);
     }
 
@@ -161,7 +172,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    public void binary_search(long cur){
+    public void binary_search(long cur) {
         animation_bin(cur);
     }
 
