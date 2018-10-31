@@ -21,7 +21,6 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     Button btnSave;
     EditText edit_text;
     private int childPosition = 0;
-    private int num_of_clicks = 0;
     private TextView []txt_num;
     final Random random = new Random();
     private int []numbers = new int[8];
@@ -38,8 +37,6 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
         Bundle arguments = getIntent().getExtras();
         if (arguments != null)
             childPosition = arguments.getInt("num", 0);
-
-        num_of_clicks = 0;
 
         txt_num = new TextView[8];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -69,10 +66,9 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bub_sort:
-                ++num_of_clicks;
-                num_of_clicks %= 1e6;
+                handler.removeCallbacksAndMessages(null);
                 ContestSet();
-                bubble_sort(num_of_clicks);
+                bubble_sort();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("3"))
@@ -92,63 +88,55 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public void bubble_sort(long cur){
-        animation_bubble(cur);
+    public void bubble_sort(){
+        animation_bubble();
     }
 
-    public void animation_bubble(final long cur) {
+    public void animation_bubble() {
         long current = 1;
         for (int i = 0; i < numbers.length; ++i) {
             for (int j = 1; j < (numbers.length-i); ++j) {
                 final int x = j, y = i;
-                if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         txt_num[x-1].setBackgroundResource(R.drawable.rectangle_orange);
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                     }
                 }, 1250*current);
+                ++current;
                 if (numbers_2[j-1] > numbers_2[j]) {
                     int temp = numbers_2[j-1];
                     numbers_2[j-1] = numbers_2[j];
                     numbers_2[j] = temp;
 
-                    ++current;
-                    if (cur != num_of_clicks) return;
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (cur != num_of_clicks) return;
                             txt_num[x-1].setBackgroundResource(R.drawable.rectangle_red);
                             txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
                         }
                     }, 1250*current);
                     ++current;
-                    if (cur != num_of_clicks) return;
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (cur != num_of_clicks) return;
                             String temp = txt_num[x-1].getText().toString();
-                            txt_num[x-1].setText(txt_num[x].getText().toString()); // swap
+                            txt_num[x-1].setText(txt_num[x].getText().toString());
                             txt_num[x].setText(temp);
                         }
                     }, 1250*current);
+                    ++current;
                 }
-                ++current;
-                if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         txt_num[x-1].setBackgroundResource(R.drawable.rectangle_gray);
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
                         if (x == numbers.length - y - 1)
                             txt_num[x].setBackgroundResource(R.drawable.rectangle_dark);
                         if (x == 1 && y == numbers.length-2)
-                            txt_num[x-1].setBackgroundResource(R.drawable.rectangle_dark);
+                            txt_num[0].setBackgroundResource(R.drawable.rectangle_dark);
                     }
                 }, 1250*current);
             }

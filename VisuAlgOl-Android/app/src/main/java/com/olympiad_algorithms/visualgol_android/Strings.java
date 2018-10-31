@@ -21,7 +21,6 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
     Button btnSave;
     EditText edit_text;
     private int childPosition = 0, groupPosition = 0;
-    private int num_of_clicks = 0;
     private TextView []txt_num;
     private TextView []st;
     private char []chars = {'a', 'b', 'a', 'c', 'a', 'b', 'a'};
@@ -41,8 +40,6 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
         }
 
         //Toast.makeText(this, ""+cur, Toast.LENGTH_SHORT).show();
-
-        num_of_clicks = 0;
 
         title = findViewById(R.id.title);
 
@@ -77,13 +74,12 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.strings:
-                ++num_of_clicks;
-                num_of_clicks %= 1e6;
+                handler.removeCallbacksAndMessages(null);
                 ContestSet();
                 if (childPosition == 0)
-                    prefix(num_of_clicks);
+                    prefix();
                 else
-                    z(num_of_clicks);
+                    z();
                 break;
             default:
                 break;
@@ -107,37 +103,32 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    public void prefix(long cur) {
-        animation_prefix(cur);
+    public void prefix() {
+        animation_prefix();
     }
 
-    public void animation_prefix(final long cur) {
+    public void animation_prefix() {
         st[0].setBackgroundResource(R.drawable.rectangle_2_gray);
         long current = 1;
         for (int i = 1; i < st.length; ++i) {
             final int y = i;
             for (int j = 1; j <= i; ++j) {
                 final int x = j;
-                if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         for (TextView u : txt_num)
                             u.setTextColor(Color.parseColor("#000000"));
                         StringBuilder s = new StringBuilder(), s1 = new StringBuilder();
-                        if (cur != num_of_clicks) return;
                         for (int k = 0; k < x; ++k) {
                             s.append(chars[k]);
                             txt_num[k].setTextColor(Color.parseColor("#0000FF"));
                         }
-                        if (cur != num_of_clicks) return;
                         for (int k = y - x + 1; k <= y; ++k) {
                             s1.append(chars[k]);
                             if (txt_num[k].getCurrentTextColor() == Color.parseColor("#0000FF"))
                                 txt_num[k].setTextColor(Color.parseColor("#FFA500"));
                             else txt_num[k].setTextColor(Color.parseColor("#FF0000"));
                         }
-                        if (cur != num_of_clicks) return;
                         if (s.toString().equals(s1.toString())) {
                             st[y].setText(String.valueOf(x));
                         }
@@ -147,7 +138,6 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
             }
             handler.postDelayed(new Runnable() {
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     for (TextView u : txt_num)
                         u.setTextColor(Color.parseColor("#000000"));
                     st[y].setBackgroundResource(R.drawable.rectangle_2_gray);
@@ -157,11 +147,11 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    public void z(long cur) {
-        animation_z(cur);
+    public void z() {
+        animation_z();
     }
 
-    public void animation_z(final long cur) {
+    public void animation_z() {
         st[0].setBackgroundResource(R.drawable.rectangle_2_gray);
         long current = 0;
         for (int i = 1; i < st.length; ++i) {
@@ -171,10 +161,8 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
             {
                 final int x = j;
                 ++current;
-                if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         if (txt_num[x].getCurrentTextColor() == Color.parseColor("#FF0000"))
                             txt_num[x].setTextColor(Color.parseColor("#FFA500"));
                         else txt_num[x].setTextColor(Color.parseColor("#0000FF"));
@@ -187,7 +175,6 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
             ++current;
             handler.postDelayed(new Runnable() {
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     st[y].setText(String.valueOf(x));
                     st[y].setBackgroundResource(R.drawable.rectangle_2_gray);
                     for (TextView u : txt_num)

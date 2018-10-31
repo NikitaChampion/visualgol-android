@@ -21,7 +21,6 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     Button btnSave;
     EditText edit_text;
     private int childPosition = 0;
-    private int num_of_clicks = 0;
     private int poz = 0;
     private TextView []txt_num;
     final Random random = new Random();
@@ -38,8 +37,6 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         Bundle arguments = getIntent().getExtras();
         if (arguments != null)
             childPosition = arguments.getInt("num", 0);
-
-        num_of_clicks = 0;
 
         txt_num = new TextView[8];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -69,10 +66,9 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sel_sort:
-                ++num_of_clicks;
-                num_of_clicks %= 1e6;
+                handler.removeCallbacksAndMessages(null);
                 ContestSet();
-                selection_sort(num_of_clicks);
+                selection_sort();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 4 3"))
@@ -91,20 +87,18 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void selection_sort(long cur){
-        animation_selection(cur);
+    public void selection_sort(){
+        animation_selection();
     }
 
-    public void animation_selection(final long cur) {
+    public void animation_selection() {
         long current = 1;
         for (int i = 0; i < numbers.length; ++i)
         {
             final int y = i;
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     txt_num[y].setBackgroundResource(R.drawable.rectangle_red);
                     poz = y;
                 }
@@ -112,20 +106,16 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
             ++current;
             for (int j = i+1; j < numbers.length; ++j) {
                 final int x = j;
-                if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                     }
                 }, 1250*current);
                 ++current;
-                if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         if (Integer.parseInt(txt_num[x].getText().toString()) < Integer.parseInt(txt_num[poz].getText().toString())) {
                             if (poz != y)
                                 txt_num[poz].setBackgroundResource(R.drawable.rectangle_gray);
@@ -140,13 +130,11 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                 }, 1250*current);
                 ++current;
             }
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     String temp = txt_num[y].getText().toString();
-                    txt_num[y].setText(txt_num[poz].getText().toString()); // swap
+                    txt_num[y].setText(txt_num[poz].getText().toString());
                     txt_num[poz].setText(temp);
                     txt_num[poz].setBackgroundResource(R.drawable.rectangle_gray);
                     txt_num[y].setBackgroundResource(R.drawable.rectangle_dark);

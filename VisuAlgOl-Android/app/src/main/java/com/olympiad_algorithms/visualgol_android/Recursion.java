@@ -24,7 +24,6 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
     Button btnSave;
     EditText edit_text;
     private int childPosition = 0, groupPosition = 0;
-    private int num_of_clicks = 0;
     private TextView []txt_num;
     private int []numbers = {1,2,3,4,5};
     private Handler handler = new Handler();
@@ -43,8 +42,6 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
         }
 
         //Toast.makeText(this, ""+cur, Toast.LENGTH_SHORT).show();
-
-        num_of_clicks = 0;
 
         title = findViewById(R.id.title);
 
@@ -72,10 +69,9 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.recursion:
-                ++num_of_clicks;
-                num_of_clicks %= 1e6;
+                handler.removeCallbacksAndMessages(null);
                 ContestSet();
-                rec(num_of_clicks);
+                rec();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))
@@ -97,28 +93,26 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
         recursion.setText(R.string.recursion);
     }
 
-    public void rec(long cur) {
-        animation_recursion(cur, 0);
+    public void rec() {
+        animation_recursion(0);
     }
 
-    public void animation_recursion(final long cur, final int poz) {
+    public void animation_recursion(final int poz) {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (cur != num_of_clicks) return;
                 txt_num[poz].setBackgroundResource(R.drawable.rectangle_orange);
                 if (poz < 4)
-                    animation_recursion(cur, poz+1);
+                    animation_recursion(poz+1);
                 long sum = 0;
                 for (int i = 0; i <= 4-poz; ++i)
                     sum += (long)pow(2, i);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         txt_num[poz].setBackgroundResource(R.drawable.rectangle_gray);
                         if (poz < 4)
-                            animation_recursion(cur, poz+1);
+                            animation_recursion(poz+1);
                     }
                 }, 1250*((long)pow(2,4-poz)+sum));
             }

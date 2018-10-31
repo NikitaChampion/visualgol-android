@@ -21,7 +21,6 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
     Button btnSave;
     EditText edit_text;
     private int childPosition = 0;
-    private int num_of_clicks = 0;
     private TextView []txt_num;
     private TextView []ind;
     final Random random = new Random();
@@ -38,8 +37,6 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
         Bundle arguments = getIntent().getExtras();
         if (arguments != null)
             childPosition = arguments.getInt("num", 0);
-
-        num_of_clicks = 0;
 
         txt_num = new TextView[8];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -82,10 +79,9 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.q_sort:
-                ++num_of_clicks;
-                num_of_clicks %= 1e6;
+                handler.removeCallbacksAndMessages(null);
                 ContestSet();
-                quick_sort(num_of_clicks);
+                quick_sort();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 4 3"))
@@ -104,12 +100,12 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    public void quick_sort(long cur){
-        animation_quick(cur, 0, numbers.length-1);
+    public void quick_sort(){
+        animation_quick(0, numbers.length-1);
     }
 
     long current = 1;
-    public void animation_quick(final long cur, int a, int b) {
+    public void animation_quick(int a, int b) {
         int l = a, r = b, mainer = numbers[(l+r)/2];
         final int mid = (l+r)/2;
         while (l <= r) {
@@ -123,7 +119,6 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         txt_num[ll].setBackgroundResource(R.drawable.rectangle_red);
                         txt_num[rr].setBackgroundResource(R.drawable.rectangle_red);
                         ind[mid].setBackgroundResource(R.drawable.rectangle_purple);
@@ -133,7 +128,6 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         String temp = txt_num[ll].getText().toString();
                         txt_num[ll].setText(txt_num[rr].getText().toString());
                         txt_num[rr].setText(temp);
@@ -143,7 +137,6 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         txt_num[ll].setBackgroundResource(R.drawable.rectangle_gray);
                         txt_num[rr].setBackgroundResource(R.drawable.rectangle_gray);
                     }
@@ -167,7 +160,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                 }
             }, 1250*current);
             ++current;
-            animation_quick(cur, a, r);
+            animation_quick(a, r);
         }
         if (b > l) {
             handler.postDelayed(new Runnable() {
@@ -183,7 +176,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                 }
             }, 1250*current);
             ++current;
-            animation_quick(cur, l, b);
+            animation_quick(l, b);
         }
         handler.postDelayed(new Runnable() {
             @Override

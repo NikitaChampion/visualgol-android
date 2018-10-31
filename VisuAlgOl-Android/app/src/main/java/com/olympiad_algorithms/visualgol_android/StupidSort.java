@@ -20,7 +20,6 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     Button btnSave;
     EditText edit_text;
     private int childPosition = 0;
-    private int num_of_clicks = 0;
     private TextView []txt_num;
     final Random random = new Random();
     private int []numbers = new int[7];
@@ -37,8 +36,6 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         Bundle arguments = getIntent().getExtras();
         if (arguments != null)
             childPosition = arguments.getInt("num", 0);
-
-        num_of_clicks = 0;
 
         txt_num = new TextView[7];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -67,10 +64,9 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.st_sort:
-                ++num_of_clicks;
-                num_of_clicks %= 1e6;
+                handler.removeCallbacksAndMessages(null);
                 ContestSet();
-                stupid_sort(num_of_clicks);
+                stupid_sort();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))
@@ -90,19 +86,17 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public void stupid_sort(long cur){
-        animation_stupid(cur);
+    public void stupid_sort(){
+        animation_stupid();
     }
 
-    public void animation_stupid(final long cur) {
+    public void animation_stupid() {
         long current = 1;
         for (int j = 1; j < numbers.length; ++j) {
             final int x = j;
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     txt_num[x-1].setBackgroundResource(R.drawable.rectangle_orange);
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                 }
@@ -113,33 +107,27 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
                 numbers_2[j] = temp;
                 j = 0;
                 ++current;
-                if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         txt_num[x-1].setBackgroundResource(R.drawable.rectangle_red);
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
                     }
                 }, 1250*current);
                 ++current;
-                if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         String temp = txt_num[x-1].getText().toString();
-                        txt_num[x-1].setText(txt_num[x].getText().toString()); // swap
+                        txt_num[x-1].setText(txt_num[x].getText().toString());
                         txt_num[x].setText(temp);
                     }
                 }, 1250*current);
             }
             ++current;
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     txt_num[x-1].setBackgroundResource(R.drawable.rectangle_gray);
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
                 }

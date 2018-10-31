@@ -25,7 +25,6 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     Button btnSave;
     EditText edit_text;
     private int childPosition = 0, groupPosition = 0;
-    private int num_of_clicks = 0;
     private TextView []txt_num;
     private TextView txt_num_find;
     final Random random = new Random();
@@ -48,8 +47,6 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         }
 
         //Toast.makeText(this, ""+cur, Toast.LENGTH_SHORT).show();
-
-        num_of_clicks = 0;
 
         title = findViewById(R.id.title);
 
@@ -90,13 +87,12 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.search:
-                ++num_of_clicks;
-                num_of_clicks %= 1e6;
+                handler.removeCallbacksAndMessages(null);
                 ContestSet();
                 if (childPosition == 0)
-                    linear_search(num_of_clicks);
+                    linear_search();
                 else
-                    binary_search(num_of_clicks);
+                    binary_search();
                 break;
             case R.id.btnSave:
                 if (childPosition == 0 && edit_text.getText().toString().equals("5"))
@@ -136,29 +132,25 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
     }
 
-    public void linear_search(long cur) {
-        animation_lin(cur);
+    public void linear_search() {
+        animation_lin();
     }
 
-    public void animation_lin(final long cur) {
+    public void animation_lin() {
         long current = 1;
         for (int i = 0; i < numbers.length; ++i) {
             final int x = i;
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
                     txt_num_find.setBackgroundResource(R.drawable.rectangle_search_4);
                 }
             }, 1250*current);
             ++current;
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     if (numbers[x] == WhatToFind)
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_search_4);
                     else {
@@ -172,32 +164,28 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    public void binary_search(long cur) {
-        animation_bin(cur);
+    public void binary_search() {
+        animation_bin();
     }
 
-    public void animation_bin(final long cur) {
+    public void animation_bin() {
         long current = 0;
         int l = -1, r = numbers_2.length, mid;
         while (l < r-1)
         {
             mid = (l+r)/2;
             final int x = mid;
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
                     txt_num_find.setBackgroundResource(R.drawable.rectangle_search_4);
                 }
             }, 1250*current);
             ++current;
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     if (numbers_2[x] < WhatToFind) {
                         for (int i = 0; i <= x; ++i) {
                             txt_num[i].setBackgroundResource(R.drawable.rectangle_search_2);

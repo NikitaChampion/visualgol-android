@@ -23,7 +23,6 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
     Button btnSave;
     EditText edit_text;
     private int childPosition = 0;
-    private int num_of_clicks = 0;
     private TextView []txt_num;
     private TextView []index;
     private TextView []numb;
@@ -42,8 +41,6 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
         Bundle arguments = getIntent().getExtras();
         if (arguments != null)
             childPosition = arguments.getInt("num", 0);
-
-        num_of_clicks = 0;
 
         txt_num = new TextView[8];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -94,10 +91,9 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.cou_sort:
-                ++num_of_clicks;
-                //num_of_clicks %= 1e6;
+                handler.removeCallbacksAndMessages(null);
                 ContestSet();
-                counting_sort(num_of_clicks);
+                counting_sort();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))
@@ -121,29 +117,25 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void counting_sort(long cur){
-        animation_counting(cur);
+    public void counting_sort(){
+        animation_counting();
     }
 
-    public void animation_counting(final long cur) {
+    public void animation_counting() {
         long current = 1;
         for (int i = 0; i < numbers.length; ++i) {
             final int x = i;
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
                     index[numbers[x]].setBackgroundResource(R.drawable.rectangle_search_3);
                 }
             }, 1250*current);
             ++current;
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     ++numbers_2[numbers[x]];
                     txt_num[x].setText("");
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_1);
@@ -156,10 +148,8 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (cur != num_of_clicks) return;
                 int curIndex = 0;
                 for (int i = 0; i < numbers_2.length; ++i) {
-                    if (cur != num_of_clicks) return;
                     while (numbers_2[i] > 0) {
                         --numbers_2[i];
                         numb[i].setText(String.valueOf(numbers_2[i]));

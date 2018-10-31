@@ -22,7 +22,6 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
     Button btnSave;
     EditText edit_text;
     private int childPosition = 0, groupPosition = 0;
-    private int num_of_clicks = 0;
     private Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
@@ -39,8 +38,6 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
         }
 
         //Toast.makeText(this, ""+cur, Toast.LENGTH_SHORT).show();
-
-        num_of_clicks = 0;
 
         title = findViewById(R.id.title);
 
@@ -61,13 +58,12 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.graphs:
-                ++num_of_clicks;
-                num_of_clicks %= 1e6;
+                handler.removeCallbacksAndMessages(null);
                 ContestSet();
                 if (childPosition == 0)
-                    dfs(num_of_clicks);
+                    dfs();
                 else
-                    bfs(num_of_clicks);
+                    bfs();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("....."))
@@ -99,45 +95,37 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
     int[] b = {R.drawable.b2, R.drawable.b3, R.drawable.b4, R.drawable.b5, R.drawable.b6,
             R.drawable.b7, R.drawable.b8, R.drawable.b9, R.drawable.b10, R.drawable.b11, R.drawable.b12};
 
-    public void dfs(long cur) {
-        animation_dfs(cur);
+    public void dfs() {
+        animation_dfs();
     }
 
-    public void animation_dfs(final long cur) {
-        long current = 1;
+    public void animation_dfs() {
         for (int i = 0; i < d.length; ++i)
         {
-            if (cur != num_of_clicks) return;
-            ++current;
             final int j = i;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     imageView.setBackgroundResource(d[j]);
                 }
-            }, 1250*current);
+            }, 1250*(i+1));
         }
     }
 
-    public void bfs(long cur) {
-        animation_bfs(cur);
+    public void bfs() {
+        animation_bfs();
     }
 
-    public void animation_bfs(final long cur) {
-        long current = 0;
+    public void animation_bfs() {
         for (int i = 0; i < b.length; ++i)
         {
-            if (cur != num_of_clicks) return;
-            ++current;
             final int j = i;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     imageView.setBackgroundResource(b[j]);
                 }
-            }, 1250*current);
+            }, 1250*(i+1));
         }
     }
 

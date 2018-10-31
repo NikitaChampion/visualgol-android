@@ -21,7 +21,6 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
     Button btnSave;
     EditText edit_text;
     private int childPosition = 0;
-    private int num_of_clicks = 0;
     private TextView []txt_num;
     final Random random = new Random();
     private int []numbers = new int[8];
@@ -38,8 +37,6 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
         Bundle arguments = getIntent().getExtras();
         if (arguments != null)
             childPosition = arguments.getInt("num", 0);
-
-        num_of_clicks = 0;
 
         txt_num = new TextView[8];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -69,10 +66,9 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ins_sort:
-                ++num_of_clicks;
-                num_of_clicks %= 1e6;
+                handler.removeCallbacksAndMessages(null);
                 ContestSet();
-                insertion_sort(num_of_clicks);
+                insertion_sort();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("3 4 2 1"))
@@ -92,22 +88,20 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void insertion_sort(long cur){
-        animation_insertion(cur);
+    public void insertion_sort(){
+        animation_insertion();
     }
 
-    public void animation_insertion(final long cur) {
+    public void animation_insertion() {
         long current = 1;
         for (int i = 0; i < numbers.length; ++i)
         {
             final int y = i;
             for (int j = i; j >= 1; --j) {
                 final int x = j;
-                if (cur != num_of_clicks) return;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cur != num_of_clicks) return;
                         txt_num[x-1].setBackgroundResource(R.drawable.rectangle_orange);
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                     }
@@ -118,23 +112,19 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
                     numbers_2[j-1] = numbers_2[j];
                     numbers_2[j] = temp;
 
-                    if (cur != num_of_clicks) return;
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (cur != num_of_clicks) return;
                             txt_num[x-1].setBackgroundResource(R.drawable.rectangle_red);
                             txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
                         }
                     }, 1250*current);
                     ++current;
-                    if (cur != num_of_clicks) return;
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (cur != num_of_clicks) return;
                             String temp = txt_num[x-1].getText().toString();
-                            txt_num[x-1].setText(txt_num[x].getText().toString()); // swap
+                            txt_num[x-1].setText(txt_num[x].getText().toString());
                             txt_num[x].setText(temp);
                             txt_num[x].setBackgroundResource(R.drawable.rectangle_purple);
                         }
@@ -143,11 +133,9 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
                 }
                 else break;
             }
-            if (cur != num_of_clicks) return;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (cur != num_of_clicks) return;
                     for (int u = 0; u <= y; ++u)
                         txt_num[u].setBackgroundResource(R.drawable.rectangle_purple);
                 }
