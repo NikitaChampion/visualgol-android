@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,14 +15,17 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class Graph extends AppCompatActivity implements View.OnClickListener {
+public class Graph extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     TextView title;
     ImageView imageView;
     Button graphs;
     Button btnSave;
     EditText edit_text;
+    SeekBar SbDelay;
+    TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
+    private int curSpeed = 1250;
     private Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
@@ -42,6 +46,12 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
         title = findViewById(R.id.title);
 
         imageView = findViewById(R.id.imageView);
+
+        TvDelay = findViewById(R.id.TvDelay);
+        TvDelay.setText(R.string.sec);
+
+        SbDelay = findViewById(R.id.SbDelay);
+        SbDelay.setOnSeekBarChangeListener(this);
 
         graphs = findViewById(R.id.graphs);
         graphs.setOnClickListener(this);
@@ -108,7 +118,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
                 public void run() {
                     imageView.setBackgroundResource(d[j]);
                 }
-            }, 1250*(i+1));
+            }, curSpeed*(i+1));
         }
     }
 
@@ -125,7 +135,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
                 public void run() {
                     imageView.setBackgroundResource(b[j]);
                 }
-            }, 1250*(i+1));
+            }, curSpeed*(i+1));
         }
     }
 
@@ -162,5 +172,22 @@ public class Graph extends AppCompatActivity implements View.OnClickListener {
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
         else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        curSpeed = progress;
+        String s = String.valueOf(progress/1000.)+" sec";
+        TvDelay.setText(s);
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
     }
 }

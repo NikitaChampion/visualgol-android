@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,13 +15,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class Strings extends AppCompatActivity implements View.OnClickListener {
+public class Strings extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     TextView title;
     Button strings;
     Button btnSave;
     EditText edit_text;
+    SeekBar SbDelay;
+    TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
+    private int curSpeed = 1250;
     private TextView []txt_num;
     private TextView []st;
     private char []chars = {'a', 'b', 'a', 'c', 'a', 'b', 'a'};
@@ -63,6 +67,12 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
 
         for (int i = 0; i < st.length; ++i)
             txt_num[i].setText(String.valueOf(chars[i]));
+
+        TvDelay = findViewById(R.id.TvDelay);
+        TvDelay.setText(R.string.sec);
+
+        SbDelay = findViewById(R.id.SbDelay);
+        SbDelay.setOnSeekBarChangeListener(this);
 
         strings = findViewById(R.id.strings);
         strings.setOnClickListener(this);
@@ -133,7 +143,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
                             st[y].setText(String.valueOf(x));
                         }
                     }
-                }, 2000*current);
+                }, curSpeed*current);
                 ++current;
             }
             handler.postDelayed(new Runnable() {
@@ -142,7 +152,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
                         u.setTextColor(Color.parseColor("#000000"));
                     st[y].setBackgroundResource(R.drawable.rectangle_2_gray);
                 }
-            }, 2000*current);
+            }, curSpeed*current);
             ++current;
         }
     }
@@ -168,7 +178,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
                         else txt_num[x].setTextColor(Color.parseColor("#0000FF"));
                         txt_num[x+y].setTextColor(Color.parseColor("#FF0000"));
                     }
-                }, 2000*current);
+                }, curSpeed*current);
                 if (chars[j] != chars[j+i]) break;
             }
             final int x = j;
@@ -180,7 +190,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
                     for (TextView u : txt_num)
                         u.setTextColor(Color.parseColor("#000000"));
                 }
-            }, 2000*current);
+            }, curSpeed*current);
             ++current;
         }
     }
@@ -218,5 +228,22 @@ public class Strings extends AppCompatActivity implements View.OnClickListener {
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
         else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        curSpeed = progress;
+        String s = String.valueOf(progress/1000.)+" sec";
+        TvDelay.setText(s);
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
     }
 }

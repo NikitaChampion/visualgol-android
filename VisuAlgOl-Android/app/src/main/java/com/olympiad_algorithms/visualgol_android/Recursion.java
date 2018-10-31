@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,14 +17,16 @@ import java.io.IOException;
 
 import static java.lang.Math.pow;
 
-public class Recursion extends AppCompatActivity implements View.OnClickListener {
+public class Recursion extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     TextView title;
-    ImageView imageView;
     Button recursion;
     Button btnSave;
     EditText edit_text;
+    SeekBar SbDelay;
+    TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
+    private int curSpeed = 1250;
     private TextView []txt_num;
     private int []numbers = {1,2,3,4,5};
     private Handler handler = new Handler();
@@ -52,7 +55,11 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
         txt_num[3] = findViewById(R.id.txt_num4);
         txt_num[4] = findViewById(R.id.txt_num5);
 
-        imageView = findViewById(R.id.imageView);
+        TvDelay = findViewById(R.id.TvDelay);
+        TvDelay.setText(R.string.sec);
+
+        SbDelay = findViewById(R.id.SbDelay);
+        SbDelay.setOnSeekBarChangeListener(this);
 
         recursion = findViewById(R.id.recursion);
         recursion.setOnClickListener(this);
@@ -108,7 +115,7 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
                 if (poz < 4)
                     animation_recursion(poz+1);
             }
-        }, 1250*(int)pow(2, 4-poz));
+        }, curSpeed*(int)pow(2, 4-poz));
     }
 
     static String convertStreamToString(FileInputStream is) {
@@ -143,5 +150,22 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
         else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        curSpeed = progress;
+        String s = String.valueOf(progress/1000.)+" sec";
+        TvDelay.setText(s);
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
     }
 }

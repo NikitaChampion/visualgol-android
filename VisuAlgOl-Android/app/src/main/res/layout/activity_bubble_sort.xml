@@ -115,6 +115,24 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/TvDelay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/sec"
+                android:textSize="19sp" />
+
+            <SeekBar
+                android:id="@+id/SbDelay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:max="4000"
+                android:progress="1250" />
+
             <Button
                 android:id="@+id/bub_sort"
                 style="@android:style/Widget.Holo.Light.Button.Toggle"

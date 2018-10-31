@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,12 +16,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
-public class BubbleSort extends AppCompatActivity implements View.OnClickListener {
+public class BubbleSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     Button bub_sort;
     Button btnSave;
     EditText edit_text;
+    SeekBar SbDelay;
+    TextView TvDelay;
     private int childPosition = 0;
+    private int curSpeed = 1250;
     private TextView []txt_num;
     final Random random = new Random();
     private int []numbers = new int[8];
@@ -50,6 +54,12 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
 
         for (int i = 0; i < numbers.length; ++i)
             numbers[i] = random.nextInt() % 10;
+
+        TvDelay = findViewById(R.id.TvDelay);
+        TvDelay.setText(R.string.sec);
+
+        SbDelay = findViewById(R.id.SbDelay);
+        SbDelay.setOnSeekBarChangeListener(this);
 
         bub_sort = findViewById(R.id.bub_sort);
         bub_sort.setOnClickListener(this);
@@ -103,7 +113,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
                         txt_num[x-1].setBackgroundResource(R.drawable.rectangle_orange);
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                     }
-                }, 1250*current);
+                }, curSpeed*current);
                 ++current;
                 if (numbers_2[j-1] > numbers_2[j]) {
                     int temp = numbers_2[j-1];
@@ -116,7 +126,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
                             txt_num[x-1].setBackgroundResource(R.drawable.rectangle_red);
                             txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
                         }
-                    }, 1250*current);
+                    }, curSpeed*current);
                     ++current;
                     //Swap
                     handler.postDelayed(new Runnable() {
@@ -126,7 +136,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
                             txt_num[x-1].setText(txt_num[x].getText().toString());
                             txt_num[x].setText(temp);
                         }
-                    }, 1250*current);
+                    }, curSpeed*current);
                     ++current;
                 }
                 handler.postDelayed(new Runnable() {
@@ -139,7 +149,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
                         if (x == 1 && y == numbers.length-2)
                             txt_num[0].setBackgroundResource(R.drawable.rectangle_dark);
                     }
-                }, 1250*current);
+                }, curSpeed*current);
             }
         }
     }
@@ -176,5 +186,22 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
         else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        curSpeed = progress;
+        String s = String.valueOf(progress/1000.)+" sec";
+        TvDelay.setText(s);
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
     }
 }

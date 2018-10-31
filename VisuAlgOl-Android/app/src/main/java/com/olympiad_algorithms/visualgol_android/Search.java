@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +17,7 @@ import java.util.Random;
 
 import static java.lang.Math.abs;
 
-public class Search extends AppCompatActivity implements View.OnClickListener {
+public class Search extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     TextView title;
     TextView Search;
@@ -24,7 +25,10 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     Button search;
     Button btnSave;
     EditText edit_text;
+    SeekBar SbDelay;
+    TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
+    private int curSpeed = 1250;
     private TextView []txt_num;
     private TextView txt_num_find;
     final Random random = new Random();
@@ -60,6 +64,12 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         txt_num[6] = findViewById(R.id.txt_num7);
         txt_num[7] = findViewById(R.id.txt_num8);
         txt_num_find = findViewById(R.id.txt_num10);
+
+        TvDelay = findViewById(R.id.TvDelay);
+        TvDelay.setText(R.string.sec);
+
+        SbDelay = findViewById(R.id.SbDelay);
+        SbDelay.setOnSeekBarChangeListener(this);
 
         Search = findViewById(R.id.Search);
 
@@ -145,7 +155,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
                     txt_num_find.setBackgroundResource(R.drawable.rectangle_search_4);
                 }
-            }, 1250*(2*i+1));
+            }, curSpeed*(2*i+1));
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -156,7 +166,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                         txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
                     }
                 }
-            }, 1250*(2*i+2));
+            }, curSpeed*(2*i+2));
             if (numbers[i] == WhatToFind) return;
         }
     }
@@ -178,7 +188,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
                     txt_num_find.setBackgroundResource(R.drawable.rectangle_search_4);
                 }
-            }, 1250*current);
+            }, curSpeed*current);
             ++current;
             handler.postDelayed(new Runnable() {
                 @Override
@@ -198,7 +208,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                     else
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_search_4);
                 }
-            }, 1250*current);
+            }, curSpeed*current);
             if (numbers_2[mid] == WhatToFind) return;
             ++current;
             if (numbers_2[mid] < WhatToFind) l = mid;
@@ -239,5 +249,22 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
         else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        curSpeed = progress;
+        String s = String.valueOf(progress/1000.)+" sec";
+        TvDelay.setText(s);
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
     }
 }

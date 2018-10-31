@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,12 +16,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
-public class QuickSort extends AppCompatActivity implements View.OnClickListener {
+public class QuickSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     Button q_sort;
     Button btnSave;
     EditText edit_text;
+    SeekBar SbDelay;
+    TextView TvDelay;
     private int childPosition = 0;
+    private int curSpeed = 1250;
     private TextView []txt_num;
     private TextView []ind;
     final Random random = new Random();
@@ -63,6 +67,12 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
 
         for (int i = 0; i < ind.length; ++i)
             ind[i].setText(String.valueOf(i+1));
+
+        TvDelay = findViewById(R.id.TvDelay);
+        TvDelay.setText(R.string.sec);
+
+        SbDelay = findViewById(R.id.SbDelay);
+        SbDelay.setOnSeekBarChangeListener(this);
 
         q_sort = findViewById(R.id.q_sort);
         q_sort.setOnClickListener(this);
@@ -123,7 +133,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                         txt_num[rr].setBackgroundResource(R.drawable.rectangle_red);
                         ind[mid].setBackgroundResource(R.drawable.rectangle_purple);
                     }
-                }, 1250*current);
+                }, curSpeed*current);
                 ++current;
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -132,7 +142,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                         txt_num[ll].setText(txt_num[rr].getText().toString());
                         txt_num[rr].setText(temp);
                     }
-                }, 1250*current);
+                }, curSpeed*current);
                 ++current;
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -140,7 +150,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                         txt_num[ll].setBackgroundResource(R.drawable.rectangle_gray);
                         txt_num[rr].setBackgroundResource(R.drawable.rectangle_gray);
                     }
-                }, 1250*current);
+                }, curSpeed*current);
             }
         }
         ++current;
@@ -158,7 +168,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                         ind[i].setBackgroundResource(R.drawable.rectangle_white);
                     }
                 }
-            }, 1250*current);
+            }, curSpeed*current);
             ++current;
             animation_quick(a, r);
         }
@@ -174,7 +184,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                         ind[i].setBackgroundResource(R.drawable.rectangle_white);
                     }
                 }
-            }, 1250*current);
+            }, curSpeed*current);
             ++current;
             animation_quick(l, b);
         }
@@ -184,7 +194,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                 for (int i = aa; i <= bb; ++i)
                     ind[i].setBackgroundResource(R.drawable.rectangle_white);
             }
-        }, 1250*current);
+        }, curSpeed*current);
     }
 
     static String convertStreamToString(FileInputStream is) {
@@ -219,5 +229,22 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
         else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        curSpeed = progress;
+        String s = String.valueOf(progress/1000.)+" sec";
+        TvDelay.setText(s);
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
     }
 }

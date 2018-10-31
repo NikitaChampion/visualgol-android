@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,12 +16,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
-public class SelectionSort extends AppCompatActivity implements View.OnClickListener {
+public class SelectionSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     Button sel_sort;
     Button btnSave;
     EditText edit_text;
+    SeekBar SbDelay;
+    TextView TvDelay;
     private int childPosition = 0;
+    private int curSpeed = 1250;
     private int poz = 0;
     private TextView []txt_num;
     final Random random = new Random();
@@ -50,6 +54,12 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
 
         for (int i = 0; i < numbers.length; ++i)
             numbers[i] = random.nextInt() % 10;
+
+        TvDelay = findViewById(R.id.TvDelay);
+        TvDelay.setText(R.string.sec);
+
+        SbDelay = findViewById(R.id.SbDelay);
+        SbDelay.setOnSeekBarChangeListener(this);
 
         sel_sort = findViewById(R.id.sel_sort);
         sel_sort.setOnClickListener(this);
@@ -102,7 +112,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                     txt_num[y].setBackgroundResource(R.drawable.rectangle_red);
                     poz = y;
                 }
-            }, 1250*current);
+            }, curSpeed*current);
             ++current;
             for (int j = i+1; j < numbers.length; ++j) {
                 final int x = j;
@@ -111,7 +121,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                     public void run() {
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                     }
-                }, 1250*current);
+                }, curSpeed*current);
                 ++current;
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -127,7 +137,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                         else
                             txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
                     }
-                }, 1250*current);
+                }, curSpeed*current);
                 ++current;
             }
             //Swap
@@ -140,7 +150,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                     txt_num[poz].setBackgroundResource(R.drawable.rectangle_gray);
                     txt_num[y].setBackgroundResource(R.drawable.rectangle_dark);
                 }
-            }, 1250*current);
+            }, curSpeed*current);
             ++current;
         }
     }
@@ -177,5 +187,22 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
         else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        curSpeed = progress;
+        String s = String.valueOf(progress/1000.)+" sec";
+        TvDelay.setText(s);
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
     }
 }
