@@ -92,8 +92,8 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
 
     public void animation_stupid() {
         long current = 1;
-        for (int j = 1; j < numbers.length; ++j) {
-            final int x = j;
+        for (int i = 1; i < numbers.length; ++i) {
+            final int x = i;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -101,12 +101,13 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                 }
             }, 1250*current);
-            if (numbers_2[j-1] > numbers_2[j]) {
-                int temp = numbers_2[j-1];
-                numbers_2[j-1] = numbers_2[j];
-                numbers_2[j] = temp;
-                j = 0;
-                ++current;
+            ++current;
+            if (numbers_2[i-1] > numbers_2[i]) {
+                int temp = numbers_2[i-1];
+                numbers_2[i-1] = numbers_2[i];
+                numbers_2[i] = temp;
+                i = 0;
+
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -115,6 +116,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
                     }
                 }, 1250*current);
                 ++current;
+                //Swap
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -123,8 +125,8 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
                         txt_num[x].setText(temp);
                     }
                 }, 1250*current);
+                ++current;
             }
-            ++current;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -136,8 +138,8 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                for (int j = 0; j < numbers.length; ++j)
-                    txt_num[j].setBackgroundResource(R.drawable.rectangle_dark);
+                for (int i = 0; i < numbers.length; ++i)
+                    txt_num[i].setBackgroundResource(R.drawable.rectangle_dark);
             }
         }, 1250*current);
     }

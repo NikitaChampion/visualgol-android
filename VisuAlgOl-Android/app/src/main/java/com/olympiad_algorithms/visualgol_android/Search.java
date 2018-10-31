@@ -137,7 +137,6 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void animation_lin() {
-        long current = 1;
         for (int i = 0; i < numbers.length; ++i) {
             final int x = i;
             handler.postDelayed(new Runnable() {
@@ -146,8 +145,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
                     txt_num_find.setBackgroundResource(R.drawable.rectangle_search_4);
                 }
-            }, 1250*current);
-            ++current;
+            }, 1250*(2*i+1));
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -158,9 +156,8 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
                         txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
                     }
                 }
-            }, 1250*current);
+            }, 1250*(2*i+2));
             if (numbers[i] == WhatToFind) return;
-            ++current;
         }
     }
 
@@ -169,7 +166,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void animation_bin() {
-        long current = 0;
+        long current = 1;
         int l = -1, r = numbers_2.length, mid;
         while (l < r-1)
         {

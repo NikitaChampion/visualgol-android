@@ -19,7 +19,9 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:text="@string/first_intro"
                 android:textColor="#000000"
@@ -45,12 +47,12 @@
                 android:gravity="center"
                 android:text="@string/about"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
             <Button
                 android:id="@+id/toAlgorithms"
                 style="@android:style/Widget.Holo.Light.Button.Toggle"
-                android:layout_width="wrap_content"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -58,7 +60,7 @@
                 android:gravity="center"
                 android:text="@string/go_next"
                 android:textColor="#ffffff"
-                android:textSize="26sp" />
+                android:textSize="24sp" />
         </LinearLayout>
     </ScrollView>
 

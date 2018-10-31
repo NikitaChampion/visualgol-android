@@ -98,25 +98,17 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
     }
 
     public void animation_recursion(final int poz) {
+        txt_num[poz].setBackgroundResource(R.drawable.rectangle_orange);
+        if (poz < 4)
+            animation_recursion(poz+1);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                txt_num[poz].setBackgroundResource(R.drawable.rectangle_orange);
+                txt_num[poz].setBackgroundResource(R.drawable.rectangle_gray);
                 if (poz < 4)
                     animation_recursion(poz+1);
-                long sum = 0;
-                for (int i = 0; i <= 4-poz; ++i)
-                    sum += (long)pow(2, i);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        txt_num[poz].setBackgroundResource(R.drawable.rectangle_gray);
-                        if (poz < 4)
-                            animation_recursion(poz+1);
-                    }
-                }, 1250*((long)pow(2,4-poz)+sum));
             }
-        }, 1250);
+        }, 1250*(int)pow(2, 4-poz));
     }
 
     static String convertStreamToString(FileInputStream is) {

@@ -118,6 +118,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
                         }
                     }, 1250*current);
                     ++current;
+                    //Swap
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {

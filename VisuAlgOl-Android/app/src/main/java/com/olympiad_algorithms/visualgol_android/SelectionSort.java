@@ -130,6 +130,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                 }, 1250*current);
                 ++current;
             }
+            //Swap
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
