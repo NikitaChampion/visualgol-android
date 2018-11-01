@@ -21,6 +21,7 @@ import static java.lang.Math.abs;
 public class CountingSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     Button cou_sort;
+    Button generate;
     Button btnSave;
     EditText edit_text;
     SeekBar SbDelay;
@@ -89,6 +90,9 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
         cou_sort = findViewById(R.id.cou_sort);
         cou_sort.setOnClickListener(this);
 
+        generate = findViewById(R.id.generate);
+        generate.setOnClickListener(this);
+
         edit_text = findViewById(R.id.edit_text);
 
         btnSave = findViewById(R.id.btnSave);
@@ -104,6 +108,12 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
                 handler.removeCallbacksAndMessages(null);
                 ContestSet();
                 counting_sort();
+                break;
+            case R.id.generate:
+                handler.removeCallbacksAndMessages(null);
+                for (int i = 0; i < numbers.length; ++i)
+                    numbers[i] = abs(random.nextInt()) % 7;
+                ContestSet();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))

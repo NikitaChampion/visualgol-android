@@ -18,6 +18,7 @@ import java.util.Random;
 public class StupidSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     Button st_sort;
+    Button generate;
     Button btnSave;
     EditText edit_text;
     SeekBar SbDelay;
@@ -62,6 +63,9 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         st_sort = findViewById(R.id.st_sort);
         st_sort.setOnClickListener(this);
 
+        generate = findViewById(R.id.generate);
+        generate.setOnClickListener(this);
+
         edit_text = findViewById(R.id.edit_text);
 
         btnSave = findViewById(R.id.btnSave);
@@ -77,6 +81,12 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
                 handler.removeCallbacksAndMessages(null);
                 ContestSet();
                 stupid_sort();
+                break;
+            case R.id.generate:
+                handler.removeCallbacksAndMessages(null);
+                for (int i = 0; i < numbers.length; ++i)
+                    numbers[i] = random.nextInt() % 10;
+                ContestSet();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 3"))

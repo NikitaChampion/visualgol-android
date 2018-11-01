@@ -19,6 +19,7 @@ import java.util.Random;
 public class QuickSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     Button q_sort;
+    Button generate;
     Button btnSave;
     EditText edit_text;
     SeekBar SbDelay;
@@ -77,6 +78,9 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
         q_sort = findViewById(R.id.q_sort);
         q_sort.setOnClickListener(this);
 
+        generate = findViewById(R.id.generate);
+        generate.setOnClickListener(this);
+
         edit_text = findViewById(R.id.edit_text);
 
         btnSave = findViewById(R.id.btnSave);
@@ -92,6 +96,12 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                 handler.removeCallbacksAndMessages(null);
                 ContestSet();
                 quick_sort();
+                break;
+            case R.id.generate:
+                handler.removeCallbacksAndMessages(null);
+                for (int i = 0; i < numbers.length; ++i)
+                    numbers[i] = random.nextInt() % 10;
+                ContestSet();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("1 2 4 3"))

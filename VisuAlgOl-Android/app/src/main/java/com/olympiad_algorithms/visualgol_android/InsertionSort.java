@@ -19,6 +19,7 @@ import java.util.Random;
 public class InsertionSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     Button ins_sort;
+    Button generate;
     Button btnSave;
     EditText edit_text;
     SeekBar SbDelay;
@@ -64,6 +65,9 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
         ins_sort = findViewById(R.id.ins_sort);
         ins_sort.setOnClickListener(this);
 
+        generate = findViewById(R.id.generate);
+        generate.setOnClickListener(this);
+
         edit_text = findViewById(R.id.edit_text);
 
         btnSave = findViewById(R.id.btnSave);
@@ -79,6 +83,12 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
                 handler.removeCallbacksAndMessages(null);
                 ContestSet();
                 insertion_sort();
+                break;
+            case R.id.generate:
+                handler.removeCallbacksAndMessages(null);
+                for (int i = 0; i < numbers.length; ++i)
+                    numbers[i] = random.nextInt() % 10;
+                ContestSet();
                 break;
             case R.id.btnSave:
                 if (edit_text.getText().toString().equals("3 4 2 1"))

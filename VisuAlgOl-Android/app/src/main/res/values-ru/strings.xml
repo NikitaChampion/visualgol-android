@@ -49,6 +49,8 @@
     <string name="prefix_fun">Префикс-функция — длина наибольшего префикса строки, который одновременно является её суффиксом.</string>
 
     <string name="basic_sort2">.....................</string>
+    <string name="generate">Сгенерировать</string>
+    <string name="run">Запустить</string>
     <string name="nothingToShow">.....................</string>
     <string name="one">1</string>
     <string name="symbol">a</string>

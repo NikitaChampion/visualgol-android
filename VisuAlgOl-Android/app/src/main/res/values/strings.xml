@@ -49,6 +49,8 @@
     <string name="prefix_fun">.....................</string>
 
     <string name="basic_sort2">.....................</string>
+    <string name="generate">Generate</string>
+    <string name="run">Run</string>
     <string name="nothingToShow">.....................</string>
     <string name="one">1</string>
     <string name="symbol">a</string>
