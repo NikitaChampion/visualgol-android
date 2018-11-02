@@ -9,11 +9,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class SegmentTree extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 

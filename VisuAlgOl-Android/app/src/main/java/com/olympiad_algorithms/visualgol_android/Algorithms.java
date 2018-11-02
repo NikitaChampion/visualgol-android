@@ -117,7 +117,18 @@ public class Algorithms extends AppCompatActivity {
                 }
                 else if (groupPosition == 4)
                 {
-                    Intent intent = new Intent(Algorithms.this, SegmentTree.class);
+                    Intent intent;
+                    switch (childPosition) {
+                        case 0:
+                            intent = new Intent(Algorithms.this, SegmentTree.class);
+                            break;
+                        case 1:
+                            intent = new Intent(Algorithms.this, BST.class);
+                            break;
+                        default:
+                            intent = new Intent(Algorithms.this, SegmentTree.class);
+                            break;
+                    }
                     intent.putExtra("num", childPosition);
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
@@ -170,6 +181,7 @@ public class Algorithms extends AppCompatActivity {
 
         List<String> DsArray = new ArrayList<>();
         DsArray.add(getString(R.string.st));
+        DsArray.add(getString(R.string.bst));
 
         listDataChild.put(listDataHeader.get(0), SortArray);
         listDataChild.put(listDataHeader.get(1), SearchArray);
