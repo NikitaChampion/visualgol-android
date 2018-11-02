@@ -87,27 +87,27 @@ public class Algorithms extends AppCompatActivity {
                     intent.putExtra("num", childPosition);
                     startActivity(intent);
                 }
-                else if (groupPosition == 1)
+                /*else if (groupPosition == 1)
                 {
                     Intent intent = new Intent(Algorithms.this, Search.class);
                     intent.putExtra("num", childPosition);
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
-                }
-                else if (groupPosition == 2)
+                }*/
+                else if (groupPosition == 1)
                 {
                     Intent intent = new Intent(Algorithms.this, Recursion.class);
                     startActivity(intent);
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                 }
-                else if (groupPosition == 3)
+                else if (groupPosition == 2)
                 {
                     Intent intent = new Intent(Algorithms.this, Graph.class);
                     intent.putExtra("num", childPosition);
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
                 }
-                else if (groupPosition == 4)
+                else if (groupPosition == 3)
                 {
                     Intent intent = new Intent(Algorithms.this, Strings.class);
                     intent.putExtra("num", childPosition);
@@ -130,7 +130,7 @@ public class Algorithms extends AppCompatActivity {
 
         listDataHeader.add(getString(R.string.sorting));
         listDataHeader.add(getString(R.string.search));
-        listDataHeader.add(getString(R.string.recursion));
+        //listDataHeader.add(getString(R.string.recursion));
         listDataHeader.add(getString(R.string.graphs));
         listDataHeader.add(getString(R.string.strings));
 
@@ -148,8 +148,8 @@ public class Algorithms extends AppCompatActivity {
         SearchArray.add(getString(R.string.lin_search));
         SearchArray.add(getString(R.string.bin_search));
 
-        List<String> RecursionArray = new ArrayList<>();
-        RecursionArray.add(getString(R.string.what));
+        /*List<String> RecursionArray = new ArrayList<>();
+        RecursionArray.add(getString(R.string.what));*/
 
         List<String> GraphsArray = new ArrayList<>();
         GraphsArray.add(getString(R.string.dfs));
@@ -157,15 +157,15 @@ public class Algorithms extends AppCompatActivity {
 
         List<String> StringArray = new ArrayList<>();
         StringArray.add(getString(R.string.prefix));
-        StringArray.add(getString(R.string.z_fun));
+        StringArray.add(getString(R.string.z));
 
         listDataChild.put(listDataHeader.get(0), SortArray);
         listDataChild.put(listDataHeader.get(1), SearchArray);
-        listDataChild.put(listDataHeader.get(2), RecursionArray);
-        listDataChild.put(listDataHeader.get(3), GraphsArray);
-        listDataChild.put(listDataHeader.get(4), StringArray);
+        //listDataChild.put(listDataHeader.get(2), RecursionArray);
+        listDataChild.put(listDataHeader.get(2), GraphsArray);
+        listDataChild.put(listDataHeader.get(3), StringArray);
 
-        sizer = SortArray.size()+SearchArray.size()+RecursionArray.size()+GraphsArray.size()+StringArray.size();
+        sizer = SortArray.size()+SearchArray.size()+GraphsArray.size()+StringArray.size();
 
         setter = loadText();
 

@@ -232,8 +232,10 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                for (TextView aTxt_num : txt_num)
-                    aTxt_num.setBackgroundResource(R.drawable.rectangle_dark);
+                for (int i = 0; i < txt_num.length; ++i) {
+                    txt_num[i].setBackgroundResource(R.drawable.rectangle_dark);
+                    txt_num[i].setTextColor(getResources().getColor(R.color.white));
+                }
             }
         }, curSpeed*current);
     }

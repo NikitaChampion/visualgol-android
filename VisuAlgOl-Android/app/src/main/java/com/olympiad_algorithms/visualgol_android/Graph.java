@@ -18,6 +18,7 @@ import java.io.IOException;
 public class Graph extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     TextView title;
+    TextView Graph;
     ImageView imageView;
     Button graphs;
     Button btnSave;
@@ -52,6 +53,8 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
 
         SbDelay = findViewById(R.id.SbDelay);
         SbDelay.setOnSeekBarChangeListener(this);
+
+        Graph = findViewById(R.id.Graph);
 
         graphs = findViewById(R.id.graphs);
         graphs.setOnClickListener(this);
@@ -91,11 +94,13 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
         if (childPosition == 0) {
             imageView.setBackgroundResource(R.drawable.d1);
             graphs.setText(R.string.dfs);
+            Graph.setText(R.string.dfs_);
             title.setText(R.string.dfs);
         }
         else {
             imageView.setBackgroundResource(R.drawable.b1);
             graphs.setText(R.string.bfs);
+            Graph.setText(R.string.bfs_);
             title.setText(R.string.bfs);
         }
     }

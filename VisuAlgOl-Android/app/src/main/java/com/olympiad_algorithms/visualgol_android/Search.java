@@ -23,6 +23,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
     TextView Search;
     TextView task;
     Button search;
+    Button generate;
     Button btnSave;
     EditText edit_text;
     SeekBar SbDelay;
@@ -85,6 +86,9 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
         search = findViewById(R.id.search);
         search.setOnClickListener(this);
 
+        generate = findViewById(R.id.generate);
+        generate.setOnClickListener(this);
+
         edit_text = findViewById(R.id.edit_text);
 
         btnSave = findViewById(R.id.btnSave);
@@ -103,6 +107,16 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
                     linear_search();
                 else
                     binary_search();
+                break;
+            case R.id.generate:
+                handler.removeCallbacksAndMessages(null);
+                for (int i = 0; i < numbers.length; ++i)
+                    numbers[i] = random.nextInt() % 10;
+                if (childPosition == 0)
+                    WhatToFind = numbers[abs(random.nextInt())%numbers.length];
+                else
+                    WhatToFind = numbers_2[abs(random.nextInt())%numbers_2.length];
+                ContestSet();
                 break;
             case R.id.btnSave:
                 if (childPosition == 0 && edit_text.getText().toString().equals("5"))
@@ -125,7 +139,6 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
                 txt_num[i].setText(String.valueOf(numbers[i]));
                 txt_num[i].setBackgroundResource(R.drawable.rectangle_search_1);
             }
-            search.setText(R.string.lin_search);
             Search.setText(R.string.lin_s);
             task.setText(R.string.task8);
         }
@@ -135,7 +148,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
                 txt_num[i].setText(String.valueOf(numbers_2[i]));
                 txt_num[i].setBackgroundResource(R.drawable.rectangle_search_1);
             }
-            search.setText(R.string.bin_search);
+            Search.setText(R.string.bin_s);
             task.setText(R.string.task9);
         }
         txt_num_find.setText(String.valueOf(WhatToFind));

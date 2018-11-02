@@ -28,7 +28,7 @@
 
     <string name="strings">Strings</string>
     <string name="prefix">Prefix-function</string>
-    <string name="z_fun">Z-function</string>
+    <string name="z">Z-function</string>
 
 
     <string name="what">What is it and what is it for?</string>
@@ -44,9 +44,23 @@
 
     <string name="sort_ins">.....................</string>
 
+    <string name="sort_mer">.....................</string>
+
+    <string name="sort_q">.....................</string>
+
+    <string name="sort_cou">.....................</string>
+
     <string name="lin_s">.....................</string>
 
+    <string name="bin_s">.....................</string>
+
+    <string name="dfs_">.....................</string>
+
+    <string name="bfs_">.....................</string>
+
     <string name="prefix_fun">.....................</string>
+
+    <string name="z_fun">.....................</string>
 
     <string name="basic_sort2">.....................</string>
     <string name="generate">Generate</string>

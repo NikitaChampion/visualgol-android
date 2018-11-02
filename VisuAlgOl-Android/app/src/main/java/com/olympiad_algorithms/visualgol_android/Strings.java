@@ -18,6 +18,7 @@ import java.io.IOException;
 public class Strings extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
     TextView title;
+    TextView Strings;
     Button strings;
     Button btnSave;
     EditText edit_text;
@@ -74,6 +75,8 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
         SbDelay = findViewById(R.id.SbDelay);
         SbDelay.setOnSeekBarChangeListener(this);
 
+        Strings = findViewById(R.id.Strings);
+
         strings = findViewById(R.id.strings);
         strings.setOnClickListener(this);
 
@@ -97,7 +100,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
     }
 
     public void ContestSet() {
-        //DFS == 0, BFS == 1
+        //prefix == 0, z == 1
         for (int i = 0; i < st.length; ++i) {
             txt_num[i].setTextColor(getResources().getColor(R.color.colorAccent));
             st[i].setText("0");
@@ -106,10 +109,12 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
         if (childPosition == 0) {
             title.setText(R.string.prefix);
             strings.setText(R.string.prefix);
+            Strings.setText(R.string.prefix_fun);
         }
         else {
-            title.setText(R.string.z_fun);
-            strings.setText(R.string.z_fun);
+            title.setText(R.string.z);
+            strings.setText(R.string.z);
+            Strings.setText(R.string.z_fun);
         }
     }
 
