@@ -97,9 +97,9 @@ public class Algorithms extends AppCompatActivity {
                 else if (groupPosition == 1)
                 {
                     Intent intent = new Intent(Algorithms.this, Search.class);
-                    startActivity(intent);
                     intent.putExtra("num", childPosition);
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
+                    startActivity(intent);
                 }
                 else if (groupPosition == 2)
                 {
