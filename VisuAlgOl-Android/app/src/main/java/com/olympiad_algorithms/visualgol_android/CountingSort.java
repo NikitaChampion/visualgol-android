@@ -116,7 +116,7 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
                 ContestSet();
                 break;
             case R.id.btnSave:
-                if (edit_text.getText().toString().equals("1 2 3"))
+                if (edit_text.getText().toString().equals("10"))
                     saveText('1');
                 else saveText('0');
                 break;

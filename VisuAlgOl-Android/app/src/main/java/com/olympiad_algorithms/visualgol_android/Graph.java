@@ -19,6 +19,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
 
     TextView title;
     TextView Graph;
+    TextView task;
     ImageView imageView;
     Button graphs;
     Button btnSave;
@@ -56,6 +57,8 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
 
         Graph = findViewById(R.id.Graph);
 
+        task = findViewById(R.id.task);
+
         graphs = findViewById(R.id.graphs);
         graphs.setOnClickListener(this);
 
@@ -79,7 +82,9 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
                     bfs();
                 break;
             case R.id.btnSave:
-                if (edit_text.getText().toString().equals("....."))
+                if (childPosition == 0 && edit_text.getText().toString().equals("4"))
+                    saveText('1');
+                else if (childPosition == 1 && edit_text.getText().toString().equals("9"))
                     saveText('1');
                 else
                     saveText('0');
@@ -96,12 +101,14 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
             graphs.setText(R.string.dfs);
             Graph.setText(R.string.dfs_);
             title.setText(R.string.dfs);
+            task.setText(R.string.task10);
         }
         else {
             imageView.setBackgroundResource(R.drawable.b1);
             graphs.setText(R.string.bfs);
             Graph.setText(R.string.bfs_);
             title.setText(R.string.bfs);
+            task.setText(R.string.task11);
         }
     }
 

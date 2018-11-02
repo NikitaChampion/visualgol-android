@@ -110,7 +110,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
                 ContestSet();
                 break;
             case R.id.btnSave:
-                if (edit_text.getText().toString().equals("1 2 4 3"))
+                if (edit_text.getText().toString().equals("1 3 4 4 5 6 4 5"))
                     saveText('1');
                 else saveText('0');
                 break;

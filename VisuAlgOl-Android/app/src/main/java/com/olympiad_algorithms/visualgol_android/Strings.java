@@ -19,6 +19,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
 
     TextView title;
     TextView Strings;
+    TextView task;
     Button strings;
     Button btnSave;
     EditText edit_text;
@@ -77,8 +78,15 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
 
         Strings = findViewById(R.id.Strings);
 
+        task = findViewById(R.id.task);
+
         strings = findViewById(R.id.strings);
         strings.setOnClickListener(this);
+
+        edit_text = findViewById(R.id.edit_text);
+
+        btnSave = findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(this);
 
         ContestSet();
     }
@@ -93,6 +101,14 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
                     prefix();
                 else
                     z();
+                break;
+            case R.id.btnSave:
+                if (childPosition == 0 && edit_text.getText().toString().equals("3"))
+                    saveText('1');
+                else if (childPosition == 1 && edit_text.getText().toString().equals("1"))
+                    saveText('1');
+                else
+                    saveText('0');
                 break;
             default:
                 break;
@@ -110,11 +126,13 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
             title.setText(R.string.prefix);
             strings.setText(R.string.prefix);
             Strings.setText(R.string.prefix_fun);
+            task.setText(R.string.task12);
         }
         else {
             title.setText(R.string.z);
             strings.setText(R.string.z);
             Strings.setText(R.string.z_fun);
+            task.setText(R.string.task13);
         }
     }
 

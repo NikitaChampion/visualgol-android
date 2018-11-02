@@ -227,6 +227,30 @@
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
+            <TextView
+                android:id="@+id/Task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text="@string/task"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text="@string/nothingToShow"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
             <EditText
                 android:id="@+id/edit_text"
                 android:layout_width="wrap_content"
