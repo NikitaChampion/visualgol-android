@@ -115,6 +115,13 @@ public class Algorithms extends AppCompatActivity {
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
                 }
+                else if (groupPosition == 4)
+                {
+                    Intent intent = new Intent(Algorithms.this, SegmentTree.class);
+                    intent.putExtra("num", childPosition);
+                    intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
+                    startActivity(intent);
+                }
                 return false;
             }
         });
@@ -134,6 +141,7 @@ public class Algorithms extends AppCompatActivity {
         //listDataHeader.add(getString(R.string.recursion));
         listDataHeader.add(getString(R.string.graphs));
         listDataHeader.add(getString(R.string.strings));
+        listDataHeader.add(getString(R.string.data_structures));
 
         // Adding child data
         List<String> SortArray = new ArrayList<>();
@@ -160,13 +168,17 @@ public class Algorithms extends AppCompatActivity {
         StringArray.add(getString(R.string.prefix));
         StringArray.add(getString(R.string.z));
 
+        List<String> DsArray = new ArrayList<>();
+        DsArray.add(getString(R.string.st));
+
         listDataChild.put(listDataHeader.get(0), SortArray);
         listDataChild.put(listDataHeader.get(1), SearchArray);
         //listDataChild.put(listDataHeader.get(2), RecursionArray);
         listDataChild.put(listDataHeader.get(2), GraphsArray);
         listDataChild.put(listDataHeader.get(3), StringArray);
+        listDataChild.put(listDataHeader.get(4), DsArray);
 
-        sizer = SortArray.size()+SearchArray.size()+GraphsArray.size()+StringArray.size();
+        sizer = SortArray.size()+SearchArray.size()+GraphsArray.size()+StringArray.size()+DsArray.size();
 
         setter = loadText();
 
