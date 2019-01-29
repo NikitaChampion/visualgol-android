@@ -1,0 +1,6 @@
+*.o
+.sh3
+*.so
+*.bin
+*.log
+main
