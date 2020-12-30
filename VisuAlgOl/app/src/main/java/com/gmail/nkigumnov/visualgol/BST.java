@@ -17,7 +17,7 @@ public class BST extends AppCompatActivity implements View.OnClickListener, Seek
     Button bst2;
     SeekBar SbDelay;
     TextView TvDelay;
-    private int curSpeed = 1250;
+    private int curSpeed = Constants.SPEED;
     private final Handler handler = new Handler();
 
     @Override

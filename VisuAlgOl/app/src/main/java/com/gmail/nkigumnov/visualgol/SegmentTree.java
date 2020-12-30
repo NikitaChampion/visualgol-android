@@ -17,7 +17,7 @@ public class SegmentTree extends AppCompatActivity implements View.OnClickListen
     Button st2;
     SeekBar SbDelay;
     TextView TvDelay;
-    private int curSpeed = 1250;
+    private int curSpeed = Constants.SPEED;
     private final Handler handler = new Handler();
 
     @Override

@@ -28,7 +28,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
     SeekBar SbDelay;
     TextView TvDelay;
     private int childPosition = 0;
-    private int curSpeed = 1250;
+    private int curSpeed = Constants.SPEED;
     private TextView[] txt_num;
     private TextView[] arr;
     final Random random = new Random();
@@ -36,8 +36,6 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
     private final int[] numbers_2 = new int[8];
     private final int[] numbers_3 = new int[8];
     private final Handler handler = new Handler();
-
-    private final static String FILE_NAME = "qwerty.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,7 +221,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
 
     public String loadText() {
         try {
-            FileInputStream fin = openFileInput(FILE_NAME);
+            FileInputStream fin = openFileInput(Constants.FILE_NAME);
             String str = convertStreamToString(fin);
             fin.close();
             return str;
@@ -241,7 +239,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
         c[childPosition] = ch;
         String str = new String(c);
         try {
-            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput(Constants.FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
         } catch (IOException ex) {

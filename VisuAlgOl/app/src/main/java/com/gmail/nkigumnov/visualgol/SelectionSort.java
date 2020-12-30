@@ -24,14 +24,12 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     SeekBar SbDelay;
     TextView TvDelay;
     private int childPosition = 0;
-    private int curSpeed = 1250;
+    private int curSpeed = Constants.SPEED;
     private int poz = 0;
     private TextView[] txt_num;
     final Random random = new Random();
     private final int[] numbers = new int[8];
     private final Handler handler = new Handler();
-
-    private final static String FILE_NAME = "qwerty.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +153,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
 
     public String loadText() {
         try {
-            FileInputStream fin = openFileInput(FILE_NAME);
+            FileInputStream fin = openFileInput(Constants.FILE_NAME);
             String str = convertStreamToString(fin);
             fin.close();
             return str;
@@ -173,7 +171,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         c[childPosition] = ch;
         String str = new String(c);
         try {
-            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput(Constants.FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
         } catch (IOException ex) {
