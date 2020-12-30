@@ -16,7 +16,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Strings extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
     TextView title;
     TextView Strings;
     TextView task;
@@ -27,10 +26,10 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
     TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = 1250;
-    private TextView []txt_num;
-    private TextView []st;
-    private char []chars = {'a', 'b', 'a', 'c', 'a', 'b', 'a'};
-    private Handler handler = new Handler();
+    private TextView[] txt_num;
+    private TextView[] st;
+    private final char[] chars = {'a', 'b', 'a', 'c', 'a', 'b', 'a'};
+    private final Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -127,8 +126,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
             strings.setText(R.string.prefix);
             Strings.setText(R.string.prefix_fun);
             task.setText(R.string.task12);
-        }
-        else {
+        } else {
             title.setText(R.string.z);
             strings.setText(R.string.z);
             Strings.setText(R.string.z_fun);
@@ -166,7 +164,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
                             st[y].setText(String.valueOf(x));
                         }
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
                 ++current;
             }
             handler.postDelayed(new Runnable() {
@@ -175,7 +173,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
                         u.setTextColor(Color.parseColor("#000000"));
                     st[y].setBackgroundResource(R.drawable.rectangle_2_gray);
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             ++current;
         }
     }
@@ -190,8 +188,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
         for (int i = 1; i < st.length; ++i) {
             final int y = i;
             int j = 0;
-            for (; j+i < st.length; ++j)
-            {
+            for (; j + i < st.length; ++j) {
                 final int x = j;
                 ++current;
                 handler.postDelayed(new Runnable() {
@@ -199,10 +196,10 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
                         if (txt_num[x].getCurrentTextColor() == Color.parseColor("#FF0000"))
                             txt_num[x].setTextColor(Color.parseColor("#FFA500"));
                         else txt_num[x].setTextColor(Color.parseColor("#0000FF"));
-                        txt_num[x+y].setTextColor(Color.parseColor("#FF0000"));
+                        txt_num[x + y].setTextColor(Color.parseColor("#FF0000"));
                     }
-                }, curSpeed*current);
-                if (chars[j] != chars[j+i]) break;
+                }, curSpeed * current);
+                if (chars[j] != chars[j + i]) break;
             }
             final int x = j;
             ++current;
@@ -213,7 +210,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
                     for (TextView u : txt_num)
                         u.setTextColor(Color.parseColor("#000000"));
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             ++current;
         }
     }
@@ -229,7 +226,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
             String str = convertStreamToString(fin);
             fin.close();
             return str;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
@@ -240,13 +237,13 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
 
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[groupPosition+childPosition] = ch;
+        c[groupPosition + childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
@@ -256,7 +253,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = progress / 1000. + " sec";
         TvDelay.setText(s);
     }
 

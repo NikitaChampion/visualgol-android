@@ -18,7 +18,6 @@ import java.util.Random;
 import static java.lang.Math.abs;
 
 public class Search extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
     TextView title;
     TextView Search;
     TextView task;
@@ -30,13 +29,13 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
     TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = 1250;
-    private TextView []txt_num;
+    private TextView[] txt_num;
     private TextView txt_num_find;
     final Random random = new Random();
-    private int []numbers = new int[8];
-    private int []numbers_2 = {1,2,3,4,5,6,7,8};
+    private final int[] numbers = new int[8];
+    private final int[] numbers_2 = {1, 2, 3, 4, 5, 6, 7, 8};
     private int WhatToFind;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -79,9 +78,9 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
         for (int i = 0; i < numbers.length; ++i)
             numbers[i] = random.nextInt() % 10;
         if (childPosition == 0)
-            WhatToFind = numbers[abs(random.nextInt())%numbers.length];
+            WhatToFind = numbers[abs(random.nextInt()) % numbers.length];
         else
-            WhatToFind = numbers_2[abs(random.nextInt())%numbers_2.length];
+            WhatToFind = numbers_2[abs(random.nextInt()) % numbers_2.length];
 
         search = findViewById(R.id.search);
         search.setOnClickListener(this);
@@ -113,9 +112,9 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
                 for (int i = 0; i < numbers.length; ++i)
                     numbers[i] = random.nextInt() % 10;
                 if (childPosition == 0)
-                    WhatToFind = numbers[abs(random.nextInt())%numbers.length];
+                    WhatToFind = numbers[abs(random.nextInt()) % numbers.length];
                 else
-                    WhatToFind = numbers_2[abs(random.nextInt())%numbers_2.length];
+                    WhatToFind = numbers_2[abs(random.nextInt()) % numbers_2.length];
                 ContestSet();
                 break;
             case R.id.btnSave:
@@ -141,8 +140,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
             }
             Search.setText(R.string.lin_s);
             task.setText(R.string.task8);
-        }
-        else {
+        } else {
             title.setText(R.string.bin_search);
             for (int i = 0; i < numbers_2.length; ++i) {
                 txt_num[i].setText(String.valueOf(numbers_2[i]));
@@ -168,7 +166,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
                     txt_num_find.setBackgroundResource(R.drawable.rectangle_search_4);
                 }
-            }, curSpeed*(2*i+1));
+            }, curSpeed * (2 * i + 1));
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -179,7 +177,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
                         txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
                     }
                 }
-            }, curSpeed*(2*i+2));
+            }, curSpeed * (2 * i + 2));
             if (numbers[i] == WhatToFind) return;
         }
     }
@@ -191,9 +189,8 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
     public void animation_bin() {
         long current = 1;
         int l = -1, r = numbers_2.length, mid;
-        while (l < r-1)
-        {
-            mid = (l+r)/2;
+        while (l < r - 1) {
+            mid = (l + r) / 2;
             final int x = mid;
             handler.postDelayed(new Runnable() {
                 @Override
@@ -201,7 +198,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
                     txt_num_find.setBackgroundResource(R.drawable.rectangle_search_4);
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             ++current;
             handler.postDelayed(new Runnable() {
                 @Override
@@ -211,17 +208,15 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
                             txt_num[i].setBackgroundResource(R.drawable.rectangle_search_2);
                         }
                         txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
-                    }
-                    else if (numbers_2[x] > WhatToFind) {
-                        for (int i = txt_num.length-1; i >= x; --i) {
+                    } else if (numbers_2[x] > WhatToFind) {
+                        for (int i = txt_num.length - 1; i >= x; --i) {
                             txt_num[i].setBackgroundResource(R.drawable.rectangle_search_2);
                         }
                         txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
-                    }
-                    else
+                    } else
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_search_4);
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             if (numbers_2[mid] == WhatToFind) return;
             ++current;
             if (numbers_2[mid] < WhatToFind) l = mid;
@@ -240,7 +235,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
             String str = convertStreamToString(fin);
             fin.close();
             return str;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
@@ -251,13 +246,13 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
 
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[groupPosition+childPosition] = ch;
+        c[groupPosition + childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
@@ -267,7 +262,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = String.valueOf(progress / 1000.) + " sec";
         TvDelay.setText(s);
     }
 

@@ -9,9 +9,9 @@ import android.widget.Button;
 import pl.droidsonroids.gif.GifImageView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
     Button toAlgorithms;
     GifImageView giff;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,13 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.toAlgorithms:
-                Intent intent = new Intent(this, Algorithms.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
+        if (v.getId() == R.id.toAlgorithms) {
+            Intent intent = new Intent(this, Algorithms.class);
+            startActivity(intent);
         }
     }
 }

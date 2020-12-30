@@ -1,6 +1,7 @@
 package com.olympiad_algorithms.visualgol_android;
 
 //import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +18,6 @@ import java.io.IOException;
 import java.util.Random;
 
 public class BubbleSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
     Button bub_sort;
     Button generate;
     Button btnSave;
@@ -26,11 +26,11 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     TextView TvDelay;
     private int childPosition = 0;
     private int curSpeed = 1250;
-    private TextView []txt_num;
+    private TextView[] txt_num;
     final Random random = new Random();
-    private int []numbers = new int[8];
-    private int []numbers_2 = new int[8];
-    private Handler handler = new Handler();
+    private final int[] numbers = new int[8];
+    private final int[] numbers_2 = new int[8];
+    private final Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -108,58 +108,58 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public void bubble_sort(){
+    public void bubble_sort() {
         animation_bubble();
     }
 
     public void animation_bubble() {
         long current = 1;
         for (int i = 0; i < numbers.length; ++i) {
-            for (int j = 1; j < (numbers.length-i); ++j) {
+            for (int j = 1; j < (numbers.length - i); ++j) {
                 final int x = j, y = i;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        txt_num[x-1].setBackgroundResource(R.drawable.rectangle_orange);
+                        txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_orange);
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
                 ++current;
-                if (numbers_2[j-1] > numbers_2[j]) {
-                    int temp = numbers_2[j-1];
-                    numbers_2[j-1] = numbers_2[j];
+                if (numbers_2[j - 1] > numbers_2[j]) {
+                    int temp = numbers_2[j - 1];
+                    numbers_2[j - 1] = numbers_2[j];
                     numbers_2[j] = temp;
 
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            txt_num[x-1].setBackgroundResource(R.drawable.rectangle_red);
+                            txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_red);
                             txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
                         }
-                    }, curSpeed*current);
+                    }, curSpeed * current);
                     ++current;
                     //Swap
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            String temp = txt_num[x-1].getText().toString();
-                            txt_num[x-1].setText(txt_num[x].getText().toString());
+                            String temp = txt_num[x - 1].getText().toString();
+                            txt_num[x - 1].setText(txt_num[x].getText().toString());
                             txt_num[x].setText(temp);
                         }
-                    }, curSpeed*current);
+                    }, curSpeed * current);
                     ++current;
                 }
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        txt_num[x-1].setBackgroundResource(R.drawable.rectangle_gray);
+                        txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_gray);
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
                         if (x == numbers.length - y - 1)
                             txt_num[x].setBackgroundResource(R.drawable.rectangle_dark);
-                        if (x == 1 && y == numbers.length-2)
+                        if (x == 1 && y == numbers.length - 2)
                             txt_num[0].setBackgroundResource(R.drawable.rectangle_dark);
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
             }
         }
     }
@@ -175,7 +175,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
             String str = convertStreamToString(fin);
             fin.close();
             return str;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
@@ -183,6 +183,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
             return curBuilder.toString();
         }
     }
+
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
         c[childPosition] = ch;
@@ -191,7 +192,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
@@ -201,7 +202,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = String.valueOf(progress / 1000.) + " sec";
         TvDelay.setText(s);
     }
 

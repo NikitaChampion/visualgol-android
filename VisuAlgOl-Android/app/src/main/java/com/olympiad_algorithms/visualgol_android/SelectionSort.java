@@ -1,6 +1,5 @@
 package com.olympiad_algorithms.visualgol_android;
 
-//import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.util.Random;
 
 public class SelectionSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
     Button sel_sort;
     Button generate;
     Button btnSave;
@@ -27,10 +25,10 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     private int childPosition = 0;
     private int curSpeed = 1250;
     private int poz = 0;
-    private TextView []txt_num;
+    private TextView[] txt_num;
     final Random random = new Random();
-    private int []numbers = new int[8];
-    private Handler handler = new Handler();
+    private final int[] numbers = new int[8];
+    private final Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -107,14 +105,13 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void selection_sort(){
+    public void selection_sort() {
         animation_selection();
     }
 
     public void animation_selection() {
         long current = 1;
-        for (int i = 0; i < numbers.length; ++i)
-        {
+        for (int i = 0; i < numbers.length; ++i) {
             final int y = i;
             handler.postDelayed(new Runnable() {
                 @Override
@@ -122,16 +119,16 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                     txt_num[y].setBackgroundResource(R.drawable.rectangle_red);
                     poz = y;
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             ++current;
-            for (int j = i+1; j < numbers.length; ++j) {
+            for (int j = i + 1; j < numbers.length; ++j) {
                 final int x = j;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
                 ++current;
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -143,11 +140,10 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                                 txt_num[poz].setBackgroundResource(R.drawable.rectangle_purple);
                             poz = x;
                             txt_num[poz].setBackgroundResource(R.drawable.rectangle_red);
-                        }
-                        else
+                        } else
                             txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
                 ++current;
             }
             //Swap
@@ -160,7 +156,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
                     txt_num[poz].setBackgroundResource(R.drawable.rectangle_gray);
                     txt_num[y].setBackgroundResource(R.drawable.rectangle_dark);
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             ++current;
         }
     }
@@ -176,7 +172,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
             String str = convertStreamToString(fin);
             fin.close();
             return str;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
@@ -184,6 +180,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
             return curBuilder.toString();
         }
     }
+
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
         c[childPosition] = ch;
@@ -192,7 +189,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
@@ -202,7 +199,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = String.valueOf(progress / 1000.) + " sec";
         TvDelay.setText(s);
     }
 

@@ -18,7 +18,6 @@ import java.io.IOException;
 import static java.lang.Math.pow;
 
 public class Recursion extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
     TextView title;
     Button recursion;
     Button btnSave;
@@ -27,9 +26,9 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
     TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = 1250;
-    private TextView []txt_num;
-    private int []numbers = {1,2,3,4,5};
-    private Handler handler = new Handler();
+    private TextView[] txt_num;
+    private final int[] numbers = {1, 2, 3, 4, 5};
+    private final Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -107,15 +106,15 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
     public void animation_recursion(final int poz) {
         txt_num[poz].setBackgroundResource(R.drawable.rectangle_orange);
         if (poz < 4)
-            animation_recursion(poz+1);
+            animation_recursion(poz + 1);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 txt_num[poz].setBackgroundResource(R.drawable.rectangle_gray);
                 if (poz < 4)
-                    animation_recursion(poz+1);
+                    animation_recursion(poz + 1);
             }
-        }, curSpeed*(int)pow(2, 4-poz));
+        }, curSpeed * (int) pow(2, 4 - poz));
     }
 
     static String convertStreamToString(FileInputStream is) {
@@ -129,7 +128,7 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
             String str = convertStreamToString(fin);
             fin.close();
             return str;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
@@ -137,15 +136,16 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
             return curBuilder.toString();
         }
     }
+
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[groupPosition+childPosition] = ch;
+        c[groupPosition + childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
@@ -155,7 +155,7 @@ public class Recursion extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = String.valueOf(progress / 1000.) + " sec";
         TvDelay.setText(s);
     }
 

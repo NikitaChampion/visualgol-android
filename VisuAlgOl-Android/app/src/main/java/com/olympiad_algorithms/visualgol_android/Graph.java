@@ -16,7 +16,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Graph extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
     TextView title;
     TextView Graph;
     TextView task;
@@ -28,7 +27,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
     TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = 1250;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -102,8 +101,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
             Graph.setText(R.string.dfs_);
             title.setText(R.string.dfs);
             task.setText(R.string.task10);
-        }
-        else {
+        } else {
             imageView.setBackgroundResource(R.drawable.b1);
             graphs.setText(R.string.bfs);
             Graph.setText(R.string.bfs_);
@@ -113,7 +111,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
     }
 
     int[] d = {R.drawable.d2, R.drawable.d3, R.drawable.d4, R.drawable.d5, R.drawable.d6,
-               R.drawable.d7, R.drawable.d8, R.drawable.d9, R.drawable.d10, R.drawable.d11, R.drawable.d12};
+            R.drawable.d7, R.drawable.d8, R.drawable.d9, R.drawable.d10, R.drawable.d11, R.drawable.d12};
     int[] b = {R.drawable.b2, R.drawable.b3, R.drawable.b4, R.drawable.b5, R.drawable.b6,
             R.drawable.b7, R.drawable.b8, R.drawable.b9, R.drawable.b10, R.drawable.b11, R.drawable.b12};
 
@@ -122,15 +120,14 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
     }
 
     public void animation_dfs() {
-        for (int i = 0; i < d.length; ++i)
-        {
+        for (int i = 0; i < d.length; ++i) {
             final int j = i;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     imageView.setBackgroundResource(d[j]);
                 }
-            }, curSpeed*(i+1));
+            }, curSpeed * (i + 1));
         }
     }
 
@@ -139,15 +136,14 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
     }
 
     public void animation_bfs() {
-        for (int i = 0; i < b.length; ++i)
-        {
+        for (int i = 0; i < b.length; ++i) {
             final int j = i;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     imageView.setBackgroundResource(b[j]);
                 }
-            }, curSpeed*(i+1));
+            }, curSpeed * (i + 1));
         }
     }
 
@@ -162,7 +158,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
             String str = convertStreamToString(fin);
             fin.close();
             return str;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
@@ -173,13 +169,13 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
 
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
-        c[groupPosition+childPosition] = ch;
+        c[groupPosition + childPosition] = ch;
         String str = new String(c);
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
@@ -189,7 +185,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = String.valueOf(progress / 1000.) + " sec";
         TvDelay.setText(s);
     }
 

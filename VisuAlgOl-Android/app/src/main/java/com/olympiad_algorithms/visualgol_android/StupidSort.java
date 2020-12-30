@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.Random;
 
 public class StupidSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
     Button st_sort;
     Button generate;
     Button btnSave;
@@ -25,11 +24,11 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     TextView TvDelay;
     private int childPosition = 0;
     private int curSpeed = 1250;
-    private TextView []txt_num;
+    private TextView[] txt_num;
     final Random random = new Random();
-    private int []numbers = new int[7];
-    private int []numbers_2 = new int[7];
-    private Handler handler = new Handler();
+    private final int[] numbers = new int[7];
+    private final int[] numbers_2 = new int[7];
+    private final Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -106,7 +105,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public void stupid_sort(){
+    public void stupid_sort() {
         animation_stupid();
     }
 
@@ -117,43 +116,43 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    txt_num[x-1].setBackgroundResource(R.drawable.rectangle_orange);
+                    txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_orange);
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             ++current;
-            if (numbers_2[i-1] > numbers_2[i]) {
-                int temp = numbers_2[i-1];
-                numbers_2[i-1] = numbers_2[i];
+            if (numbers_2[i - 1] > numbers_2[i]) {
+                int temp = numbers_2[i - 1];
+                numbers_2[i - 1] = numbers_2[i];
                 numbers_2[i] = temp;
                 i = 0;
 
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        txt_num[x-1].setBackgroundResource(R.drawable.rectangle_red);
+                        txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_red);
                         txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
                 ++current;
                 //Swap
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        String temp = txt_num[x-1].getText().toString();
-                        txt_num[x-1].setText(txt_num[x].getText().toString());
+                        String temp = txt_num[x - 1].getText().toString();
+                        txt_num[x - 1].setText(txt_num[x].getText().toString());
                         txt_num[x].setText(temp);
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
                 ++current;
             }
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    txt_num[x-1].setBackgroundResource(R.drawable.rectangle_gray);
+                    txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_gray);
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
         }
         handler.postDelayed(new Runnable() {
             @Override
@@ -161,7 +160,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
                 for (int i = 0; i < numbers.length; ++i)
                     txt_num[i].setBackgroundResource(R.drawable.rectangle_dark);
             }
-        }, curSpeed*current);
+        }, curSpeed * current);
     }
 
     static String convertStreamToString(FileInputStream is) {
@@ -175,7 +174,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
             String str = convertStreamToString(fin);
             fin.close();
             return str;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
@@ -183,6 +182,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
             return curBuilder.toString();
         }
     }
+
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
         c[childPosition] = ch;
@@ -191,7 +191,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
@@ -201,7 +201,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = progress / 1000. + " sec";
         TvDelay.setText(s);
     }
 

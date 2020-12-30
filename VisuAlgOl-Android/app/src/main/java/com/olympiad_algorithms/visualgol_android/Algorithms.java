@@ -11,12 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-//import android.widget.Toast;
 
 public class Algorithms extends AppCompatActivity {
-
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -29,16 +28,16 @@ public class Algorithms extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        allThings();
+        downloadContent();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();  // Always call the superclass method first
-        allThings();
+        downloadContent();
     }
 
-    public void allThings() {
+    public void downloadContent() {
         setContentView(R.layout.activity_algorithms);
 
         // get the listView
@@ -55,13 +54,9 @@ public class Algorithms extends AppCompatActivity {
         // ListView child click listener
         expListView.setOnChildClickListener(new OnChildClickListener() {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                if (groupPosition == 0)
-                {
+                if (groupPosition == 0) {
                     Intent intent;
                     switch (childPosition) {
-                        case 0:
-                            intent = new Intent(Algorithms.this, StupidSort.class);
-                            break;
                         case 1:
                             intent = new Intent(Algorithms.this, BubbleSort.class);
                             break;
@@ -94,40 +89,27 @@ public class Algorithms extends AppCompatActivity {
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
                 }*/
-                else if (groupPosition == 1)
-                {
+                else if (groupPosition == 1) {
                     Intent intent = new Intent(Algorithms.this, Search.class);
                     intent.putExtra("num", childPosition);
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
-                }
-                else if (groupPosition == 2)
-                {
+                } else if (groupPosition == 2) {
                     Intent intent = new Intent(Algorithms.this, Graph.class);
                     intent.putExtra("num", childPosition);
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
-                }
-                else if (groupPosition == 3)
-                {
+                } else if (groupPosition == 3) {
                     Intent intent = new Intent(Algorithms.this, Strings.class);
                     intent.putExtra("num", childPosition);
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
                     startActivity(intent);
-                }
-                else if (groupPosition == 4)
-                {
+                } else if (groupPosition == 4) {
                     Intent intent;
-                    switch (childPosition) {
-                        case 0:
-                            intent = new Intent(Algorithms.this, SegmentTree.class);
-                            break;
-                        case 1:
-                            intent = new Intent(Algorithms.this, BST.class);
-                            break;
-                        default:
-                            intent = new Intent(Algorithms.this, SegmentTree.class);
-                            break;
+                    if (childPosition == 1) {
+                        intent = new Intent(Algorithms.this, BST.class);
+                    } else {
+                        intent = new Intent(Algorithms.this, SegmentTree.class);
                     }
                     intent.putExtra("num", childPosition);
                     intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
@@ -149,7 +131,6 @@ public class Algorithms extends AppCompatActivity {
 
         listDataHeader.add(getString(R.string.sorting));
         listDataHeader.add(getString(R.string.search));
-        //listDataHeader.add(getString(R.string.recursion));
         listDataHeader.add(getString(R.string.graphs));
         listDataHeader.add(getString(R.string.strings));
         listDataHeader.add(getString(R.string.data_structures));
@@ -179,18 +160,17 @@ public class Algorithms extends AppCompatActivity {
         StringArray.add(getString(R.string.prefix));
         StringArray.add(getString(R.string.z));
 
-        List<String> DsArray = new ArrayList<>();
-        DsArray.add(getString(R.string.st));
-        DsArray.add(getString(R.string.bst));
+        List<String> DSArray = new ArrayList<>();
+        DSArray.add(getString(R.string.st));
+        DSArray.add(getString(R.string.bst));
 
         listDataChild.put(listDataHeader.get(0), SortArray);
         listDataChild.put(listDataHeader.get(1), SearchArray);
-        //listDataChild.put(listDataHeader.get(2), RecursionArray);
         listDataChild.put(listDataHeader.get(2), GraphsArray);
         listDataChild.put(listDataHeader.get(3), StringArray);
-        listDataChild.put(listDataHeader.get(4), DsArray);
+        listDataChild.put(listDataHeader.get(4), DSArray);
 
-        sizer = SortArray.size()+SearchArray.size()+GraphsArray.size()+StringArray.size()+DsArray.size();
+        sizer = SortArray.size() + SearchArray.size() + GraphsArray.size() + StringArray.size() + DSArray.size();
 
         setter = loadText();
 
@@ -205,7 +185,7 @@ public class Algorithms extends AppCompatActivity {
     public String loadText() {
         try {
             FileInputStream fin = openFileInput(FILE_NAME);
-            String str =  convertStreamToString(fin);
+            String str = convertStreamToString(fin);
             fin.close();
             return str;
         } catch (IOException ex) {
@@ -223,7 +203,7 @@ public class Algorithms extends AppCompatActivity {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(s.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }

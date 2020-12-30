@@ -1,6 +1,5 @@
 package com.olympiad_algorithms.visualgol_android;
 
-//import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +20,6 @@ import static java.lang.Math.log;
 import static java.lang.Math.pow;
 
 public class MergeSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
     Button m_sort;
     Button generate;
     Button btnSave;
@@ -30,13 +28,13 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
     TextView TvDelay;
     private int childPosition = 0;
     private int curSpeed = 1250;
-    private TextView []txt_num;
-    private TextView []arr;
+    private TextView[] txt_num;
+    private TextView[] arr;
     final Random random = new Random();
-    private int []numbers = new int[8];
-    private int []numbers_2 = new int[8];
-    private int []numbers_3 = new int[8];
-    private Handler handler = new Handler();
+    private final int[] numbers = new int[8];
+    private final int[] numbers_2 = new int[8];
+    private final int[] numbers_3 = new int[8];
+    private final Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -129,7 +127,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    public void merge_sort(){
+    public void merge_sort() {
         animation_merge();
     }
 
@@ -139,8 +137,8 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
         while (step <= ceil(log(txt_num.length))) {
             int np;
             for (int i = 0; i < txt_num.length; i = np) {
-                np = i+(int)pow(2, step);
-                int fp = i, cp = i, s1 = i+(int)pow(2, step-1), sp = s1;
+                np = i + (int) pow(2, step);
+                int fp = i, cp = i, s1 = i + (int) pow(2, step - 1), sp = s1;
                 final int fir_poz = fp, sec_poz = sp, next_poz = np;
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -148,7 +146,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
                         txt_num[fir_poz].setBackgroundResource(R.drawable.rectangle_gray);
                         txt_num[sec_poz].setBackgroundResource(R.drawable.rectangle_gray);
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
                 ++current;
                 while (fp < s1 && sp < np) {
                     if (numbers_2[fp] <= numbers_2[sp]) {
@@ -157,25 +155,24 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
                             @Override
                             public void run() {
                                 txt_num[f_poz].setBackgroundResource(R.drawable.rectangle_2_gray);
-                                if (f_poz < sec_poz-1)
-                                    txt_num[f_poz+1].setBackgroundResource(R.drawable.rectangle_gray);
+                                if (f_poz < sec_poz - 1)
+                                    txt_num[f_poz + 1].setBackgroundResource(R.drawable.rectangle_gray);
                                 arr[cur_poz].setText(txt_num[f_poz].getText().toString());
                             }
-                        }, curSpeed*current);
+                        }, curSpeed * current);
                         numbers_3[cp] = numbers_2[fp];
                         ++fp;
-                    }
-                    else {
+                    } else {
                         final int s_poz = sp, cur_poz = cp;
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 txt_num[s_poz].setBackgroundResource(R.drawable.rectangle_2_gray);
-                                if (s_poz < next_poz-1)
-                                    txt_num[s_poz+1].setBackgroundResource(R.drawable.rectangle_gray);
+                                if (s_poz < next_poz - 1)
+                                    txt_num[s_poz + 1].setBackgroundResource(R.drawable.rectangle_gray);
                                 arr[cur_poz].setText(txt_num[s_poz].getText().toString());
                             }
-                        }, curSpeed*current);
+                        }, curSpeed * current);
                         numbers_3[cp] = numbers_2[sp];
                         ++sp;
                     }
@@ -188,11 +185,11 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
                         @Override
                         public void run() {
                             txt_num[f_poz].setBackgroundResource(R.drawable.rectangle_2_gray);
-                            if (f_poz < sec_poz-1)
-                                txt_num[f_poz+1].setBackgroundResource(R.drawable.rectangle_gray);
+                            if (f_poz < sec_poz - 1)
+                                txt_num[f_poz + 1].setBackgroundResource(R.drawable.rectangle_gray);
                             arr[cur_poz].setText(txt_num[f_poz].getText().toString());
                         }
-                    }, curSpeed*current);
+                    }, curSpeed * current);
                     numbers_3[cp] = numbers_2[fp];
                     ++fp;
                     ++cp;
@@ -204,18 +201,17 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
                         @Override
                         public void run() {
                             txt_num[s_poz].setBackgroundResource(R.drawable.rectangle_2_gray);
-                            if (s_poz < next_poz-1)
-                                txt_num[s_poz+1].setBackgroundResource(R.drawable.rectangle_gray);
+                            if (s_poz < next_poz - 1)
+                                txt_num[s_poz + 1].setBackgroundResource(R.drawable.rectangle_gray);
                             arr[cur_poz].setText(txt_num[s_poz].getText().toString());
                         }
-                    }, curSpeed*current);
+                    }, curSpeed * current);
                     numbers_3[cp] = numbers_2[sp];
                     ++sp;
                     ++cp;
                     ++current;
                 }
-                for (int j = i; j < np; ++j)
-                    numbers_2[j] = numbers_3[j];
+                if (np - i >= 0) System.arraycopy(numbers_3, i, numbers_2, i, np - i);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -224,7 +220,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
                             arr[i].setText("0");
                         }
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
                 ++current;
             }
             ++step;
@@ -232,12 +228,12 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < txt_num.length; ++i) {
-                    txt_num[i].setBackgroundResource(R.drawable.rectangle_dark);
-                    txt_num[i].setTextColor(getResources().getColor(R.color.white));
+                for (TextView textView : txt_num) {
+                    textView.setBackgroundResource(R.drawable.rectangle_dark);
+                    textView.setTextColor(getResources().getColor(R.color.white));
                 }
             }
-        }, curSpeed*current);
+        }, curSpeed * current);
     }
 
     static String convertStreamToString(FileInputStream is) {
@@ -251,7 +247,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
             String str = convertStreamToString(fin);
             fin.close();
             return str;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
@@ -259,6 +255,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
             return curBuilder.toString();
         }
     }
+
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
         c[childPosition] = ch;
@@ -267,7 +264,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
@@ -277,7 +274,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = progress / 1000. + " sec";
         TvDelay.setText(s);
     }
 

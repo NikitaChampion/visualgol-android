@@ -1,6 +1,7 @@
 package com.olympiad_algorithms.visualgol_android;
 
 //import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +20,6 @@ import java.util.Random;
 import static java.lang.Math.abs;
 
 public class CountingSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
     Button cou_sort;
     Button generate;
     Button btnSave;
@@ -28,13 +28,13 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
     TextView TvDelay;
     private int childPosition = 0;
     private int curSpeed = 1250;
-    private TextView []txt_num;
-    private TextView []index;
-    private TextView []numb;
+    private TextView[] txt_num;
+    private TextView[] index;
+    private TextView[] numb;
     final Random random = new Random();
-    private int []numbers = new int[8];
-    private int []numbers_2 = new int[7];
-    private Handler handler = new Handler();
+    private final int[] numbers = new int[8];
+    private final int[] numbers_2 = new int[7];
+    private final Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -137,7 +137,7 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void counting_sort(){
+    public void counting_sort() {
         animation_counting();
     }
 
@@ -151,7 +151,7 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
                     txt_num[x].setBackgroundResource(R.drawable.rectangle_search_3);
                     index[numbers[x]].setBackgroundResource(R.drawable.rectangle_search_3);
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             ++current;
             handler.postDelayed(new Runnable() {
                 @Override
@@ -162,7 +162,7 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
                     numb[numbers[x]].setText(String.valueOf(numbers_2[numbers[x]]));
                     index[numbers[x]].setBackgroundResource(R.drawable.rectangle_white);
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             ++current;
         }
         handler.postDelayed(new Runnable() {
@@ -179,7 +179,7 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
                     }
                 }
             }
-        }, curSpeed*current);
+        }, curSpeed * current);
     }
 
     static String convertStreamToString(FileInputStream is) {
@@ -193,7 +193,7 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
             String str = convertStreamToString(fin);
             fin.close();
             return str;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
@@ -201,6 +201,7 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
             return curBuilder.toString();
         }
     }
+
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
         c[childPosition] = ch;
@@ -209,7 +210,7 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
@@ -219,7 +220,7 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = String.valueOf(progress / 1000.) + " sec";
         TvDelay.setText(s);
     }
 

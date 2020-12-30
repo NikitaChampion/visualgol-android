@@ -11,15 +11,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class SegmentTree extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
-    TextView title;
     TextView St;
-    TextView task;
     ImageView imageView;
     Button st;
     Button st2;
-    Button btnSave;
-    EditText edit_text;
     SeekBar SbDelay;
     TextView TvDelay;
     private int curSpeed = 1250;
@@ -82,15 +77,14 @@ public class SegmentTree extends AppCompatActivity implements View.OnClickListen
     }
 
     public void animation_st() {
-        for (int i = 0; i < st_.length; ++i)
-        {
+        for (int i = 0; i < st_.length; ++i) {
             final int j = i;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     imageView.setBackgroundResource(st_[j]);
                 }
-            }, curSpeed*(i+1));
+            }, curSpeed * (i + 1));
         }
     }
 
@@ -99,22 +93,21 @@ public class SegmentTree extends AppCompatActivity implements View.OnClickListen
     }
 
     public void animation_st_sum() {
-        for (int i = 0; i < st_sum.length; ++i)
-        {
+        for (int i = 0; i < st_sum.length; ++i) {
             final int j = i;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     imageView.setBackgroundResource(st_sum[j]);
                 }
-            }, curSpeed*i);
+            }, curSpeed * i);
         }
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = progress / 1000. + " sec";
         TvDelay.setText(s);
     }
 

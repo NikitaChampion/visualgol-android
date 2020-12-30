@@ -5,25 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class BST extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
-    TextView title;
     TextView Bst;
-    TextView task;
     ImageView imageView;
     Button bst;
     Button bst2;
-    Button btnSave;
-    EditText edit_text;
     SeekBar SbDelay;
     TextView TvDelay;
     private int curSpeed = 1250;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,15 +76,14 @@ public class BST extends AppCompatActivity implements View.OnClickListener, Seek
     }
 
     public void animation_bst_ins() {
-        for (int i = 0; i < bst_ins.length; ++i)
-        {
+        for (int i = 0; i < bst_ins.length; ++i) {
             final int j = i;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     imageView.setBackgroundResource(bst_ins[j]);
                 }
-            }, curSpeed*(i+1));
+            }, curSpeed * (i + 1));
         }
     }
 
@@ -99,22 +92,21 @@ public class BST extends AppCompatActivity implements View.OnClickListener, Seek
     }
 
     public void animation_bst_del() {
-        for (int i = 0; i < bst_del.length; ++i)
-        {
+        for (int i = 0; i < bst_del.length; ++i) {
             final int j = i;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     imageView.setBackgroundResource(bst_del[j]);
                 }
-            }, curSpeed*i);
+            }, curSpeed * i);
         }
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = progress / 1000. + " sec";
         TvDelay.setText(s);
     }
 

@@ -11,12 +11,11 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
-
-    private Context _context;
-    private List<String> _listDataHeader; // header titles
+    private final Context _context;
+    private final List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
-    private HashMap<String, List<String>> _listDataChild;
-    private String setter;
+    private final HashMap<String, List<String>> _listDataChild;
+    private final String setter;
 
     ExpandableListAdapter(Context context, List<String> listDataHeader,
                           HashMap<String, List<String>> listChildData, String setter) {
@@ -55,7 +54,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         txtListChild.setText(childText);
 
         int PozAll = getPozAll(groupPosition);
-        if (setter.charAt(PozAll+childPosition) == '1')
+        if (setter.charAt(PozAll + childPosition) == '1')
             txtListChild.setTextColor(_context.getResources().getColor(R.color.green));
         else
             txtListChild.setTextColor(_context.getResources().getColor(R.color.colorAccent));

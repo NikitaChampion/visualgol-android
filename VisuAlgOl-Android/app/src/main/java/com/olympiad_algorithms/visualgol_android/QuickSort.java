@@ -1,6 +1,5 @@
 package com.olympiad_algorithms.visualgol_android;
 
-//import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.util.Random;
 
 public class QuickSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
     Button q_sort;
     Button generate;
     Button btnSave;
@@ -26,11 +24,11 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
     TextView TvDelay;
     private int childPosition = 0;
     private int curSpeed = 1250;
-    private TextView []txt_num;
-    private TextView []ind;
+    private TextView[] txt_num;
+    private TextView[] ind;
     final Random random = new Random();
-    private int []numbers = new int[8];
-    private Handler handler = new Handler();
+    private final int[] numbers = new int[8];
+    private final Handler handler = new Handler();
 
     private final static String FILE_NAME = "qwerty.txt";
 
@@ -67,7 +65,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
             numbers[i] = random.nextInt() % 10;
 
         for (int i = 0; i < ind.length; ++i)
-            ind[i].setText(String.valueOf(i+1));
+            ind[i].setText(String.valueOf(i + 1));
 
         TvDelay = findViewById(R.id.TvDelay);
         TvDelay.setText(R.string.sec);
@@ -120,14 +118,15 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    public void quick_sort(){
-        animation_quick(0, numbers.length-1);
+    public void quick_sort() {
+        animation_quick(0, numbers.length - 1);
     }
 
     long current = 1;
+
     public void animation_quick(int a, int b) {
-        int l = a, r = b, mainer = numbers[(l+r)/2];
-        final int mid = (l+r)/2;
+        int l = a, r = b, mainer = numbers[(l + r) / 2];
+        final int mid = (l + r) / 2;
         while (l <= r) {
             while (numbers[l] < mainer) ++l;
             while (numbers[r] > mainer) --r;
@@ -143,7 +142,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                         txt_num[rr].setBackgroundResource(R.drawable.rectangle_red);
                         ind[mid].setBackgroundResource(R.drawable.rectangle_purple);
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
                 ++current;
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -152,7 +151,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                         txt_num[ll].setText(txt_num[rr].getText().toString());
                         txt_num[rr].setText(temp);
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
                 ++current;
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -160,7 +159,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                         txt_num[ll].setBackgroundResource(R.drawable.rectangle_gray);
                         txt_num[rr].setBackgroundResource(R.drawable.rectangle_gray);
                     }
-                }, curSpeed*current);
+                }, curSpeed * current);
             }
         }
         ++current;
@@ -178,7 +177,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                         ind[i].setBackgroundResource(R.drawable.rectangle_white);
                     }
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             ++current;
             animation_quick(a, r);
         }
@@ -194,7 +193,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                         ind[i].setBackgroundResource(R.drawable.rectangle_white);
                     }
                 }
-            }, curSpeed*current);
+            }, curSpeed * current);
             ++current;
             animation_quick(l, b);
         }
@@ -204,7 +203,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                 for (int i = aa; i <= bb; ++i)
                     ind[i].setBackgroundResource(R.drawable.rectangle_white);
             }
-        }, curSpeed*current);
+        }, curSpeed * current);
     }
 
     static String convertStreamToString(FileInputStream is) {
@@ -218,7 +217,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
             String str = convertStreamToString(fin);
             fin.close();
             return str;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
             for (int i = 0; i < 100; ++i)
@@ -226,6 +225,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
             return curBuilder.toString();
         }
     }
+
     public void saveText(char ch) {
         char[] c = loadText().toCharArray();
         c[childPosition] = ch;
@@ -234,7 +234,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(str.getBytes());
             fos.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
@@ -244,7 +244,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
-        String s = String.valueOf(progress/1000.)+" sec";
+        String s = progress / 1000. + " sec";
         TvDelay.setText(s);
     }
 
