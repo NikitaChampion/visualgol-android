@@ -8,7 +8,7 @@ To install VisuAlgOl on Android, download an [apk](./app-debug.apk).
 
 ## Using VisuAlgOl
 
-To use VisuAlgOl, just run a downloaded apk from your donloads.
+To use VisuAlgOl, just run a downloaded apk.
 
 ## Contact
 
