@@ -5,18 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Handler;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class SegmentTree extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    TextView St;
-    ImageView imageView;
-    Button st;
-    Button st2;
-    SeekBar SbDelay;
-    TextView TvDelay;
+    private ImageView imageView;
+    private TextView TvDelay;
     private int curSpeed = Constants.SPEED;
     private final Handler handler = new Handler();
 
@@ -32,16 +27,9 @@ public class SegmentTree extends AppCompatActivity implements View.OnClickListen
         TvDelay = findViewById(R.id.TvDelay);
         TvDelay.setText(R.string.sec);
 
-        SbDelay = findViewById(R.id.SbDelay);
-        SbDelay.setOnSeekBarChangeListener(this);
-
-        St = findViewById(R.id.St);
-
-        st = findViewById(R.id.st);
-        st.setOnClickListener(this);
-
-        st2 = findViewById(R.id.st2);
-        st2.setOnClickListener(this);
+        ((SeekBar) findViewById(R.id.SbDelay)).setOnSeekBarChangeListener(this);
+        findViewById(R.id.st).setOnClickListener(this);
+        findViewById(R.id.st2).setOnClickListener(this);
 
         contestSet();
     }
@@ -52,11 +40,11 @@ public class SegmentTree extends AppCompatActivity implements View.OnClickListen
         if (id == R.id.st) {
             handler.removeCallbacksAndMessages(null);
             contestSet();
-            seg_tree();
+            segmentTree();
         } else if (id == R.id.st2) {
             handler.removeCallbacksAndMessages(null);
             contestSet();
-            seg_tree_sum();
+            segmentTreeSum();
         }
     }
 
@@ -68,22 +56,22 @@ public class SegmentTree extends AppCompatActivity implements View.OnClickListen
     int[] st_ = {R.drawable.st2, R.drawable.st3, R.drawable.st4, R.drawable.st5};
     int[] st_sum = {R.drawable.stsum1, R.drawable.stsum2, R.drawable.stsum3, R.drawable.stsum4, R.drawable.stsum5};
 
-    public void seg_tree() {
-        animation_st();
+    public void segmentTree() {
+        animationST();
     }
 
-    public void animation_st() {
+    public void animationST() {
         for (int i = 0; i < st_.length; ++i) {
             final int j = i;
             handler.postDelayed(() -> imageView.setBackgroundResource(st_[j]), curSpeed * (i + 1));
         }
     }
 
-    public void seg_tree_sum() {
-        animation_st_sum();
+    public void segmentTreeSum() {
+        animationStSum();
     }
 
-    public void animation_st_sum() {
+    public void animationStSum() {
         for (int i = 0; i < st_sum.length; ++i) {
             final int j = i;
             handler.postDelayed(() -> imageView.setBackgroundResource(st_sum[j]), curSpeed * i);

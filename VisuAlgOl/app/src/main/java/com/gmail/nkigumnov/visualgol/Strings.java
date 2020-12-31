@@ -12,14 +12,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class Strings extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    TextView title;
-    TextView Strings;
-    TextView task;
-    Button strings;
-    Button btnSave;
-    EditText edit_text;
-    SeekBar SbDelay;
-    TextView TvDelay;
+    private TextView title;
+    private TextView Strings;
+    private TextView task;
+    private Button strings;
+    private EditText editText;
+    private TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
     private TextView[] txt_num;
@@ -37,8 +35,6 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
             childPosition = arguments.getInt("num", 0);
             groupPosition = arguments.getInt("num_2", 0);
         }
-
-        //Toast.makeText(this, ""+cur, Toast.LENGTH_SHORT).show();
 
         title = findViewById(R.id.title);
 
@@ -60,14 +56,15 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
         st[5] = findViewById(R.id.s_6);
         st[6] = findViewById(R.id.s_7);
 
-        for (int i = 0; i < st.length; ++i)
+        for (int i = 0; i < st.length; ++i) {
             txt_num[i].setText(String.valueOf(chars[i]));
+        }
 
         TvDelay = findViewById(R.id.TvDelay);
         TvDelay.setText(R.string.sec);
 
-        SbDelay = findViewById(R.id.SbDelay);
-        SbDelay.setOnSeekBarChangeListener(this);
+        ((SeekBar) findViewById(R.id.SbDelay)).setOnSeekBarChangeListener(this);
+        findViewById(R.id.btnSave).setOnClickListener(this);
 
         Strings = findViewById(R.id.Strings);
 
@@ -76,10 +73,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
         strings = findViewById(R.id.strings);
         strings.setOnClickListener(this);
 
-        edit_text = findViewById(R.id.edit_text);
-
-        btnSave = findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(this);
+        editText = findViewById(R.id.edit_text);
 
         contestSet();
     }
@@ -92,14 +86,13 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
             contestSet();
             if (childPosition == 0) {
                 prefix();
-            }
-            else {
+            } else {
                 z();
             }
         } else if (id == R.id.btnSave) {
-            if (childPosition == 0 && edit_text.getText().toString().equals("3")) {
+            if (childPosition == 0 && editText.getText().toString().equals("3")) {
                 Util.saveText(this, '1', groupPosition + childPosition);
-            } else if (childPosition == 1 && edit_text.getText().toString().equals("1")) {
+            } else if (childPosition == 1 && editText.getText().toString().equals("1")) {
                 Util.saveText(this, '1', groupPosition + childPosition);
             } else {
                 Util.saveText(this, '0', groupPosition + childPosition);

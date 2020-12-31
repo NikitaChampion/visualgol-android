@@ -64,7 +64,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    int getPozAll(int groupPosition) {
+    public int getPozAll(int groupPosition) {
         int sum = 0;
         for (int i = 0; i < groupPosition; ++i)
             sum += getChildrenCount(i);

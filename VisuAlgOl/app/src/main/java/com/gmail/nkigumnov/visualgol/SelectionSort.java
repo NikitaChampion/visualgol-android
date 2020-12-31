@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -13,17 +12,13 @@ import android.widget.EditText;
 import java.util.Random;
 
 public class SelectionSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    Button sel_sort;
-    Button generate;
-    Button btnSave;
-    EditText edit_text;
-    SeekBar SbDelay;
-    TextView TvDelay;
+    private EditText editText;
+    private TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
     private int poz = 0;
     private TextView[] txt_num;
-    final Random random = new Random();
+    private final Random random = new Random();
     private final int[] numbers = new int[8];
     private final Handler handler = new Handler();
 
@@ -54,19 +49,12 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         TvDelay = findViewById(R.id.TvDelay);
         TvDelay.setText(R.string.sec);
 
-        SbDelay = findViewById(R.id.SbDelay);
-        SbDelay.setOnSeekBarChangeListener(this);
+        ((SeekBar) findViewById(R.id.SbDelay)).setOnSeekBarChangeListener(this);
+        findViewById(R.id.sel_sort).setOnClickListener(this);
+        findViewById(R.id.generate).setOnClickListener(this);
+        findViewById(R.id.btnSave).setOnClickListener(this);
 
-        sel_sort = findViewById(R.id.sel_sort);
-        sel_sort.setOnClickListener(this);
-
-        generate = findViewById(R.id.generate);
-        generate.setOnClickListener(this);
-
-        edit_text = findViewById(R.id.edit_text);
-
-        btnSave = findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(this);
+        editText = findViewById(R.id.edit_text);
 
         contestSet();
     }
@@ -77,14 +65,14 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         if (id == R.id.sel_sort) {
             handler.removeCallbacksAndMessages(null);
             contestSet();
-            selection_sort();
+            selectionSort();
         } else if (id == R.id.generate) {
             handler.removeCallbacksAndMessages(null);
             for (int i = 0; i < numbers.length; ++i)
                 numbers[i] = random.nextInt() % 10;
             contestSet();
         } else if (id == R.id.btnSave) {
-            if (edit_text.getText().toString().equals("1 2 4 3")) {
+            if (editText.getText().toString().equals("1 2 4 3")) {
                 Util.saveText(this, '1', groupPosition + childPosition);
             } else {
                 Util.saveText(this, '0', groupPosition + childPosition);
@@ -99,11 +87,11 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void selection_sort() {
-        animation_selection();
+    public void selectionSort() {
+        animationSelection();
     }
 
-    public void animation_selection() {
+    public void animationSelection() {
         long current = 1;
         for (int i = 0; i < numbers.length; ++i) {
             final int y = i;

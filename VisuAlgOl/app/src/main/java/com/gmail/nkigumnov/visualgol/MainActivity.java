@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.toAlgorithms) {
-            Intent intent = new Intent(this, Algorithms.class);
+            Intent intent = new Intent(this, AlgorithmsActivity.class);
             startActivity(intent);
         }
     }

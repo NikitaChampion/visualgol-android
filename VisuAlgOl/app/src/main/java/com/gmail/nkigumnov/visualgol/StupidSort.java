@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -13,16 +12,12 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class StupidSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    Button stSort;
-    Button generate;
-    Button save;
-    EditText editText;
-    TextView tvDelay;
-    SeekBar sbDelay;
+    private EditText editText;
+    private TextView tvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
     private TextView[] txt_num;
-    final Random random = new Random();
+    private final Random random = new Random();
     private final int[] numbers = new int[7];
     private final int[] numbers_2 = new int[7];
     private final Handler handler = new Handler();
@@ -54,17 +49,10 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         tvDelay = findViewById(R.id.TvDelay);
         tvDelay.setText(R.string.sec);
 
-        sbDelay = findViewById(R.id.SbDelay);
-        sbDelay.setOnSeekBarChangeListener(this);
-
-        stSort = findViewById(R.id.st_sort);
-        stSort.setOnClickListener(this);
-
-        generate = findViewById(R.id.generate);
-        generate.setOnClickListener(this);
-
-        save = findViewById(R.id.btnSave);
-        save.setOnClickListener(this);
+        ((SeekBar) findViewById(R.id.SbDelay)).setOnSeekBarChangeListener(this);
+        findViewById(R.id.st_sort).setOnClickListener(this);
+        findViewById(R.id.generate).setOnClickListener(this);
+        findViewById(R.id.btnSave).setOnClickListener(this);
 
         editText = findViewById(R.id.edit_text);
 
@@ -77,7 +65,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         if (id == R.id.st_sort) {
             handler.removeCallbacksAndMessages(null);
             contestSet();
-            stupid_sort();
+            stupidSort();
         } else if (id == R.id.generate) {
             handler.removeCallbacksAndMessages(null);
             for (int i = 0; i < numbers.length; ++i)
@@ -92,19 +80,19 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public void contestSet() {
+    private void contestSet() {
         for (int i = 0; i < numbers.length; ++i) {
             txt_num[i].setText(String.valueOf(numbers[i]));
-            txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
+            txt_num[i].setBackgroundResource(R.drawable.rectangle_blue);
             numbers_2[i] = numbers[i];
         }
     }
 
-    public void stupid_sort() {
-        animation_stupid();
+    private void stupidSort() {
+        animationStupid();
     }
 
-    public void animation_stupid() {
+    private void animationStupid() {
         long current = 1;
         for (int i = 1; i < numbers.length; ++i) {
             final int x = i;
