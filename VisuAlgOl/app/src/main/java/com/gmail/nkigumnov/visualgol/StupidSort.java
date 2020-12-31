@@ -9,21 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 public class StupidSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    Button st_sort;
+    Button stSort;
     Button generate;
-    Button btnSave;
-    EditText edit_text;
-    SeekBar SbDelay;
-    TextView TvDelay;
-    private int childPosition = 0;
+    Button save;
+    EditText editText;
+    TextView tvDelay;
+    SeekBar sbDelay;
+    private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
     private TextView[] txt_num;
     final Random random = new Random();
@@ -37,8 +33,10 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_stupid_sort);
 
         Bundle arguments = getIntent().getExtras();
-        if (arguments != null)
+        if (arguments != null) {
             childPosition = arguments.getInt("num", 0);
+            groupPosition = arguments.getInt("num_2", 0);
+        }
 
         txt_num = new TextView[7];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -49,54 +47,52 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         txt_num[5] = findViewById(R.id.txt_num6);
         txt_num[6] = findViewById(R.id.txt_num7);
 
-        for (int i = 0; i < numbers.length; ++i)
+        for (int i = 0; i < numbers.length; ++i) {
             numbers[i] = random.nextInt() % 10;
+        }
 
-        TvDelay = findViewById(R.id.TvDelay);
-        TvDelay.setText(R.string.sec);
+        tvDelay = findViewById(R.id.TvDelay);
+        tvDelay.setText(R.string.sec);
 
-        SbDelay = findViewById(R.id.SbDelay);
-        SbDelay.setOnSeekBarChangeListener(this);
+        sbDelay = findViewById(R.id.SbDelay);
+        sbDelay.setOnSeekBarChangeListener(this);
 
-        st_sort = findViewById(R.id.st_sort);
-        st_sort.setOnClickListener(this);
+        stSort = findViewById(R.id.st_sort);
+        stSort.setOnClickListener(this);
 
         generate = findViewById(R.id.generate);
         generate.setOnClickListener(this);
 
-        edit_text = findViewById(R.id.edit_text);
+        save = findViewById(R.id.btnSave);
+        save.setOnClickListener(this);
 
-        btnSave = findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(this);
+        editText = findViewById(R.id.edit_text);
 
-        ContestSet();
+        contestSet();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.st_sort:
-                handler.removeCallbacksAndMessages(null);
-                ContestSet();
-                stupid_sort();
-                break;
-            case R.id.generate:
-                handler.removeCallbacksAndMessages(null);
-                for (int i = 0; i < numbers.length; ++i)
-                    numbers[i] = random.nextInt() % 10;
-                ContestSet();
-                break;
-            case R.id.btnSave:
-                if (edit_text.getText().toString().equals("1 2 3"))
-                    saveText('1');
-                else saveText('0');
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.st_sort) {
+            handler.removeCallbacksAndMessages(null);
+            contestSet();
+            stupid_sort();
+        } else if (id == R.id.generate) {
+            handler.removeCallbacksAndMessages(null);
+            for (int i = 0; i < numbers.length; ++i)
+                numbers[i] = random.nextInt() % 10;
+            contestSet();
+        } else if (id == R.id.btnSave) {
+            if (editText.getText().toString().equals("1 2 3")) {
+                Util.saveText(this, '1', groupPosition + childPosition);
+            } else {
+                Util.saveText(this, '0', groupPosition + childPosition);
+            }
         }
     }
 
-    public void ContestSet() {
+    public void contestSet() {
         for (int i = 0; i < numbers.length; ++i) {
             txt_num[i].setText(String.valueOf(numbers[i]));
             txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
@@ -147,46 +143,11 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         }, curSpeed * current);
     }
 
-    static String convertStreamToString(FileInputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
-
-    public String loadText() {
-        try {
-            FileInputStream fin = openFileInput(Constants.FILE_NAME);
-            String str = convertStreamToString(fin);
-            fin.close();
-            return str;
-        } catch (IOException ex) {
-            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            StringBuilder curBuilder = new StringBuilder();
-            for (int i = 0; i < 100; ++i)
-                curBuilder.append('0');
-            return curBuilder.toString();
-        }
-    }
-
-    public void saveText(char ch) {
-        char[] c = loadText().toCharArray();
-        c[childPosition] = ch;
-        String str = new String(c);
-        try {
-            FileOutputStream fos = openFileOutput(Constants.FILE_NAME, MODE_PRIVATE);
-            fos.write(str.getBytes());
-            fos.close();
-        } catch (IOException ex) {
-            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         curSpeed = progress;
         String s = progress / 1000. + " sec";
-        TvDelay.setText(s);
+        tvDelay.setText(s);
     }
 
     @Override

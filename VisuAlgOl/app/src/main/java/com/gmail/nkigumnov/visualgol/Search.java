@@ -9,11 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 import static java.lang.Math.abs;
@@ -45,7 +41,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null) {
-            childPosition = arguments.getInt("num", 1);
+            childPosition = arguments.getInt("num", 0);
             groupPosition = arguments.getInt("num_2", 0);
         }
 
@@ -92,44 +88,40 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
 
-        ContestSet();
+        contestSet();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.search:
-                handler.removeCallbacksAndMessages(null);
-                ContestSet();
-                if (childPosition == 0)
-                    linear_search();
-                else
-                    binary_search();
-                break;
-            case R.id.generate:
-                handler.removeCallbacksAndMessages(null);
-                for (int i = 0; i < numbers.length; ++i)
-                    numbers[i] = random.nextInt() % 10;
-                if (childPosition == 0)
-                    WhatToFind = numbers[abs(random.nextInt()) % numbers.length];
-                else
-                    WhatToFind = numbers_2[abs(random.nextInt()) % numbers_2.length];
-                ContestSet();
-                break;
-            case R.id.btnSave:
-                if (childPosition == 0 && edit_text.getText().toString().equals("5"))
-                    saveText('1');
-                else if (childPosition == 1 && edit_text.getText().toString().equals("4"))
-                    saveText('1');
-                else
-                    saveText('0');
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.search) {
+            handler.removeCallbacksAndMessages(null);
+            contestSet();
+            if (childPosition == 0)
+                linear_search();
+            else
+                binary_search();
+        } else if (id == R.id.generate) {
+            handler.removeCallbacksAndMessages(null);
+            for (int i = 0; i < numbers.length; ++i)
+                numbers[i] = random.nextInt() % 10;
+            if (childPosition == 0)
+                WhatToFind = numbers[abs(random.nextInt()) % numbers.length];
+            else
+                WhatToFind = numbers_2[abs(random.nextInt()) % numbers_2.length];
+            contestSet();
+        } else if (id == R.id.btnSave) {
+            if (childPosition == 0 && edit_text.getText().toString().equals("5")) {
+                Util.saveText(this, '1', groupPosition + childPosition);
+            } else if (childPosition == 1 && edit_text.getText().toString().equals("4")) {
+                Util.saveText(this, '1', groupPosition + childPosition);
+            } else {
+                Util.saveText(this, '0', groupPosition + childPosition);
+            }
         }
     }
 
-    public void ContestSet() {
+    public void contestSet() {
         //linear search == 0, binary search == 1
         if (childPosition == 0) {
             title.setText(R.string.lin_search);
@@ -209,41 +201,6 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
             if (numbers_2[mid] < WhatToFind) l = mid;
             else r = mid;
         }
-    }
-
-    static String convertStreamToString(FileInputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
-
-    public String loadText() {
-        try {
-            FileInputStream fin = openFileInput(Constants.FILE_NAME);
-            String str = convertStreamToString(fin);
-            fin.close();
-            return str;
-        } catch (IOException ex) {
-            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            StringBuilder curBuilder = new StringBuilder();
-            for (int i = 0; i < 100; ++i)
-                curBuilder.append('0');
-            return curBuilder.toString();
-        }
-    }
-
-    public void saveText(char ch) {
-        char[] c = loadText().toCharArray();
-        c[groupPosition + childPosition] = ch;
-        String str = new String(c);
-        try {
-            FileOutputStream fos = openFileOutput(Constants.FILE_NAME, MODE_PRIVATE);
-            fos.write(str.getBytes());
-            fos.close();
-        } catch (IOException ex) {
-            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -9,11 +9,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 public class SelectionSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
@@ -23,7 +19,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     EditText edit_text;
     SeekBar SbDelay;
     TextView TvDelay;
-    private int childPosition = 0;
+    private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
     private int poz = 0;
     private TextView[] txt_num;
@@ -37,8 +33,10 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_selection_sort);
 
         Bundle arguments = getIntent().getExtras();
-        if (arguments != null)
+        if (arguments != null) {
             childPosition = arguments.getInt("num", 0);
+            groupPosition = arguments.getInt("num_2", 0);
+        }
 
         txt_num = new TextView[8];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -70,34 +68,31 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
 
-        ContestSet();
+        contestSet();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.sel_sort:
-                handler.removeCallbacksAndMessages(null);
-                ContestSet();
-                selection_sort();
-                break;
-            case R.id.generate:
-                handler.removeCallbacksAndMessages(null);
-                for (int i = 0; i < numbers.length; ++i)
-                    numbers[i] = random.nextInt() % 10;
-                ContestSet();
-                break;
-            case R.id.btnSave:
-                if (edit_text.getText().toString().equals("1 2 4 3"))
-                    saveText('1');
-                else saveText('0');
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.sel_sort) {
+            handler.removeCallbacksAndMessages(null);
+            contestSet();
+            selection_sort();
+        } else if (id == R.id.generate) {
+            handler.removeCallbacksAndMessages(null);
+            for (int i = 0; i < numbers.length; ++i)
+                numbers[i] = random.nextInt() % 10;
+            contestSet();
+        } else if (id == R.id.btnSave) {
+            if (edit_text.getText().toString().equals("1 2 4 3")) {
+                Util.saveText(this, '1', groupPosition + childPosition);
+            } else {
+                Util.saveText(this, '0', groupPosition + childPosition);
+            }
         }
     }
 
-    public void ContestSet() {
+    public void contestSet() {
         for (int i = 0; i < numbers.length; ++i) {
             txt_num[i].setText(String.valueOf(numbers[i]));
             txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
@@ -144,41 +139,6 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
             }, curSpeed * current);
             ++current;
         }
-    }
-
-    static String convertStreamToString(FileInputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
-
-    public String loadText() {
-        try {
-            FileInputStream fin = openFileInput(Constants.FILE_NAME);
-            String str = convertStreamToString(fin);
-            fin.close();
-            return str;
-        } catch (IOException ex) {
-            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            StringBuilder curBuilder = new StringBuilder();
-            for (int i = 0; i < 100; ++i)
-                curBuilder.append('0');
-            return curBuilder.toString();
-        }
-    }
-
-    public void saveText(char ch) {
-        char[] c = loadText().toCharArray();
-        c[childPosition] = ch;
-        String str = new String(c);
-        try {
-            FileOutputStream fos = openFileOutput(Constants.FILE_NAME, MODE_PRIVATE);
-            fos.write(str.getBytes());
-            fos.close();
-        } catch (IOException ex) {
-            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
     }
 
     @Override

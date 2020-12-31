@@ -9,11 +9,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 import static java.lang.Math.ceil;
@@ -27,7 +23,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
     EditText edit_text;
     SeekBar SbDelay;
     TextView TvDelay;
-    private int childPosition = 0;
+    private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
     private TextView[] txt_num;
     private TextView[] arr;
@@ -43,8 +39,10 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_merge_sort);
 
         Bundle arguments = getIntent().getExtras();
-        if (arguments != null)
+        if (arguments != null) {
             childPosition = arguments.getInt("num", 0);
+            groupPosition = arguments.getInt("num_2", 0);
+        }
 
         txt_num = new TextView[8];
         txt_num[0] = findViewById(R.id.txt_num1);
@@ -89,34 +87,31 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
 
-        ContestSet();
+        contestSet();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.m_sort:
-                handler.removeCallbacksAndMessages(null);
-                ContestSet();
-                merge_sort();
-                break;
-            case R.id.generate:
-                handler.removeCallbacksAndMessages(null);
-                for (int i = 0; i < numbers.length; ++i)
-                    numbers[i] = random.nextInt() % 10;
-                ContestSet();
-                break;
-            case R.id.btnSave:
-                if (edit_text.getText().toString().equals("1 3 4 4 5 6 4 5"))
-                    saveText('1');
-                else saveText('0');
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.m_sort) {
+            handler.removeCallbacksAndMessages(null);
+            contestSet();
+            merge_sort();
+        } else if (id == R.id.generate) {
+            handler.removeCallbacksAndMessages(null);
+            for (int i = 0; i < numbers.length; ++i)
+                numbers[i] = random.nextInt() % 10;
+            contestSet();
+        } else if (id == R.id.btnSave) {
+            if (edit_text.getText().toString().equals("1 3 4 4 5 6 4 5")) {
+                Util.saveText(this, '1', groupPosition + childPosition);
+            } else {
+                Util.saveText(this, '0', groupPosition + childPosition);
+            }
         }
     }
 
-    public void ContestSet() {
+    public void contestSet() {
         for (int i = 0; i < numbers.length; ++i) {
             txt_num[i].setText(String.valueOf(numbers[i]));
             txt_num[i].setBackgroundResource(R.drawable.rectangle_2_gray);
@@ -212,41 +207,6 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
                 textView.setTextColor(getResources().getColor(R.color.white));
             }
         }, curSpeed * current);
-    }
-
-    static String convertStreamToString(FileInputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
-
-    public String loadText() {
-        try {
-            FileInputStream fin = openFileInput(Constants.FILE_NAME);
-            String str = convertStreamToString(fin);
-            fin.close();
-            return str;
-        } catch (IOException ex) {
-            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            StringBuilder curBuilder = new StringBuilder();
-            for (int i = 0; i < 100; ++i)
-                curBuilder.append('0');
-            return curBuilder.toString();
-        }
-    }
-
-    public void saveText(char ch) {
-        char[] c = loadText().toCharArray();
-        c[childPosition] = ch;
-        String str = new String(c);
-        try {
-            FileOutputStream fos = openFileOutput(Constants.FILE_NAME, MODE_PRIVATE);
-            fos.write(str.getBytes());
-            fos.close();
-        } catch (IOException ex) {
-            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -43,28 +43,24 @@ public class BST extends AppCompatActivity implements View.OnClickListener, Seek
         bst2 = findViewById(R.id.bst2);
         bst2.setOnClickListener(this);
 
-        ContestSet();
+        contestSet();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bst:
-                handler.removeCallbacksAndMessages(null);
-                ContestSet();
-                bst_ins();
-                break;
-            case R.id.bst2:
-                handler.removeCallbacksAndMessages(null);
-                ContestSet();
-                bst_del();
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.bst) {
+            handler.removeCallbacksAndMessages(null);
+            contestSet();
+            bst_ins();
+        } else if (id == R.id.bst2) {
+            handler.removeCallbacksAndMessages(null);
+            contestSet();
+            bst_del();
         }
     }
 
-    public void ContestSet() {
+    public void contestSet() {
         //DFS == 0, BFS == 1
         imageView.setBackgroundResource(R.drawable.bst);
     }

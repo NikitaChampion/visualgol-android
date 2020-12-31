@@ -10,11 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class Strings extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     TextView title;
@@ -39,7 +34,7 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null) {
-            childPosition = arguments.getInt("num", 1);
+            childPosition = arguments.getInt("num", 0);
             groupPosition = arguments.getInt("num_2", 0);
         }
 
@@ -86,34 +81,33 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
 
-        ContestSet();
+        contestSet();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.strings:
-                handler.removeCallbacksAndMessages(null);
-                ContestSet();
-                if (childPosition == 0)
-                    prefix();
-                else
-                    z();
-                break;
-            case R.id.btnSave:
-                if (childPosition == 0 && edit_text.getText().toString().equals("3"))
-                    saveText('1');
-                else if (childPosition == 1 && edit_text.getText().toString().equals("1"))
-                    saveText('1');
-                else
-                    saveText('0');
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.strings) {
+            handler.removeCallbacksAndMessages(null);
+            contestSet();
+            if (childPosition == 0) {
+                prefix();
+            }
+            else {
+                z();
+            }
+        } else if (id == R.id.btnSave) {
+            if (childPosition == 0 && edit_text.getText().toString().equals("3")) {
+                Util.saveText(this, '1', groupPosition + childPosition);
+            } else if (childPosition == 1 && edit_text.getText().toString().equals("1")) {
+                Util.saveText(this, '1', groupPosition + childPosition);
+            } else {
+                Util.saveText(this, '0', groupPosition + childPosition);
+            }
         }
     }
 
-    public void ContestSet() {
+    public void contestSet() {
         //prefix == 0, z == 1
         for (int i = 0; i < st.length; ++i) {
             txt_num[i].setTextColor(getResources().getColor(R.color.colorAccent));
@@ -204,41 +198,6 @@ public class Strings extends AppCompatActivity implements View.OnClickListener, 
             }, curSpeed * current);
             ++current;
         }
-    }
-
-    static String convertStreamToString(FileInputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
-
-    public String loadText() {
-        try {
-            FileInputStream fin = openFileInput(Constants.FILE_NAME);
-            String str = convertStreamToString(fin);
-            fin.close();
-            return str;
-        } catch (IOException ex) {
-            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            StringBuilder curBuilder = new StringBuilder();
-            for (int i = 0; i < 100; ++i)
-                curBuilder.append('0');
-            return curBuilder.toString();
-        }
-    }
-
-    public void saveText(char ch) {
-        char[] c = loadText().toCharArray();
-        c[groupPosition + childPosition] = ch;
-        String str = new String(c);
-        try {
-            FileOutputStream fos = openFileOutput(Constants.FILE_NAME, MODE_PRIVATE);
-            fos.write(str.getBytes());
-            fos.close();
-        } catch (IOException ex) {
-            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        if (ch == '1') Toast.makeText(this, "Right answer, text saved", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
     }
 
     @Override

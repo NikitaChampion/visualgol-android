@@ -43,28 +43,24 @@ public class SegmentTree extends AppCompatActivity implements View.OnClickListen
         st2 = findViewById(R.id.st2);
         st2.setOnClickListener(this);
 
-        ContestSet();
+        contestSet();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.st:
-                handler.removeCallbacksAndMessages(null);
-                ContestSet();
-                seg_tree();
-                break;
-            case R.id.st2:
-                handler.removeCallbacksAndMessages(null);
-                ContestSet();
-                seg_tree_sum();
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.st) {
+            handler.removeCallbacksAndMessages(null);
+            contestSet();
+            seg_tree();
+        } else if (id == R.id.st2) {
+            handler.removeCallbacksAndMessages(null);
+            contestSet();
+            seg_tree_sum();
         }
     }
 
-    public void ContestSet() {
+    public void contestSet() {
         //DFS == 0, BFS == 1
         imageView.setBackgroundResource(R.drawable.st1);
     }
@@ -79,12 +75,7 @@ public class SegmentTree extends AppCompatActivity implements View.OnClickListen
     public void animation_st() {
         for (int i = 0; i < st_.length; ++i) {
             final int j = i;
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    imageView.setBackgroundResource(st_[j]);
-                }
-            }, curSpeed * (i + 1));
+            handler.postDelayed(() -> imageView.setBackgroundResource(st_[j]), curSpeed * (i + 1));
         }
     }
 
@@ -95,12 +86,7 @@ public class SegmentTree extends AppCompatActivity implements View.OnClickListen
     public void animation_st_sum() {
         for (int i = 0; i < st_sum.length; ++i) {
             final int j = i;
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    imageView.setBackgroundResource(st_sum[j]);
-                }
-            }, curSpeed * i);
+            handler.postDelayed(() -> imageView.setBackgroundResource(st_sum[j]), curSpeed * i);
         }
     }
 
