@@ -68,7 +68,7 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
 
-        ContestSet();
+        contestSet();
     }
 
     @Override
@@ -76,13 +76,13 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
         int id = v.getId();
         if (id == R.id.ins_sort) {
             handler.removeCallbacksAndMessages(null);
-            ContestSet();
+            contestSet();
             insertion_sort();
         } else if (id == R.id.generate) {
             handler.removeCallbacksAndMessages(null);
             for (int i = 0; i < numbers.length; ++i)
                 numbers[i] = random.nextInt() % 10;
-            ContestSet();
+            contestSet();
         } else if (id == R.id.btnSave) {
             if (edit_text.getText().toString().equals("3 4 2 1")) {
                 Util.saveText(this, '1', groupPosition + childPosition);
@@ -92,7 +92,7 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void ContestSet() {
+    public void contestSet() {
         for (int i = 0; i < numbers.length; ++i) {
             txt_num[i].setText(String.valueOf(numbers[i]));
             txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
