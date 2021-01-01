@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -13,12 +12,8 @@ import android.widget.EditText;
 import java.util.Random;
 
 public class QuickSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    Button q_sort;
-    Button generate;
-    Button btnSave;
-    EditText edit_text;
-    SeekBar SbDelay;
-    TextView TvDelay;
+    private EditText editText;
+    private TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
     private TextView[] txt_num;
@@ -67,19 +62,12 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
         TvDelay = findViewById(R.id.TvDelay);
         TvDelay.setText(R.string.sec);
 
-        SbDelay = findViewById(R.id.SbDelay);
-        SbDelay.setOnSeekBarChangeListener(this);
+        ((SeekBar) findViewById(R.id.SbDelay)).setOnSeekBarChangeListener(this);
+        findViewById(R.id.q_sort).setOnClickListener(this);
+        findViewById(R.id.generate).setOnClickListener(this);
+        findViewById(R.id.btnSave).setOnClickListener(this);
 
-        q_sort = findViewById(R.id.q_sort);
-        q_sort.setOnClickListener(this);
-
-        generate = findViewById(R.id.generate);
-        generate.setOnClickListener(this);
-
-        edit_text = findViewById(R.id.edit_text);
-
-        btnSave = findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(this);
+        editText = findViewById(R.id.edit_text);
 
         contestSet();
     }
@@ -97,7 +85,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
                 numbers[i] = random.nextInt() % 10;
             contestSet();
         } else if (id == R.id.btnSave) {
-            if (edit_text.getText().toString().equals("1 3 2 4")) {
+            if (editText.getText().toString().equals("1 3 2 4")) {
                 Util.saveText(this, '1', groupPosition + childPosition);
             } else {
                 Util.saveText(this, '0', groupPosition + childPosition);

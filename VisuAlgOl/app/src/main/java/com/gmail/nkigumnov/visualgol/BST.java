@@ -5,18 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Handler;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class BST extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    TextView Bst;
-    ImageView imageView;
-    Button bst;
-    Button bst2;
-    SeekBar SbDelay;
-    TextView TvDelay;
+    private ImageView imageView;
+    private TextView TvDelay;
     private int curSpeed = Constants.SPEED;
     private final Handler handler = new Handler();
 
@@ -32,16 +27,9 @@ public class BST extends AppCompatActivity implements View.OnClickListener, Seek
         TvDelay = findViewById(R.id.TvDelay);
         TvDelay.setText(R.string.sec);
 
-        SbDelay = findViewById(R.id.SbDelay);
-        SbDelay.setOnSeekBarChangeListener(this);
-
-        Bst = findViewById(R.id.Bst);
-
-        bst = findViewById(R.id.bst);
-        bst.setOnClickListener(this);
-
-        bst2 = findViewById(R.id.bst2);
-        bst2.setOnClickListener(this);
+        ((SeekBar) findViewById(R.id.SbDelay)).setOnSeekBarChangeListener(this);
+        findViewById(R.id.bst).setOnClickListener(this);
+        findViewById(R.id.bst2).setOnClickListener(this);
 
         contestSet();
     }

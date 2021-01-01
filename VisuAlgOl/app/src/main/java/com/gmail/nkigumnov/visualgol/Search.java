@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Handler;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -15,20 +14,16 @@ import java.util.Random;
 import static java.lang.Math.abs;
 
 public class Search extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    TextView title;
-    TextView Search;
-    TextView task;
-    Button search;
-    Button generate;
-    Button btnSave;
-    EditText edit_text;
-    SeekBar SbDelay;
-    TextView TvDelay;
+    private TextView title;
+    private TextView Search;
+    private TextView task;
+    private EditText editText;
+    private TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
     private TextView[] txt_num;
     private TextView txt_num_find;
-    final Random random = new Random();
+    private final Random random = new Random();
     private final int[] numbers = new int[8];
     private final int[] numbers_2 = {1, 2, 3, 4, 5, 6, 7, 8};
     private int WhatToFind;
@@ -63,8 +58,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
         TvDelay = findViewById(R.id.TvDelay);
         TvDelay.setText(R.string.sec);
 
-        SbDelay = findViewById(R.id.SbDelay);
-        SbDelay.setOnSeekBarChangeListener(this);
+        ((SeekBar) findViewById(R.id.SbDelay)).setOnSeekBarChangeListener(this);
 
         Search = findViewById(R.id.Search);
 
@@ -77,16 +71,11 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
         else
             WhatToFind = numbers_2[abs(random.nextInt()) % numbers_2.length];
 
-        search = findViewById(R.id.search);
-        search.setOnClickListener(this);
+        findViewById(R.id.search).setOnClickListener(this);
+        findViewById(R.id.generate).setOnClickListener(this);
+        findViewById(R.id.btnSave).setOnClickListener(this);
 
-        generate = findViewById(R.id.generate);
-        generate.setOnClickListener(this);
-
-        edit_text = findViewById(R.id.edit_text);
-
-        btnSave = findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(this);
+        editText = findViewById(R.id.edit_text);
 
         contestSet();
     }
@@ -98,9 +87,9 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
             handler.removeCallbacksAndMessages(null);
             contestSet();
             if (childPosition == 0)
-                linear_search();
+                linearSearch();
             else
-                binary_search();
+                binarySearch();
         } else if (id == R.id.generate) {
             handler.removeCallbacksAndMessages(null);
             for (int i = 0; i < numbers.length; ++i)
@@ -111,9 +100,9 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
                 WhatToFind = numbers_2[abs(random.nextInt()) % numbers_2.length];
             contestSet();
         } else if (id == R.id.btnSave) {
-            if (childPosition == 0 && edit_text.getText().toString().equals("5")) {
+            if (childPosition == 0 && editText.getText().toString().equals("5")) {
                 Util.saveText(this, '1', groupPosition + childPosition);
-            } else if (childPosition == 1 && edit_text.getText().toString().equals("4")) {
+            } else if (childPosition == 1 && editText.getText().toString().equals("4")) {
                 Util.saveText(this, '1', groupPosition + childPosition);
             } else {
                 Util.saveText(this, '0', groupPosition + childPosition);
@@ -144,11 +133,11 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
         txt_num_find.setBackgroundResource(R.drawable.rectangle_search_1);
     }
 
-    public void linear_search() {
-        animation_lin();
+    public void linearSearch() {
+        animationLinear();
     }
 
-    public void animation_lin() {
+    public void animationLinear() {
         for (int i = 0; i < numbers.length; ++i) {
             final int x = i;
             handler.postDelayed(() -> {
@@ -167,11 +156,11 @@ public class Search extends AppCompatActivity implements View.OnClickListener, S
         }
     }
 
-    public void binary_search() {
-        animation_bin();
+    public void binarySearch() {
+        animationBinary();
     }
 
-    public void animation_bin() {
+    public void animationBinary() {
         long current = 1;
         int l = -1, r = numbers_2.length, mid;
         while (l < r - 1) {

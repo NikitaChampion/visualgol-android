@@ -1,7 +1,5 @@
 package com.gmail.nkigumnov.visualgol;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.HashMap;
 import java.util.List;
 

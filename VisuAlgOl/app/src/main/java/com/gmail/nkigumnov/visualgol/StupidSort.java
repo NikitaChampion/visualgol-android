@@ -83,7 +83,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     private void contestSet() {
         for (int i = 0; i < numbers.length; ++i) {
             txt_num[i].setText(String.valueOf(numbers[i]));
-            txt_num[i].setBackgroundResource(R.drawable.rectangle_blue);
+            txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
             numbers_2[i] = numbers[i];
         }
     }

@@ -12,15 +12,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class Graph extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    TextView title;
-    TextView Graph;
-    TextView task;
-    ImageView imageView;
-    Button graphs;
-    Button btnSave;
-    EditText edit_text;
-    SeekBar SbDelay;
-    TextView TvDelay;
+    private TextView title;
+    private TextView Graph;
+    private TextView task;
+    private ImageView imageView;
+    private Button graphs;
+    private EditText editText;
+    private TextView TvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
     private final Handler handler = new Handler();
@@ -45,8 +43,8 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
         TvDelay = findViewById(R.id.TvDelay);
         TvDelay.setText(R.string.sec);
 
-        SbDelay = findViewById(R.id.SbDelay);
-        SbDelay.setOnSeekBarChangeListener(this);
+        ((SeekBar) findViewById(R.id.SbDelay)).setOnSeekBarChangeListener(this);
+        findViewById(R.id.btnSave).setOnClickListener(this);
 
         Graph = findViewById(R.id.Graph);
 
@@ -55,10 +53,7 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
         graphs = findViewById(R.id.graphs);
         graphs.setOnClickListener(this);
 
-        edit_text = findViewById(R.id.edit_text);
-
-        btnSave = findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(this);
+        editText = findViewById(R.id.edit_text);
 
         contestSet();
     }
@@ -71,14 +66,13 @@ public class Graph extends AppCompatActivity implements View.OnClickListener, Se
             contestSet();
             if (childPosition == 0) {
                 dfs();
-            }
-            else {
+            } else {
                 bfs();
             }
         } else if (id == R.id.btnSave) {
-            if (childPosition == 0 && edit_text.getText().toString().equals("4")) {
+            if (childPosition == 0 && editText.getText().toString().equals("4")) {
                 Util.saveText(this, '1', groupPosition + childPosition);
-            } else if (childPosition == 1 && edit_text.getText().toString().equals("9")) {
+            } else if (childPosition == 1 && editText.getText().toString().equals("9")) {
                 Util.saveText(this, '1', groupPosition + childPosition);
             } else {
                 Util.saveText(this, '0', groupPosition + childPosition);
