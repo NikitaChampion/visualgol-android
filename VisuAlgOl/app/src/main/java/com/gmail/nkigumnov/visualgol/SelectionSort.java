@@ -9,6 +9,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
 
+import com.gmail.nkigumnov.visualgol.util.Constants;
+import com.gmail.nkigumnov.visualgol.util.Util;
+
 import java.util.Random;
 
 public class SelectionSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {

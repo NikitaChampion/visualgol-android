@@ -9,6 +9,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
 
+import com.gmail.nkigumnov.visualgol.util.Constants;
+import com.gmail.nkigumnov.visualgol.util.Util;
+
 import java.util.Random;
 
 public class BubbleSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
@@ -17,7 +20,7 @@ public class BubbleSort extends AppCompatActivity implements View.OnClickListene
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
     private TextView[] txt_num;
-    final Random random = new Random();
+    private final Random random = new Random();
     private final int[] numbers = new int[8];
     private final int[] numbers_2 = new int[8];
     private final Handler handler = new Handler();

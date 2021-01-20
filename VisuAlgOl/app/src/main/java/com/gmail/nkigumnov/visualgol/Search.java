@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.gmail.nkigumnov.visualgol.util.Constants;
+import com.gmail.nkigumnov.visualgol.util.Util;
+
 import java.util.Random;
 
 import static java.lang.Math.abs;

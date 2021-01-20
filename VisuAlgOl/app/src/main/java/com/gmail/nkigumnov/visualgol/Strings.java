@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.gmail.nkigumnov.visualgol.util.Constants;
+import com.gmail.nkigumnov.visualgol.util.Util;
+
 public class Strings extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private TextView title;
     private TextView Strings;

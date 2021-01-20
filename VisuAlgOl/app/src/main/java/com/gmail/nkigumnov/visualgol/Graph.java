@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.gmail.nkigumnov.visualgol.util.Constants;
+import com.gmail.nkigumnov.visualgol.util.Util;
+
 public class Graph extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private TextView title;
     private TextView Graph;

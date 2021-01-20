@@ -1,26 +1,28 @@
 package com.gmail.nkigumnov.visualgol;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.gmail.nkigumnov.visualgol.algorithms.sorting.Stupid;
+import com.gmail.nkigumnov.visualgol.util.Constants;
+import com.gmail.nkigumnov.visualgol.util.Util;
+
 import java.util.Random;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class StupidSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private EditText editText;
     private TextView tvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
-    private TextView[] txt_num;
+    private final int[] array = new int[7];
+    private final TextView[] txtNum = new TextView[7];
+    private Stupid stSort;
     private final Random random = new Random();
-    private final int[] numbers = new int[7];
-    private final int[] numbers_2 = new int[7];
-    private final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +35,13 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
             groupPosition = arguments.getInt("num_2", 0);
         }
 
-        txt_num = new TextView[7];
-        txt_num[0] = findViewById(R.id.txt_num1);
-        txt_num[1] = findViewById(R.id.txt_num2);
-        txt_num[2] = findViewById(R.id.txt_num3);
-        txt_num[3] = findViewById(R.id.txt_num4);
-        txt_num[4] = findViewById(R.id.txt_num5);
-        txt_num[5] = findViewById(R.id.txt_num6);
-        txt_num[6] = findViewById(R.id.txt_num7);
-
-        for (int i = 0; i < numbers.length; ++i) {
-            numbers[i] = random.nextInt() % 10;
-        }
+        txtNum[0] = findViewById(R.id.txt_num1);
+        txtNum[1] = findViewById(R.id.txt_num2);
+        txtNum[2] = findViewById(R.id.txt_num3);
+        txtNum[3] = findViewById(R.id.txt_num4);
+        txtNum[4] = findViewById(R.id.txt_num5);
+        txtNum[5] = findViewById(R.id.txt_num6);
+        txtNum[6] = findViewById(R.id.txt_num7);
 
         tvDelay = findViewById(R.id.TvDelay);
         tvDelay.setText(R.string.sec);
@@ -56,79 +53,66 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
 
         editText = findViewById(R.id.edit_text);
 
-        contestSet();
+        generate();
+        stSort = new Stupid(this, array, txtNum, curSpeed);
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.st_sort) {
-            handler.removeCallbacksAndMessages(null);
-            contestSet();
-            stupidSort();
+            stSort.interrupt();
+            update();
+            stSort = new Stupid(this, array, txtNum, curSpeed);
+            stSort.start();
         } else if (id == R.id.generate) {
-            handler.removeCallbacksAndMessages(null);
-            for (int i = 0; i < numbers.length; ++i)
-                numbers[i] = random.nextInt() % 10;
-            contestSet();
+            stSort.interrupt();
+            update();
+            generate();
         } else if (id == R.id.btnSave) {
-            if (editText.getText().toString().equals("1 2 3")) {
-                Util.saveText(this, '1', groupPosition + childPosition);
-            } else {
-                Util.saveText(this, '0', groupPosition + childPosition);
+            Util.saveText(this, ((editText.getText().toString().equals("1 2 3")) ? '1' : '0'),
+                    groupPosition + childPosition);
+        }
+    }
+
+    private void generate() {
+        for (int i = 0; i < array.length; ++i) {
+            array[i] = random.nextInt() % 10;
+        }
+        update();
+    }
+
+    private void update() {
+        runOnUiThread(() -> {
+            for (int i = 0; i < array.length; ++i) {
+                txtNum[i].setText(String.valueOf(array[i]));
+                txtNum[i].setBackgroundResource(R.drawable.rectangle_gray);
             }
-        }
+        });
     }
 
-    private void contestSet() {
-        for (int i = 0; i < numbers.length; ++i) {
-            txt_num[i].setText(String.valueOf(numbers[i]));
-            txt_num[i].setBackgroundResource(R.drawable.rectangle_gray);
-            numbers_2[i] = numbers[i];
-        }
-    }
-
-    private void stupidSort() {
-        animationStupid();
-    }
-
-    private void animationStupid() {
-        long current = 1;
-        for (int i = 1; i < numbers.length; ++i) {
-            final int x = i;
-            handler.postDelayed(() -> {
-                txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_orange);
-                txt_num[x].setBackgroundResource(R.drawable.rectangle_orange);
-            }, curSpeed * current);
-            ++current;
-            if (numbers_2[i - 1] > numbers_2[i]) {
-                int temp = numbers_2[i - 1];
-                numbers_2[i - 1] = numbers_2[i];
-                numbers_2[i] = temp;
-                i = 0;
-
-                handler.postDelayed(() -> {
-                    txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_red);
-                    txt_num[x].setBackgroundResource(R.drawable.rectangle_red);
-                }, curSpeed * current);
-                ++current;
-                //Swap
-                handler.postDelayed(() -> {
-                    String temp1 = txt_num[x - 1].getText().toString();
-                    txt_num[x - 1].setText(txt_num[x].getText().toString());
-                    txt_num[x].setText(temp1);
-                }, curSpeed * current);
-                ++current;
+    public void setColor(final int[] indices, final int color) {
+        runOnUiThread(() -> {
+            for (int index : indices) {
+                txtNum[index].setBackgroundResource(color);
+                txtNum[index].invalidate();
+                txtNum[index].requestLayout();
+                txtNum[index].refreshDrawableState();
+                txtNum[index].forceLayout();
             }
-            handler.postDelayed(() -> {
-                txt_num[x - 1].setBackgroundResource(R.drawable.rectangle_gray);
-                txt_num[x].setBackgroundResource(R.drawable.rectangle_gray);
-            }, curSpeed * current);
-        }
-        handler.postDelayed(() -> {
-            for (int i = 0; i < numbers.length; ++i)
-                txt_num[i].setBackgroundResource(R.drawable.rectangle_dark);
-        }, curSpeed * current);
+        });
+    }
+
+    public void setText(final int[] indices, final String[] text) {
+        runOnUiThread(() -> {
+            for (int i = 0; i < indices.length; ++i) {
+                txtNum[indices[i]].setText(text[i]);
+                txtNum[indices[i]].invalidate();
+                txtNum[indices[i]].requestLayout();
+                txtNum[indices[i]].refreshDrawableState();
+                txtNum[indices[i]].forceLayout();
+            }
+        });
     }
 
     @Override
@@ -140,11 +124,9 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-
     }
 }

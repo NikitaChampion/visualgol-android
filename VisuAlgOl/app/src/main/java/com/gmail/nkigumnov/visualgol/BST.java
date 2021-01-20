@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.gmail.nkigumnov.visualgol.util.Constants;
+
 public class BST extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private ImageView imageView;
     private TextView TvDelay;
