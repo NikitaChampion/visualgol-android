@@ -45,13 +45,13 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         txtNum[6] = findViewById(R.id.txt_num7);
         txtNum[7] = findViewById(R.id.txt_num8);
 
-        tvDelay = findViewById(R.id.TvDelay);
+        tvDelay = findViewById(R.id.tv_delay);
         tvDelay.setText(R.string.sec);
 
-        ((SeekBar) findViewById(R.id.SbDelay)).setOnSeekBarChangeListener(this);
-        findViewById(R.id.sel_sort).setOnClickListener(this);
+        ((SeekBar) findViewById(R.id.sb_delay)).setOnSeekBarChangeListener(this);
+        findViewById(R.id.sort).setOnClickListener(this);
         findViewById(R.id.generate).setOnClickListener(this);
-        findViewById(R.id.btnSave).setOnClickListener(this);
+        findViewById(R.id.btn_save).setOnClickListener(this);
 
         editText = findViewById(R.id.edit_text);
 
@@ -62,7 +62,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.sel_sort) {
+        if (id == R.id.sort) {
             selSort.interrupt();
             update();
             selSort = new Selection(this, array, curSpeed);
@@ -71,7 +71,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
             selSort.interrupt();
             update();
             generate();
-        } else if (id == R.id.btnSave) {
+        } else if (id == R.id.btn_save) {
             Util.saveText(this, ((editText.getText().toString().equals("1 2 4 3")) ? '1' : '0'),
                     groupPosition + childPosition);
         }

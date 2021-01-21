@@ -44,13 +44,13 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         txtNum[5] = findViewById(R.id.txt_num6);
         txtNum[6] = findViewById(R.id.txt_num7);
 
-        tvDelay = findViewById(R.id.TvDelay);
+        tvDelay = findViewById(R.id.tv_delay);
         tvDelay.setText(R.string.sec);
 
-        ((SeekBar) findViewById(R.id.SbDelay)).setOnSeekBarChangeListener(this);
-        findViewById(R.id.st_sort).setOnClickListener(this);
+        ((SeekBar) findViewById(R.id.sb_delay)).setOnSeekBarChangeListener(this);
+        findViewById(R.id.sort).setOnClickListener(this);
         findViewById(R.id.generate).setOnClickListener(this);
-        findViewById(R.id.btnSave).setOnClickListener(this);
+        findViewById(R.id.btn_save).setOnClickListener(this);
 
         editText = findViewById(R.id.edit_text);
 
@@ -61,7 +61,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.st_sort) {
+        if (id == R.id.sort) {
             stSort.interrupt();
             update();
             stSort = new Stupid(this, array, curSpeed);
@@ -70,7 +70,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
             stSort.interrupt();
             update();
             generate();
-        } else if (id == R.id.btnSave) {
+        } else if (id == R.id.btn_save) {
             Util.saveText(this, ((editText.getText().toString().equals("1 2 3")) ? '1' : '0'),
                     groupPosition + childPosition);
         }

@@ -23,7 +23,7 @@
                 android:gravity="center"
                 android:text="@string/insertion_sort"
                 android:textColor="?android:attr/colorForeground"
-                android:textSize="21sp"
+                android:textSize="22sp"
                 app:fontFamily="@font/rubik_italic" />
 
             <LinearLayout
@@ -116,7 +116,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/TvDelay"
+                android:id="@+id/tv_delay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -125,7 +125,7 @@
                 android:textSize="19sp" />
 
             <SeekBar
-                android:id="@+id/SbDelay"
+                android:id="@+id/sb_delay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -141,13 +141,12 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/ins_sort"
+                    android:id="@+id/sort"
                     style="@android:style/Widget.Holo.Light.Button.Toggle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
                     android:layout_weight="1.40"
                     android:background="@drawable/button_shape"
                     android:gravity="center"
@@ -162,9 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_weight="1.75"
                     android:background="@drawable/button_shape"
                     android:gravity="center"
@@ -175,7 +172,6 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/SortIns"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -187,7 +183,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/Task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -199,7 +194,6 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -220,7 +214,7 @@
                 android:inputType="textPersonName" />
 
             <Button
-                android:id="@+id/btnSave"
+                android:id="@+id/btn_save"
                 style="@android:style/Widget.Holo.Light.Button.Toggle"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
