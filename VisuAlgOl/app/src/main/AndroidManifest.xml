@@ -22,15 +22,15 @@
             android:name=".activities.AlgorithmsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".StupidSort"
+            android:name=".activities.StupidSort"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".BubbleSort"
+            android:name=".activities.BubbleSort"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".SelectionSort"
+            android:name=".activities.SelectionSort"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity

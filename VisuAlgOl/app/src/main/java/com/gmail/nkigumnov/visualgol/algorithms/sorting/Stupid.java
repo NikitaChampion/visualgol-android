@@ -1,21 +1,18 @@
 package com.gmail.nkigumnov.visualgol.algorithms.sorting;
 
 import android.app.Activity;
-import android.widget.TextView;
 
 import com.gmail.nkigumnov.visualgol.R;
-import com.gmail.nkigumnov.visualgol.StupidSort;
+import com.gmail.nkigumnov.visualgol.activities.StupidSort;
 
 public class Stupid extends Thread {
     private final Activity activity;
-    private final TextView[] txtNum;
     private final int[] array;
     private final int speed;
 
-    public Stupid(Activity activity, int[] array, TextView[] txtNum, int speed) {
+    public Stupid(Activity activity, int[] array, int speed) {
         this.activity = activity;
         this.array = array.clone();
-        this.txtNum = txtNum;
         this.speed = speed;
     }
 
@@ -42,7 +39,7 @@ public class Stupid extends Thread {
 
                 Thread.sleep(speed);
                 ((StupidSort) activity).setText(new int[]{i - 1, i},
-                        new String[]{txtNum[i].getText().toString(), txtNum[i - 1].getText().toString()});
+                        new String[]{Integer.toString(array[i - 1]), Integer.toString(array[i])});
 
                 Thread.sleep(speed);
                 ((StupidSort) activity).setColor(new int[]{i - 1, i}, R.drawable.rectangle_gray);

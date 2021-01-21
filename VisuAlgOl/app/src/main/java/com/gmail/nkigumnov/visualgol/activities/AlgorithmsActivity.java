@@ -14,7 +14,6 @@ import android.widget.ExpandableListView;
 import com.gmail.nkigumnov.visualgol.R;
 
 import com.gmail.nkigumnov.visualgol.BST;
-import com.gmail.nkigumnov.visualgol.BubbleSort;
 import com.gmail.nkigumnov.visualgol.CountingSort;
 import com.gmail.nkigumnov.visualgol.Graph;
 import com.gmail.nkigumnov.visualgol.InsertionSort;
@@ -22,9 +21,7 @@ import com.gmail.nkigumnov.visualgol.MergeSort;
 import com.gmail.nkigumnov.visualgol.QuickSort;
 import com.gmail.nkigumnov.visualgol.Search;
 import com.gmail.nkigumnov.visualgol.SegmentTree;
-import com.gmail.nkigumnov.visualgol.SelectionSort;
 import com.gmail.nkigumnov.visualgol.Strings;
-import com.gmail.nkigumnov.visualgol.StupidSort;
 
 import com.gmail.nkigumnov.visualgol.util.Util;
 import com.gmail.nkigumnov.visualgol.util.ExpandableListAdapter;

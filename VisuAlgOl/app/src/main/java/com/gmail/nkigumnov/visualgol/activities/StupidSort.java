@@ -1,4 +1,4 @@
-package com.gmail.nkigumnov.visualgol;
+package com.gmail.nkigumnov.visualgol.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.algorithms.sorting.Stupid;
 import com.gmail.nkigumnov.visualgol.util.Constants;
 import com.gmail.nkigumnov.visualgol.util.Util;
@@ -54,7 +55,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         editText = findViewById(R.id.edit_text);
 
         generate();
-        stSort = new Stupid(this, array, txtNum, curSpeed);
+        stSort = new Stupid(this, array, curSpeed);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         if (id == R.id.st_sort) {
             stSort.interrupt();
             update();
-            stSort = new Stupid(this, array, txtNum, curSpeed);
+            stSort = new Stupid(this, array, curSpeed);
             stSort.start();
         } else if (id == R.id.generate) {
             stSort.interrupt();

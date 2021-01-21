@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.gmail.nkigumnov.visualgol.R;
-import com.gmail.nkigumnov.visualgol.activities.AlgorithmsActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
