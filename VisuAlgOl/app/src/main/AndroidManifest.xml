@@ -34,7 +34,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".InsertionSort"
+            android:name=".activities.InsertionSort"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
