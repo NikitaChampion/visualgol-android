@@ -58,7 +58,7 @@ public class Selection extends Thread {
         }
     }
 }
-// TODO: slider с 0,... (на 0 не успевает) ([0,01, 3]) (++)
+// slider с 0,... (на 0 не успевает) ([0,01, 3]) (++)
 // TODO: Thread.sleep(time) -> sleep() + обработать interrupt между sleep (++)
 // TODO: interrupt потока вынести в отдельный метод (++)
 // TODO: переход на таймер вместо отдельного потока (++++)
@@ -69,4 +69,6 @@ public class Selection extends Thread {
 // TODO: Search (++)
 // TODO: Другие алгоритмы
 // TODO: поменять layout-ы (++)
-// TODO: Добавить нормальное описание
+// TODO: Добавить нормальное описание (+++)
+// TODO: Counting сделать дополнительно устойчивой
+// TODO: Radix сделать

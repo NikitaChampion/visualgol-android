@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CountingSort">
+    tools:context=".activities.CountingSort">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,7 +16,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -123,7 +122,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/num1"
+                    android:id="@+id/number1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_2_gray"
@@ -133,7 +132,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/num2"
+                    android:id="@+id/number2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_2_gray"
@@ -143,7 +142,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/num3"
+                    android:id="@+id/number3"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_2_gray"
@@ -153,7 +152,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/num4"
+                    android:id="@+id/number4"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_2_gray"
@@ -163,7 +162,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/num5"
+                    android:id="@+id/number5"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_2_gray"
@@ -173,7 +172,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/num6"
+                    android:id="@+id/number6"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_2_gray"
@@ -183,7 +182,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/num7"
+                    android:id="@+id/number7"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_2_gray"
@@ -197,12 +196,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="1dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/ind1"
+                    android:id="@+id/amount1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_white"
@@ -212,7 +211,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/ind2"
+                    android:id="@+id/amount2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_white"
@@ -222,7 +221,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/ind3"
+                    android:id="@+id/amount3"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_white"
@@ -232,7 +231,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/ind4"
+                    android:id="@+id/amount4"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_white"
@@ -242,7 +241,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/ind5"
+                    android:id="@+id/amount5"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_white"
@@ -252,7 +251,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/ind6"
+                    android:id="@+id/amount6"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_white"
@@ -262,7 +261,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/ind7"
+                    android:id="@+id/amount7"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/rectangle_white"
@@ -274,7 +273,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/TvDelay"
+                android:id="@+id/tv_delay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -283,7 +282,7 @@
                 android:textSize="19sp" />
 
             <SeekBar
-                android:id="@+id/SbDelay"
+                android:id="@+id/sb_delay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -299,13 +298,12 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/cou_sort"
+                    android:id="@+id/sort"
                     style="@android:style/Widget.Holo.Light.Button.Toggle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
                     android:layout_weight="1.40"
                     android:background="@drawable/button_shape"
                     android:gravity="center"
@@ -320,9 +318,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_weight="1.75"
                     android:background="@drawable/button_shape"
                     android:gravity="center"
@@ -333,7 +329,6 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/SortCou"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -345,7 +340,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/Task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -357,7 +351,6 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -378,7 +371,7 @@
                 android:inputType="textPersonName" />
 
             <Button
-                android:id="@+id/btnSave"
+                android:id="@+id/btn_save"
                 style="@android:style/Widget.Holo.Light.Button.Toggle"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
