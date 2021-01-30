@@ -65,7 +65,6 @@ public class Selection extends Thread {
 // TODO: Binary insertion (++)
 // TODO: Merge (++)
 // TODO: Quick (++)
-// TODO: Counting (++)
 // TODO: Search (++)
 // TODO: Другие алгоритмы
 // TODO: поменять layout-ы (++)

@@ -14,6 +14,7 @@
     <string name="merge_sort">Сортировка слиянием</string>
     <string name="quick_sort">Быстрая сортировка</string>
     <string name="counting_sort">Сортировка подсчётом</string>
+    <string name="radix_sort">Поразрядная сортировка</string>
 
     <string name="search">Поиск</string>
     <string name="lin_search">Линейный поиск</string>

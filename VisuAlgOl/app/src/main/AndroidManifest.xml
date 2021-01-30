@@ -50,6 +50,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".activities.RadixSort"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".Search"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />

@@ -79,6 +79,9 @@ public class AlgorithmsActivity extends AppCompatActivity {
                     case 6:
                         intent = new Intent(this, CountingSort.class);
                         break;
+                    case 7:
+                        intent = new Intent(this, RadixSort.class);
+                        break;
                     default:
                         intent = new Intent(this, StupidSort.class);
                         break;
@@ -127,6 +130,7 @@ public class AlgorithmsActivity extends AppCompatActivity {
         SortArray.add(getString(R.string.merge_sort));
         SortArray.add(getString(R.string.quick_sort));
         SortArray.add(getString(R.string.counting_sort));
+        SortArray.add(getString(R.string.radix_sort));
 
         List<String> SearchArray = new ArrayList<>();
         SearchArray.add(getString(R.string.lin_search));
