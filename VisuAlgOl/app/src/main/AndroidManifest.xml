@@ -38,7 +38,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".MergeSort"
+            android:name=".activities.MergeSort"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity

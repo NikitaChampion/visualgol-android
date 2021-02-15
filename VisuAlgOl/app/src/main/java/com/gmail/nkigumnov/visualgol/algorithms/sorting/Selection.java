@@ -63,7 +63,8 @@ public class Selection extends Thread {
 // TODO: interrupt потока вынести в отдельный метод (++)
 // TODO: переход на таймер вместо отдельного потока (+++++)
 // TODO: Binary insertion (++)
-// TODO: Merge (++)
+// TODO: Heap sort (++)
+// Merge (++)
 // Quick (++)
 // TODO: Search (++)
 // TODO: Другие алгоритмы

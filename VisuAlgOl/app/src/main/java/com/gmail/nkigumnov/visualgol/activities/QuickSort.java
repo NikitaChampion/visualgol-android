@@ -89,7 +89,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
 
     private void update() {
         runOnUiThread(() -> {
-            setPivotText(" ");
+            setPivotText("");
             setPivotColor(R.drawable.rectangle_white);
             for (int i = 0; i < array.length; ++i) {
                 txtNum[i].setText(String.valueOf(array[i]));

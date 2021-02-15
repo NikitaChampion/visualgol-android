@@ -22,7 +22,7 @@
                 android:gravity="center"
                 android:text="@string/quick_sort"
                 android:textColor="?android:attr/colorForeground"
-                android:textSize="21sp"
+                android:textSize="22sp"
                 app:fontFamily="@font/rubik_italic" />
 
             <LinearLayout
