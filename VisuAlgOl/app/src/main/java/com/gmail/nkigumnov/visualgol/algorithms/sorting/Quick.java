@@ -38,30 +38,36 @@ public class Quick extends Thread {
         while (l <= r) {
             Thread.sleep(speed);
             ((QuickSort) activity).setColor(new int[]{l}, R.drawable.rectangle_orange);
+            ((QuickSort) activity).setPivotColor(R.drawable.rectangle_orange);
             while (array[l] < pivot) {
                 Thread.sleep(speed);
                 ((QuickSort) activity).setColor(new int[]{l}, R.drawable.rectangle_gray);
+                ((QuickSort) activity).setPivotColor(R.drawable.rectangle_white);
                 ++l;
                 Thread.sleep(speed);
                 ((QuickSort) activity).setColor(new int[]{l}, R.drawable.rectangle_orange);
+                ((QuickSort) activity).setPivotColor(R.drawable.rectangle_orange);
             }
+            Thread.sleep(speed);
+            ((QuickSort) activity).setPivotColor(R.drawable.rectangle_white);
 
             Thread.sleep(speed);
             ((QuickSort) activity).setColor(new int[]{r}, R.drawable.rectangle_orange);
+            ((QuickSort) activity).setPivotColor(R.drawable.rectangle_orange);
             while (array[r] > pivot) {
                 Thread.sleep(speed);
                 ((QuickSort) activity).setColor(new int[]{r}, R.drawable.rectangle_gray);
+                ((QuickSort) activity).setPivotColor(R.drawable.rectangle_white);
                 --r;
                 Thread.sleep(speed);
                 ((QuickSort) activity).setColor(new int[]{r}, R.drawable.rectangle_orange);
+                ((QuickSort) activity).setPivotColor(R.drawable.rectangle_orange);
             }
+            Thread.sleep(speed);
+            ((QuickSort) activity).setPivotColor(R.drawable.rectangle_white);
             if (l >= r) {
-                if (l < array.length) {
-                    ((QuickSort) activity).setColor(new int[]{l}, R.drawable.rectangle_gray);
-                }
-                if (r >= 0) {
-                    ((QuickSort) activity).setColor(new int[]{r}, R.drawable.rectangle_gray);
-                }
+                Thread.sleep(speed);
+                ((QuickSort) activity).setColor(new int[]{l, r}, R.drawable.rectangle_gray);
                 return r;
             }
             int temp = array[l];

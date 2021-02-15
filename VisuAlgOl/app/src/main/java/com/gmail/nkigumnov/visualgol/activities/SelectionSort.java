@@ -97,10 +97,6 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         runOnUiThread(() -> {
             for (int index : indices) {
                 txtNum[index].setBackgroundResource(color);
-                txtNum[index].invalidate();
-                txtNum[index].requestLayout();
-                txtNum[index].refreshDrawableState();
-                txtNum[index].forceLayout();
             }
         });
     }
@@ -109,10 +105,6 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         runOnUiThread(() -> {
             for (int i = 0; i < indices.length; ++i) {
                 txtNum[indices[i]].setText(text[i]);
-                txtNum[indices[i]].invalidate();
-                txtNum[indices[i]].requestLayout();
-                txtNum[indices[i]].refreshDrawableState();
-                txtNum[indices[i]].forceLayout();
             }
         });
     }

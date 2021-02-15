@@ -121,10 +121,6 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
         runOnUiThread(() -> {
             for (int index : indices) {
                 txtNum[index].setBackgroundResource(color);
-                txtNum[index].invalidate();
-                txtNum[index].requestLayout();
-                txtNum[index].refreshDrawableState();
-                txtNum[index].forceLayout();
             }
         });
     }
@@ -133,10 +129,6 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
         runOnUiThread(() -> {
             for (int index : indices) {
                 number[index].setBackgroundResource(color);
-                number[index].invalidate();
-                number[index].requestLayout();
-                number[index].refreshDrawableState();
-                number[index].forceLayout();
             }
         });
     }
@@ -145,10 +137,6 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
         runOnUiThread(() -> {
             for (int i = 0; i < indices.length; ++i) {
                 txtNum[indices[i]].setText(text[i]);
-                txtNum[indices[i]].invalidate();
-                txtNum[indices[i]].requestLayout();
-                txtNum[indices[i]].refreshDrawableState();
-                txtNum[indices[i]].forceLayout();
             }
         });
     }
@@ -157,10 +145,6 @@ public class CountingSort extends AppCompatActivity implements View.OnClickListe
         runOnUiThread(() -> {
             for (int i = 0; i < indices.length; ++i) {
                 amount[indices[i]].setText(text[i]);
-                amount[indices[i]].invalidate();
-                amount[indices[i]].requestLayout();
-                amount[indices[i]].refreshDrawableState();
-                amount[indices[i]].forceLayout();
             }
         });
     }

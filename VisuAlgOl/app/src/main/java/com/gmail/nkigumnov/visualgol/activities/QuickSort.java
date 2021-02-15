@@ -89,7 +89,8 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
 
     private void update() {
         runOnUiThread(() -> {
-            pivot.setText(" ");
+            setPivotText(" ");
+            setPivotColor(R.drawable.rectangle_white);
             for (int i = 0; i < array.length; ++i) {
                 txtNum[i].setText(String.valueOf(array[i]));
                 txtNum[i].setBackgroundResource(R.drawable.rectangle_gray);
@@ -101,34 +102,24 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
         runOnUiThread(() -> {
             for (int index : indices) {
                 txtNum[index].setBackgroundResource(color);
-                txtNum[index].invalidate();
-                txtNum[index].requestLayout();
-                txtNum[index].refreshDrawableState();
-                txtNum[index].forceLayout();
             }
         });
+    }
+
+    public void setPivotColor(final int color) {
+        runOnUiThread(() -> pivot.setBackgroundResource(color));
     }
 
     public void setText(final int[] indices, final String[] text) {
         runOnUiThread(() -> {
             for (int i = 0; i < indices.length; ++i) {
                 txtNum[indices[i]].setText(text[i]);
-                txtNum[indices[i]].invalidate();
-                txtNum[indices[i]].requestLayout();
-                txtNum[indices[i]].refreshDrawableState();
-                txtNum[indices[i]].forceLayout();
             }
         });
     }
 
     public void setPivotText(final String text) {
-        runOnUiThread(() -> {
-            pivot.setText(text);
-            pivot.invalidate();
-            pivot.requestLayout();
-            pivot.refreshDrawableState();
-            pivot.forceLayout();
-        });
+        runOnUiThread(() -> pivot.setText(text));
     }
 
     @Override

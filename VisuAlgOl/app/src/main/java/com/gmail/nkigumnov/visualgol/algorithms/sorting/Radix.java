@@ -3,10 +3,7 @@ package com.gmail.nkigumnov.visualgol.algorithms.sorting;
 import android.app.Activity;
 
 import com.gmail.nkigumnov.visualgol.R;
-import com.gmail.nkigumnov.visualgol.activities.CountingSort;
 import com.gmail.nkigumnov.visualgol.activities.RadixSort;
-
-import java.util.Arrays;
 
 public class Radix extends Thread {
     private final Activity activity;
