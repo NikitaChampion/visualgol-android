@@ -68,6 +68,6 @@ public class Selection extends Thread {
 // TODO: Search (++)
 // TODO: Другие алгоритмы
 // TODO: поменять layout-ы (++)
-// TODO: Добавить нормальное описание (+++)
+// TODO: Добавить нормальное описание всех алгоритмов (+++++)
 // TODO: Counting сделать дополнительно устойчивой
-// TODO: Radix сделать
+// TODO: дизайн

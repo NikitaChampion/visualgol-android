@@ -16,7 +16,6 @@ import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.BST;
 import com.gmail.nkigumnov.visualgol.Graph;
 import com.gmail.nkigumnov.visualgol.MergeSort;
-import com.gmail.nkigumnov.visualgol.QuickSort;
 import com.gmail.nkigumnov.visualgol.Search;
 import com.gmail.nkigumnov.visualgol.SegmentTree;
 import com.gmail.nkigumnov.visualgol.Strings;

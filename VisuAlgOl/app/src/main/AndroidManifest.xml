@@ -42,7 +42,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".QuickSort"
+            android:name=".activities.QuickSort"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
