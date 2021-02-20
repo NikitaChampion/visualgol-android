@@ -1,57 +1,77 @@
 package com.gmail.nkigumnov.visualgol.algorithms.sorting;
 
 import android.app.Activity;
+import android.util.Pair;
 
 import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.activities.StupidSort;
 
-public class Stupid extends Thread {
-    private final Activity activity;
-    private final int[] array;
-    private final int speed;
+import java.util.TimerTask;
 
-    public Stupid(Activity activity, int[] array, int speed) {
+public class Stupid extends TimerTask {
+    private final Activity activity;
+    private final int[] mainArray;
+    public int timerCounter;
+
+    public Stupid(Activity activity, int[] array, int timerCounter) {
         this.activity = activity;
-        this.array = array.clone();
-        this.speed = speed;
+        mainArray = array.clone();
+        this.timerCounter = timerCounter;
     }
 
     @Override
     public void run() {
-        try {
-            sort();
-        } catch (InterruptedException ignored) {
-        }
+        Pair<int[], int[]> p = sort();
+        ((StupidSort) activity).setColor(p.first);
+        ((StupidSort) activity).setText(p.second);
+        ++timerCounter;
     }
 
-    private void sort() throws InterruptedException {
+    private Pair<int[], int[]> sort() {
+        int[] colors = new int[mainArray.length];
+        int[] array = mainArray.clone();
+        int currentTime = -1;
+        for (int i = 0; i < array.length; ++i) {
+            colors[i] = R.drawable.rectangle_gray;
+        }
+        if (currentTime++ == timerCounter) {
+            return new Pair<>(colors, array);
+        }
         for (int i = 1; i < array.length; ++i) {
-            Thread.sleep(speed);
-            ((StupidSort) activity).setColor(new int[]{i - 1, i}, R.drawable.rectangle_orange);
+            colors[i - 1] = colors[i] = R.drawable.rectangle_orange;
+            if (currentTime++ == timerCounter) {
+                return new Pair<>(colors, array);
+            }
 
             if (array[i - 1] > array[i]) {
+                colors[i - 1] = colors[i] = R.drawable.rectangle_red;
+                if (currentTime++ == timerCounter) {
+                    return new Pair<>(colors, array);
+                }
+
                 int temp = array[i - 1];
                 array[i - 1] = array[i];
                 array[i] = temp;
 
-                Thread.sleep(speed);
-                ((StupidSort) activity).setColor(new int[]{i - 1, i}, R.drawable.rectangle_red);
-
-                Thread.sleep(speed);
-                ((StupidSort) activity).setText(new int[]{i - 1, i},
-                        new String[]{Integer.toString(array[i - 1]), Integer.toString(array[i])});
-
-                Thread.sleep(speed);
-                ((StupidSort) activity).setColor(new int[]{i - 1, i}, R.drawable.rectangle_gray);
+                colors[i - 1] = colors[i] = R.drawable.rectangle_gray;
+                if (currentTime++ == timerCounter) {
+                    return new Pair<>(colors, array);
+                }
                 i = 0;
             } else {
-                Thread.sleep(speed);
-                ((StupidSort) activity).setColor(new int[]{i - 1, i}, R.drawable.rectangle_gray);
+                colors[i - 1] = colors[i] = R.drawable.rectangle_gray;
+                if (currentTime++ == timerCounter) {
+                    return new Pair<>(colors, array);
+                }
             }
         }
-        Thread.sleep(speed);
         for (int i = 0; i < array.length; ++i) {
-            ((StupidSort) activity).setColor(new int[]{i}, R.drawable.rectangle_dark);
+            colors[i] = R.drawable.rectangle_dark;
         }
+        if (currentTime == timerCounter) {
+            return new Pair<>(colors, array);
+        }
+        --timerCounter;
+        return new Pair<>(colors, array);
     }
 }

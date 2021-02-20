@@ -6,6 +6,7 @@
     <string name="choose">Choose an algorithm</string>
 
     <string name="sorting">Sorting algorithms</string>
+    <string name="sort">Sort</string>
     <string name="sort_intro">Sorting</string>
     <string name="stupid_sort">Stupid sort</string>
     <string name="bubble_sort">Bubble sort</string>

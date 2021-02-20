@@ -238,7 +238,7 @@
                     android:layout_weight="1.40"
                     android:background="@drawable/button_shape"
                     android:gravity="center"
-                    android:text="@string/run"
+                    android:text="@string/sort"
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
 

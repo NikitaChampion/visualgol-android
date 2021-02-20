@@ -14,6 +14,7 @@ import com.gmail.nkigumnov.visualgol.util.Constants;
 import com.gmail.nkigumnov.visualgol.util.Util;
 
 import java.util.Random;
+import java.util.Timer;
 
 public class SelectionSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private EditText editText;
@@ -22,8 +23,9 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     private int curSpeed = Constants.SPEED;
     private final int[] array = new int[8];
     private final TextView[] txtNum = new TextView[8];
-    private Selection selSort;
     private final Random random = new Random();
+    private Selection timerAction;
+    private Timer sort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,11 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         tvDelay = findViewById(R.id.tv_delay);
         tvDelay.setText(R.string.sec);
 
+        findViewById(R.id.previous).setOnClickListener(this);
+        findViewById(R.id.next).setOnClickListener(this);
+        findViewById(R.id.stop).setOnClickListener(this);
+        findViewById(R.id.continue_).setOnClickListener(this);
+
         ((SeekBar) findViewById(R.id.sb_delay)).setOnSeekBarChangeListener(this);
         findViewById(R.id.sort).setOnClickListener(this);
         findViewById(R.id.generate).setOnClickListener(this);
@@ -56,25 +63,64 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
         editText = findViewById(R.id.edit_text);
 
         generate();
-        selSort = new Selection(this, array, curSpeed);
+        sort = new Timer();
+        timerAction = new Selection(this, array, -1);
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.sort) {
-            selSort.interrupt();
+            sort.cancel();
             update();
-            selSort = new Selection(this, array, curSpeed);
-            selSort.start();
+            sort = new Timer();
+            timerAction = new Selection(this, array, -1);
+            sort.scheduleAtFixedRate(timerAction, 0, curSpeed);
         } else if (id == R.id.generate) {
-            selSort.interrupt();
-            update();
+            sort.cancel();
             generate();
+            timerAction = new Selection(this, array, -1);
+            sort = new Timer();
         } else if (id == R.id.btn_save) {
-            Util.saveText(this, ((editText.getText().toString().equals("1 2 4 3")) ? '1' : '0'),
+            Util.saveText(this, ((editText.getText().toString().equals("3")) ? '1' : '0'),
                     groupPosition + childPosition);
+        } else if (id == R.id.previous) {
+            previous();
+        } else if (id == R.id.next) {
+            next();
+        } else if (id == R.id.stop) {
+            stop();
+        } else if (id == R.id.continue_) {
+            continue_();
         }
+    }
+
+    private void previous() {
+        sort.cancel();
+        sort = new Timer();
+        if (timerAction.timerCounter <= 0) {
+            return;
+        }
+        timerAction.timerCounter -= 2;
+        timerAction.run();
+    }
+
+    private void next() {
+        sort.cancel();
+        sort = new Timer();
+        timerAction.run();
+    }
+
+    private void stop() {
+        sort.cancel();
+        sort = new Timer();
+    }
+
+    private void continue_() {
+        sort.cancel();
+        sort = new Timer();
+        timerAction = new Selection(this, array, timerAction.timerCounter);
+        sort.scheduleAtFixedRate(timerAction, 0, curSpeed);
     }
 
     private void generate() {
@@ -85,28 +131,22 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
     }
 
     private void update() {
-        runOnUiThread(() -> {
-            for (int i = 0; i < array.length; ++i) {
-                txtNum[i].setText(String.valueOf(array[i]));
-                txtNum[i].setBackgroundResource(R.drawable.rectangle_gray);
-            }
-        });
+        for (int i = 0; i < array.length; ++i) {
+            txtNum[i].setText(String.valueOf(array[i]));
+            txtNum[i].setBackgroundResource(R.drawable.rectangle_gray);
+        }
     }
 
-    public void setColor(final int[] indices, final int color) {
-        runOnUiThread(() -> {
-            for (int index : indices) {
-                txtNum[index].setBackgroundResource(color);
-            }
-        });
+    public void setColor(final int[] colors) {
+        for (int i = 0; i < array.length; ++i) {
+            txtNum[i].setBackgroundResource(colors[i]);
+        }
     }
 
-    public void setText(final int[] indices, final String[] text) {
-        runOnUiThread(() -> {
-            for (int i = 0; i < indices.length; ++i) {
-                txtNum[indices[i]].setText(text[i]);
-            }
-        });
+    public void setText(final int[] values) {
+        for (int i = 0; i < array.length; ++i) {
+            txtNum[i].setText(String.valueOf(values[i]));
+        }
     }
 
     @Override

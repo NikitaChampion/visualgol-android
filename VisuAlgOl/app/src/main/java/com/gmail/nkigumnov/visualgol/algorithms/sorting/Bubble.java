@@ -1,56 +1,79 @@
 package com.gmail.nkigumnov.visualgol.algorithms.sorting;
 
 import android.app.Activity;
+import android.util.Pair;
 
 import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.activities.BubbleSort;
 
-public class Bubble extends Thread {
-    private final Activity activity;
-    private final int[] array;
-    private final int speed;
+import java.util.TimerTask;
 
-    public Bubble(Activity activity, int[] array, int speed) {
+public class Bubble extends TimerTask {
+    private final Activity activity;
+    private final int[] mainArray;
+    public int timerCounter;
+
+    public Bubble(Activity activity, int[] array, int timerCounter) {
         this.activity = activity;
-        this.array = array.clone();
-        this.speed = speed;
+        mainArray = array.clone();
+        this.timerCounter = timerCounter;
     }
 
     @Override
     public void run() {
-        try {
-            sort();
-        } catch (InterruptedException ignored) {
-        }
+        Pair<int[], int[]> p = sort();
+        ((BubbleSort) activity).setColor(p.first);
+        ((BubbleSort) activity).setText(p.second);
+        ++timerCounter;
     }
 
-    private void sort() throws InterruptedException {
+    private Pair<int[], int[]> sort() {
+        int[] colors = new int[mainArray.length];
+        int[] array = mainArray.clone();
+        int currentTime = -1;
+        for (int i = 0; i < array.length; ++i) {
+            colors[i] = R.drawable.rectangle_gray;
+        }
+        if (currentTime++ == timerCounter) {
+            return new Pair<>(colors, array);
+        }
         for (int i = 0; i < array.length; ++i) {
             for (int j = 1; j < array.length - i; ++j) {
-                Thread.sleep(speed);
-                ((BubbleSort) activity).setColor(new int[]{j - 1, j}, R.drawable.rectangle_orange);
+                colors[j - 1] = colors[j] = R.drawable.rectangle_orange;
+                if (currentTime++ == timerCounter) {
+                    return new Pair<>(colors, array);
+                }
 
                 if (array[j - 1] > array[j]) {
+                    colors[j - 1] = colors[j] = R.drawable.rectangle_red;
+                    if (currentTime++ == timerCounter) {
+                        return new Pair<>(colors, array);
+                    }
+
                     int temp = array[j - 1];
                     array[j - 1] = array[j];
                     array[j] = temp;
 
-                    Thread.sleep(speed);
-                    ((BubbleSort) activity).setColor(new int[]{j - 1, j}, R.drawable.rectangle_red);
-
-                    Thread.sleep(speed);
-                    ((BubbleSort) activity).setText(new int[]{j - 1, j},
-                            new String[]{Integer.toString(array[j - 1]), Integer.toString(array[j])});
+                    if (currentTime++ == timerCounter) {
+                        return new Pair<>(colors, array);
+                    }
                 }
-                Thread.sleep(speed);
-                ((BubbleSort) activity).setColor(new int[]{j - 1, j}, R.drawable.rectangle_gray);
+                colors[j - 1] = colors[j] = R.drawable.rectangle_gray;
                 if (j == array.length - i - 1) {
-                    ((BubbleSort) activity).setColor(new int[]{j}, R.drawable.rectangle_dark);
+                    colors[j] = R.drawable.rectangle_dark;
+                }
+                if (currentTime++ == timerCounter) {
+                    return new Pair<>(colors, array);
                 }
             }
             if (i == array.length - 1) {
-                ((BubbleSort) activity).setColor(new int[]{0}, R.drawable.rectangle_dark);
+                colors[0] = R.drawable.rectangle_dark;
+                if (currentTime++ == timerCounter) {
+                    return new Pair<>(colors, array);
+                }
             }
         }
+        --timerCounter;
+        return new Pair<>(colors, array);
     }
 }

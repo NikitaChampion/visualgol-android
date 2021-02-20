@@ -6,6 +6,7 @@
     <string name="choose">Выберите алгоритм</string>
 
     <string name="sorting">Сортировки</string>
+    <string name="sort">Сортировать</string>
     <string name="sort_intro">Сортировка</string>
     <string name="stupid_sort">Глупая сортировка</string>
     <string name="bubble_sort">Сортировка пузырьком</string>
