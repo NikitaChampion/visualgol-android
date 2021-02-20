@@ -81,7 +81,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
             timerAction = new Stupid(this, array, -1);
             sort = new Timer();
         } else if (id == R.id.btn_save) {
-            Util.saveText(this, ((editText.getText().toString().equals("3")) ? '1' : '0'),
+            Util.saveText(this, ((editText.getText().toString().equals("1 2 3")) ? '1' : '0'),
                     groupPosition + childPosition);
         } else if (id == R.id.previous) {
             previous();

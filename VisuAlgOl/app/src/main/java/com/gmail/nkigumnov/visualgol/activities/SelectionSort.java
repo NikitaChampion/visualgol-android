@@ -82,7 +82,7 @@ public class SelectionSort extends AppCompatActivity implements View.OnClickList
             timerAction = new Selection(this, array, -1);
             sort = new Timer();
         } else if (id == R.id.btn_save) {
-            Util.saveText(this, ((editText.getText().toString().equals("3")) ? '1' : '0'),
+            Util.saveText(this, ((editText.getText().toString().equals("1 2 4 3")) ? '1' : '0'),
                     groupPosition + childPosition);
         } else if (id == R.id.previous) {
             previous();

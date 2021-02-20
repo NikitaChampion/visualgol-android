@@ -82,7 +82,7 @@ public class InsertionSort extends AppCompatActivity implements View.OnClickList
             timerAction = new Insertion(this, array, -1);
             sort = new Timer();
         } else if (id == R.id.btn_save) {
-            Util.saveText(this, ((editText.getText().toString().equals("3")) ? '1' : '0'),
+            Util.saveText(this, ((editText.getText().toString().equals("3 4 2 1")) ? '1' : '0'),
                     groupPosition + childPosition);
         } else if (id == R.id.previous) {
             previous();
