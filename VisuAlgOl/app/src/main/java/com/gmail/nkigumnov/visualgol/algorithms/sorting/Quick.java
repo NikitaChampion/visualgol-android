@@ -5,107 +5,174 @@ import android.app.Activity;
 import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.activities.QuickSort;
 
-public class Quick extends Thread {
-    private final Activity activity;
-    private final int[] array;
-    private final int speed;
+import java.util.TimerTask;
 
-    public Quick(Activity activity, int[] array, int speed) {
+public class Quick extends TimerTask {
+    private final Activity activity;
+    private final int[] mainArray;
+    private int[] array;
+    private int pivot;
+    private int[] colors;
+    private int time;
+    public int timerCounter;
+
+    public Quick(Activity activity, int[] array, int timerCounter) {
         this.activity = activity;
-        this.array = array.clone();
-        this.speed = speed;
+        mainArray = array.clone();
+        this.timerCounter = timerCounter;
     }
 
     @Override
     public void run() {
-        try {
-            sort(0, array.length - 1);
-        } catch (InterruptedException ignored) {
+        time = -1;
+        array = mainArray.clone();
+        colors = new int[mainArray.length + 1];
+        colors[mainArray.length] = R.drawable.rectangle_white;
+        for (int i = 0; i < array.length; ++i) {
+            colors[i] = R.drawable.rectangle_gray;
         }
+
+        sort();
+
+        String[] text = new String[mainArray.length + 1];
+        for (int i = 0; i < array.length; ++i) {
+            text[i] = String.valueOf(array[i]);
+        }
+        text[mainArray.length] = String.valueOf(pivot);
+
+        ((QuickSort) activity).setColor(colors);
+        ((QuickSort) activity).setText(text);
+        ++timerCounter;
     }
 
-    private int partition(int l, int r) throws InterruptedException {
-        Thread.sleep(speed);
-        ((QuickSort) activity).setColor(new int[]{(l + r) / 2}, R.drawable.rectangle_red);
+    private int partition(int l, int r) {
+        colors[(l + r) / 2] = R.drawable.rectangle_red;
+        if (time++ == timerCounter) {
+            return r;
+        }
 
         int pivot = array[(l + r) / 2];
-        Thread.sleep(speed);
-        ((QuickSort) activity).setPivotText(Integer.toString(pivot));
+        this.pivot = pivot;
+        if (time++ == timerCounter) {
+            return r;
+        }
 
-        Thread.sleep(speed);
-        ((QuickSort) activity).setColor(new int[]{(l + r) / 2}, R.drawable.rectangle_gray);
+        colors[(l + r) / 2] = R.drawable.rectangle_gray;
+        if (time++ == timerCounter) {
+            return r;
+        }
 
         while (l <= r) {
-            Thread.sleep(speed);
-            ((QuickSort) activity).setColor(new int[]{l}, R.drawable.rectangle_orange);
-            ((QuickSort) activity).setPivotColor(R.drawable.rectangle_orange);
+            colors[l] = R.drawable.rectangle_orange;
+            colors[mainArray.length] = R.drawable.rectangle_orange;
+            if (time++ == timerCounter) {
+                return r;
+            }
             while (array[l] < pivot) {
-                Thread.sleep(speed);
-                ((QuickSort) activity).setColor(new int[]{l}, R.drawable.rectangle_gray);
-                ((QuickSort) activity).setPivotColor(R.drawable.rectangle_white);
+                colors[l] = R.drawable.rectangle_gray;
+                colors[mainArray.length] = R.drawable.rectangle_white;
+                if (time++ == timerCounter) {
+                    return r;
+                }
                 ++l;
-                Thread.sleep(speed);
-                ((QuickSort) activity).setColor(new int[]{l}, R.drawable.rectangle_orange);
-                ((QuickSort) activity).setPivotColor(R.drawable.rectangle_orange);
+                colors[l] = R.drawable.rectangle_orange;
+                colors[mainArray.length] = R.drawable.rectangle_orange;
+                if (time++ == timerCounter) {
+                    return r;
+                }
             }
-            Thread.sleep(speed);
-            ((QuickSort) activity).setPivotColor(R.drawable.rectangle_white);
+            colors[mainArray.length] = R.drawable.rectangle_white;
+            if (time++ == timerCounter) {
+                return r;
+            }
 
-            Thread.sleep(speed);
-            ((QuickSort) activity).setColor(new int[]{r}, R.drawable.rectangle_orange);
-            ((QuickSort) activity).setPivotColor(R.drawable.rectangle_orange);
-            while (array[r] > pivot) {
-                Thread.sleep(speed);
-                ((QuickSort) activity).setColor(new int[]{r}, R.drawable.rectangle_gray);
-                ((QuickSort) activity).setPivotColor(R.drawable.rectangle_white);
-                --r;
-                Thread.sleep(speed);
-                ((QuickSort) activity).setColor(new int[]{r}, R.drawable.rectangle_orange);
-                ((QuickSort) activity).setPivotColor(R.drawable.rectangle_orange);
+            colors[r] = R.drawable.rectangle_orange;
+            colors[mainArray.length] = R.drawable.rectangle_orange;
+            if (time++ == timerCounter) {
+                return r;
             }
-            Thread.sleep(speed);
-            ((QuickSort) activity).setPivotColor(R.drawable.rectangle_white);
+            while (array[r] > pivot) {
+                colors[r] = R.drawable.rectangle_gray;
+                colors[mainArray.length] = R.drawable.rectangle_white;
+                if (time++ == timerCounter) {
+                    return r;
+                }
+                --r;
+                colors[r] = R.drawable.rectangle_orange;
+                colors[mainArray.length] = R.drawable.rectangle_orange;
+                if (time++ == timerCounter) {
+                    return r;
+                }
+            }
+            colors[mainArray.length] = R.drawable.rectangle_white;
+            if (time++ == timerCounter) {
+                return r;
+            }
             if (l >= r) {
-                Thread.sleep(speed);
-                ((QuickSort) activity).setColor(new int[]{l, r}, R.drawable.rectangle_gray);
+                colors[l] = colors[r] = R.drawable.rectangle_gray;
+                if (time++ == timerCounter) {
+                    return r;
+                }
                 return r;
             }
             int temp = array[l];
             array[l] = array[r];
             array[r] = temp;
 
-            Thread.sleep(speed);
-            ((QuickSort) activity).setColor(new int[]{l, r}, R.drawable.rectangle_red);
+            colors[l] = colors[r] = R.drawable.rectangle_red;
+            if (time++ == timerCounter) {
+                return r;
+            }
 
-            Thread.sleep(speed);
-            ((QuickSort) activity).setText(new int[]{l, r},
-                    new String[]{Integer.toString(array[l]), Integer.toString(array[r])});
-
-            Thread.sleep(speed);
-            ((QuickSort) activity).setColor(new int[]{l, r}, R.drawable.rectangle_gray);
+            colors[l] = colors[r] = R.drawable.rectangle_gray;
+            if (time++ == timerCounter) {
+                return r;
+            }
             ++l;
             --r;
         }
         return r;
     }
 
-    private void sort(int left, int right) throws InterruptedException {
+    private void sort(int left, int right) {
         if (left < right) {
             int q = partition(left, right);
+            if (time == timerCounter + 1) {
+                return;
+            }
 
-            Thread.sleep(speed);
             for (int i = q + 1; i <= right; ++i) {
-                ((QuickSort) activity).setColor(new int[]{i}, R.drawable.rectangle_2_gray);
+                colors[i] = R.drawable.rectangle_2_gray;
+            }
+            if (time++ == timerCounter) {
+                return;
             }
             sort(left, q);
+            if (time == timerCounter + 1) {
+                return;
+            }
 
-            Thread.sleep(speed);
             for (int i = q + 1; i <= right; ++i) {
-                ((QuickSort) activity).setColor(new int[]{i}, R.drawable.rectangle_gray);
+                colors[i] = R.drawable.rectangle_gray;
+            }
+            if (time++ == timerCounter) {
+                return;
             }
             sort(q + 1, right);
         } else if (left == right) {
-            ((QuickSort) activity).setColor(new int[]{left}, R.drawable.rectangle_dark);
+            colors[left] = R.drawable.rectangle_dark;
+            ++time;
         }
+    }
+
+    private void sort() {
+        if (time++ == timerCounter) {
+            return;
+        }
+        sort(0, array.length - 1);
+        if (time == timerCounter + 1) {
+            return;
+        }
+        --timerCounter;
     }
 }

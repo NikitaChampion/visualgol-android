@@ -1,7 +1,6 @@
 package com.gmail.nkigumnov.visualgol.algorithms.sorting;
 
 import android.app.Activity;
-import android.util.Pair;
 
 import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.activities.SelectionSort;
@@ -11,6 +10,9 @@ import java.util.TimerTask;
 public class Selection extends TimerTask {
     private final Activity activity;
     private final int[] mainArray;
+    private int[] array;
+    private int[] colors;
+    private int time;
     public int timerCounter;
 
     public Selection(Activity activity, int[] array, int timerCounter) {
@@ -21,32 +23,34 @@ public class Selection extends TimerTask {
 
     @Override
     public void run() {
-        Pair<int[], int[]> p = sort();
-        ((SelectionSort) activity).setColor(p.first);
-        ((SelectionSort) activity).setText(p.second);
-        ++timerCounter;
-    }
-
-    private Pair<int[], int[]> sort() {
-        int[] colors = new int[mainArray.length];
-        int[] array = mainArray.clone();
-        int currentTime = -1;
+        time = -1;
+        array = mainArray.clone();
+        colors = new int[array.length];
         for (int i = 0; i < array.length; ++i) {
             colors[i] = R.drawable.rectangle_gray;
         }
-        if (currentTime++ == timerCounter) {
-            return new Pair<>(colors, array);
+
+        sort();
+
+        ((SelectionSort) activity).setColor(colors);
+        ((SelectionSort) activity).setText(array);
+        ++timerCounter;
+    }
+
+    private void sort() {
+        if (time++ == timerCounter) {
+            return;
         }
         for (int i = 0; i < array.length; ++i) {
             colors[i] = R.drawable.rectangle_red;
-            if (currentTime++ == timerCounter) {
-                return new Pair<>(colors, array);
+            if (time++ == timerCounter) {
+                return;
             }
             int pos = i;
             for (int j = i + 1; j < array.length; ++j) {
                 colors[j] = R.drawable.rectangle_orange;
-                if (currentTime++ == timerCounter) {
-                    return new Pair<>(colors, array);
+                if (time++ == timerCounter) {
+                    return;
                 }
 
                 if (array[pos] > array[j]) {
@@ -61,8 +65,8 @@ public class Selection extends TimerTask {
                 } else {
                     colors[j] = R.drawable.rectangle_gray;
                 }
-                if (currentTime++ == timerCounter) {
-                    return new Pair<>(colors, array);
+                if (time++ == timerCounter) {
+                    return;
                 }
             }
 
@@ -73,12 +77,11 @@ public class Selection extends TimerTask {
             colors[pos] = R.drawable.rectangle_gray;
             colors[i] = R.drawable.rectangle_dark;
 
-            if (currentTime++ == timerCounter) {
-                return new Pair<>(colors, array);
+            if (time++ == timerCounter) {
+                return;
             }
         }
         --timerCounter;
-        return new Pair<>(colors, array);
     }
 }
 // slider с 0,... (на 0 не успевает) ([0,01, 3]) (++)

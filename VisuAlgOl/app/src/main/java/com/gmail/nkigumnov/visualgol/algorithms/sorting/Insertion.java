@@ -1,7 +1,6 @@
 package com.gmail.nkigumnov.visualgol.algorithms.sorting;
 
 import android.app.Activity;
-import android.util.Pair;
 
 import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.activities.InsertionSort;
@@ -11,6 +10,9 @@ import java.util.TimerTask;
 public class Insertion extends TimerTask {
     private final Activity activity;
     private final int[] mainArray;
+    private int[] array;
+    private int[] colors;
+    private int time;
     public int timerCounter;
 
     public Insertion(Activity activity, int[] array, int timerCounter) {
@@ -21,51 +23,53 @@ public class Insertion extends TimerTask {
 
     @Override
     public void run() {
-        Pair<int[], int[]> p = sort();
-        ((InsertionSort) activity).setColor(p.first);
-        ((InsertionSort) activity).setText(p.second);
-        ++timerCounter;
-    }
-
-    private Pair<int[], int[]> sort() {
-        int[] colors = new int[mainArray.length];
-        int[] array = mainArray.clone();
-        int currentTime = -1;
+        time = -1;
+        array = mainArray.clone();
+        colors = new int[array.length];
         for (int i = 0; i < array.length; ++i) {
             colors[i] = R.drawable.rectangle_gray;
         }
-        if (currentTime++ == timerCounter) {
-            return new Pair<>(colors, array);
+
+        sort();
+
+        ((InsertionSort) activity).setColor(colors);
+        ((InsertionSort) activity).setText(array);
+        ++timerCounter;
+    }
+
+    private void sort() {
+        if (time++ == timerCounter) {
+            return;
         }
         for (int i = 0; i < array.length; ++i) {
             for (int j = i; j >= 1; --j) {
                 colors[j - 1] = colors[j] = R.drawable.rectangle_orange;
-                if (currentTime++ == timerCounter) {
-                    return new Pair<>(colors, array);
+                if (time++ == timerCounter) {
+                    return;
                 }
 
                 if (array[j - 1] > array[j]) {
                     colors[j - 1] = colors[j] = R.drawable.rectangle_red;
-                    if (currentTime++ == timerCounter) {
-                        return new Pair<>(colors, array);
+                    if (time++ == timerCounter) {
+                        return;
                     }
 
                     int temp = array[j - 1];
                     array[j - 1] = array[j];
                     array[j] = temp;
 
-                    if (currentTime++ == timerCounter) {
-                        return new Pair<>(colors, array);
+                    if (time++ == timerCounter) {
+                        return;
                     }
 
                     colors[j - 1] = colors[j] = R.drawable.rectangle_purple;
-                    if (currentTime++ == timerCounter) {
-                        return new Pair<>(colors, array);
+                    if (time++ == timerCounter) {
+                        return;
                     }
                 } else {
                     colors[j - 1] = colors[j] = R.drawable.rectangle_purple;
-                    if (currentTime++ == timerCounter) {
-                        return new Pair<>(colors, array);
+                    if (time++ == timerCounter) {
+                        return;
                     }
                     break;
                 }
@@ -74,10 +78,9 @@ public class Insertion extends TimerTask {
         for (int i = 0; i < array.length; ++i) {
             colors[i] = R.drawable.rectangle_dark;
         }
-        if (currentTime == timerCounter) {
-            return new Pair<>(colors, array);
+        if (time == timerCounter) {
+            return;
         }
         --timerCounter;
-        return new Pair<>(colors, array);
     }
 }

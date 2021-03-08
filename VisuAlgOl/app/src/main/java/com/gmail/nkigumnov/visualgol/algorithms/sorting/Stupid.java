@@ -11,6 +11,9 @@ import java.util.TimerTask;
 public class Stupid extends TimerTask {
     private final Activity activity;
     private final int[] mainArray;
+    private int[] array;
+    private int[] colors;
+    private int time;
     public int timerCounter;
 
     public Stupid(Activity activity, int[] array, int timerCounter) {
@@ -21,32 +24,34 @@ public class Stupid extends TimerTask {
 
     @Override
     public void run() {
-        Pair<int[], int[]> p = sort();
-        ((StupidSort) activity).setColor(p.first);
-        ((StupidSort) activity).setText(p.second);
-        ++timerCounter;
-    }
-
-    private Pair<int[], int[]> sort() {
-        int[] colors = new int[mainArray.length];
-        int[] array = mainArray.clone();
-        int currentTime = -1;
+        time = -1;
+        array = mainArray.clone();
+        colors = new int[array.length];
         for (int i = 0; i < array.length; ++i) {
             colors[i] = R.drawable.rectangle_gray;
         }
-        if (currentTime++ == timerCounter) {
-            return new Pair<>(colors, array);
+
+        sort();
+
+        ((StupidSort) activity).setColor(colors);
+        ((StupidSort) activity).setText(array);
+        ++timerCounter;
+    }
+
+    private void sort() {
+        if (time++ == timerCounter) {
+            return;
         }
         for (int i = 1; i < array.length; ++i) {
             colors[i - 1] = colors[i] = R.drawable.rectangle_orange;
-            if (currentTime++ == timerCounter) {
-                return new Pair<>(colors, array);
+            if (time++ == timerCounter) {
+                return;
             }
 
             if (array[i - 1] > array[i]) {
                 colors[i - 1] = colors[i] = R.drawable.rectangle_red;
-                if (currentTime++ == timerCounter) {
-                    return new Pair<>(colors, array);
+                if (time++ == timerCounter) {
+                    return;
                 }
 
                 int temp = array[i - 1];
@@ -54,24 +59,24 @@ public class Stupid extends TimerTask {
                 array[i] = temp;
 
                 colors[i - 1] = colors[i] = R.drawable.rectangle_gray;
-                if (currentTime++ == timerCounter) {
-                    return new Pair<>(colors, array);
+                if (time++ == timerCounter) {
+                    return;
                 }
                 i = 0;
             } else {
                 colors[i - 1] = colors[i] = R.drawable.rectangle_gray;
-                if (currentTime++ == timerCounter) {
-                    return new Pair<>(colors, array);
+                if (time++ == timerCounter) {
+                    return;
                 }
             }
         }
         for (int i = 0; i < array.length; ++i) {
             colors[i] = R.drawable.rectangle_dark;
         }
-        if (currentTime == timerCounter) {
-            return new Pair<>(colors, array);
+        if (time == timerCounter) {
+            return;
         }
         --timerCounter;
-        return new Pair<>(colors, array);
+        return;
     }
 }

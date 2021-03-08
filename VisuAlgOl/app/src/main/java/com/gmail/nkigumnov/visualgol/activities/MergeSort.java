@@ -23,7 +23,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
     private int curSpeed = Constants.SPEED;
     private final int[] array = new int[8];
     private final TextView[] txtNum = new TextView[8];
-    private TextView[] mergeArray = new TextView[8];
+    private final TextView[] mergeArray = new TextView[8];
     private final Random random = new Random();
     private Merge timerAction;
     private Timer sort;
@@ -180,4 +180,3 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
 
     }
 }
-
