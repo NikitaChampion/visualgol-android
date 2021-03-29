@@ -1,6 +1,6 @@
 # VisuAlgOl
 
-VisuAlgOl is an Android app that helps people in learning algorithms and data structures.
+VisuAlgOl is an app that helps people in learning algorithms and data structures.
 
 ## Installing VisuAlgOl
 
