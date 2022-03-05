@@ -113,15 +113,16 @@
                 android:text="@string/sec"
                 android:textSize="19sp" />
 
-            <SeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/sb_delay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:max="3500"
-                android:min="1"
-                android:progress="1250" />
+                android:stepSize="0.25"
+                android:value="1.25"
+                android:valueFrom="0.25"
+                android:valueTo="3.5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,86 +131,56 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/previous"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:background="@drawable/previous"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center" />
+                    android:contentDescription="@string/previous"
+                    android:gravity="center"
+                    android:src="@drawable/previous"
+                    app:backgroundTint="@color/colorAccent"
+                    app:tint="@color/white" />
 
-                <TextView
-                    android:id="@+id/stop"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/stop"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/stage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:contentDescription="@string/stage"
+                    android:gravity="center"
+                    android:src="@drawable/play"
+                    app:backgroundTint="@color/colorAccent"
+                    app:tint="@color/white" />
 
-                <TextView
-                    android:id="@+id/continue_"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/continue_"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center" />
-
-                <TextView
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/next"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/next"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center" />
+                    android:contentDescription="@string/next"
+                    android:gravity="center"
+                    android:src="@drawable/next"
+                    app:backgroundTint="@color/colorAccent"
+                    app:tint="@color/white" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <Button
+                android:id="@+id/generate"
+                style="@android:style/Widget.Holo.Light.Button.Toggle"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/button_shape"
                 android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/sort"
-                    style="@android:style/Widget.Holo.Light.Button.Toggle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:layout_weight="1.40"
-                    android:background="@drawable/button_shape"
-                    android:gravity="center"
-                    android:text="@string/sort"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
-
-                <Button
-                    android:id="@+id/generate"
-                    style="@android:style/Widget.Holo.Light.Button.Toggle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_weight="1.75"
-                    android:background="@drawable/button_shape"
-                    android:gravity="center"
-                    android:text="@string/generate"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
+                android:text="@string/generate"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"

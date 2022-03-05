@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
 
@@ -12,12 +11,15 @@ import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.algorithms.sorting.Quick;
 import com.gmail.nkigumnov.visualgol.util.Constants;
 import com.gmail.nkigumnov.visualgol.util.Util;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.slider.Slider;
 
 import java.util.Random;
 import java.util.Timer;
 
-public class QuickSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+public class QuickSort extends AppCompatActivity implements View.OnClickListener {
     private EditText editText;
+    private FloatingActionButton stageBtn;
     private TextView tvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
@@ -26,6 +28,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
     private TextView pivot;
     private final Random random = new Random();
     private Quick timerAction;
+    private boolean timerIsRunning;
     private Timer sort;
 
     @Override
@@ -55,11 +58,17 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
 
         findViewById(R.id.previous).setOnClickListener(this);
         findViewById(R.id.next).setOnClickListener(this);
-        findViewById(R.id.stop).setOnClickListener(this);
-        findViewById(R.id.continue_).setOnClickListener(this);
 
-        ((SeekBar) findViewById(R.id.sb_delay)).setOnSeekBarChangeListener(this);
-        findViewById(R.id.sort).setOnClickListener(this);
+        stageBtn = findViewById(R.id.stage);
+        stageBtn.setOnClickListener(this);
+        stageBtn.setImageResource(R.drawable.play);
+
+        ((Slider) findViewById(R.id.sb_delay)).addOnChangeListener((slider, value, fromUser) -> {
+            curSpeed = (int) (value * 1000);
+            String s = value + " sec";
+            tvDelay.setText(s);
+        });
+
         findViewById(R.id.generate).setOnClickListener(this);
         findViewById(R.id.btn_save).setOnClickListener(this);
 
@@ -73,13 +82,7 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.sort) {
-            sort.cancel();
-            update();
-            sort = new Timer();
-            timerAction = new Quick(this, array, -1);
-            sort.scheduleAtFixedRate(timerAction, 0, curSpeed);
-        } else if (id == R.id.generate) {
+        if (id == R.id.generate) {
             sort.cancel();
             generate();
             timerAction = new Quick(this, array, -1);
@@ -91,10 +94,12 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
             previous();
         } else if (id == R.id.next) {
             next();
-        } else if (id == R.id.stop) {
-            stop();
-        } else if (id == R.id.continue_) {
-            continue_();
+        } else if (id == R.id.stage) {
+            if (timerIsRunning) {
+                pause();
+            } else {
+                play();
+            }
         }
     }
 
@@ -106,24 +111,32 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
         }
         timerAction.timerCounter -= 2;
         timerAction.run();
+        timerIsRunning = false;
+        stageBtn.setImageResource(R.drawable.play);
     }
 
     private void next() {
         sort.cancel();
         sort = new Timer();
         timerAction.run();
+        timerIsRunning = false;
+        stageBtn.setImageResource(R.drawable.play);
     }
 
-    private void stop() {
+    private void pause() {
         sort.cancel();
         sort = new Timer();
+        timerIsRunning = false;
+        stageBtn.setImageResource(R.drawable.play);
     }
 
-    private void continue_() {
+    private void play() {
         sort.cancel();
         sort = new Timer();
         timerAction = new Quick(this, array, timerAction.timerCounter);
         sort.scheduleAtFixedRate(timerAction, 0, curSpeed);
+        timerIsRunning = true;
+        stageBtn.setImageResource(R.drawable.pause);
     }
 
     private void generate() {
@@ -140,36 +153,20 @@ public class QuickSort extends AppCompatActivity implements View.OnClickListener
             txtNum[i].setText(String.valueOf(array[i]));
             txtNum[i].setBackgroundResource(R.drawable.rectangle_gray);
         }
+        timerIsRunning = false;
     }
 
-    public void setColor(final int[] colors1) {
+    public void setColor(final int[] colors) {
         for (int i = 0; i < array.length; ++i) {
-            txtNum[i].setBackgroundResource(colors1[i]);
+            txtNum[i].setBackgroundResource(colors[i]);
         }
-        pivot.setBackgroundResource(colors1[array.length]);
+        pivot.setBackgroundResource(colors[array.length]);
     }
 
-    public void setText(final String[] values1) {
+    public void setText(final String[] values) {
         for (int i = 0; i < array.length; ++i) {
-            txtNum[i].setText(values1[i]);
+            txtNum[i].setText(values[i]);
         }
-        pivot.setText(values1[array.length]);
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        curSpeed = progress;
-        String s = progress / 1000. + " sec";
-        tvDelay.setText(s);
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
+        pivot.setText(values[array.length]);
     }
 }

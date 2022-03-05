@@ -1,7 +1,6 @@
 package com.gmail.nkigumnov.visualgol.algorithms.sorting;
 
 import android.app.Activity;
-import android.util.Pair;
 
 import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.activities.StupidSort;
@@ -77,6 +76,5 @@ public class Stupid extends TimerTask {
             return;
         }
         --timerCounter;
-        return;
     }
 }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
 
@@ -12,12 +11,15 @@ import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.algorithms.sorting.Merge;
 import com.gmail.nkigumnov.visualgol.util.Constants;
 import com.gmail.nkigumnov.visualgol.util.Util;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.slider.Slider;
 
 import java.util.Random;
 import java.util.Timer;
 
-public class MergeSort extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+public class MergeSort extends AppCompatActivity implements View.OnClickListener {
     private EditText editText;
+    private FloatingActionButton stageBtn;
     private TextView tvDelay;
     private int childPosition = 0, groupPosition = 0;
     private int curSpeed = Constants.SPEED;
@@ -26,6 +28,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
     private final TextView[] mergeArray = new TextView[8];
     private final Random random = new Random();
     private Merge timerAction;
+    private boolean timerIsRunning;
     private Timer sort;
 
     @Override
@@ -62,11 +65,17 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
 
         findViewById(R.id.previous).setOnClickListener(this);
         findViewById(R.id.next).setOnClickListener(this);
-        findViewById(R.id.stop).setOnClickListener(this);
-        findViewById(R.id.continue_).setOnClickListener(this);
 
-        ((SeekBar) findViewById(R.id.sb_delay)).setOnSeekBarChangeListener(this);
-        findViewById(R.id.sort).setOnClickListener(this);
+        stageBtn = findViewById(R.id.stage);
+        stageBtn.setOnClickListener(this);
+        stageBtn.setImageResource(R.drawable.play);
+
+        ((Slider) findViewById(R.id.sb_delay)).addOnChangeListener((slider, value, fromUser) -> {
+            curSpeed = (int) (value * 1000);
+            String s = value + " sec";
+            tvDelay.setText(s);
+        });
+
         findViewById(R.id.generate).setOnClickListener(this);
         findViewById(R.id.btn_save).setOnClickListener(this);
 
@@ -80,13 +89,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.sort) {
-            sort.cancel();
-            update();
-            sort = new Timer();
-            timerAction = new Merge(this, array, -1);
-            sort.scheduleAtFixedRate(timerAction, 0, curSpeed);
-        } else if (id == R.id.generate) {
+        if (id == R.id.generate) {
             sort.cancel();
             generate();
             timerAction = new Merge(this, array, -1);
@@ -98,10 +101,12 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
             previous();
         } else if (id == R.id.next) {
             next();
-        } else if (id == R.id.stop) {
-            stop();
-        } else if (id == R.id.continue_) {
-            continue_();
+        } else if (id == R.id.stage) {
+            if (timerIsRunning) {
+                pause();
+            } else {
+                play();
+            }
         }
     }
 
@@ -113,24 +118,32 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
         }
         timerAction.timerCounter -= 2;
         timerAction.run();
+        timerIsRunning = false;
+        stageBtn.setImageResource(R.drawable.play);
     }
 
     private void next() {
         sort.cancel();
         sort = new Timer();
         timerAction.run();
+        timerIsRunning = false;
+        stageBtn.setImageResource(R.drawable.play);
     }
 
-    private void stop() {
+    private void pause() {
         sort.cancel();
         sort = new Timer();
+        timerIsRunning = false;
+        stageBtn.setImageResource(R.drawable.play);
     }
 
-    private void continue_() {
+    private void play() {
         sort.cancel();
         sort = new Timer();
         timerAction = new Merge(this, array, timerAction.timerCounter);
         sort.scheduleAtFixedRate(timerAction, 0, curSpeed);
+        timerIsRunning = true;
+        stageBtn.setImageResource(R.drawable.pause);
     }
 
     private void generate() {
@@ -147,6 +160,7 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
             mergeArray[i].setText("");
             mergeArray[i].setBackgroundResource(R.drawable.rectangle_white);
         }
+        timerIsRunning = false;
     }
 
     public void setColor(final int[] colors1, final int[] colors2) {
@@ -161,22 +175,5 @@ public class MergeSort extends AppCompatActivity implements View.OnClickListener
             txtNum[i].setText(values1[i]);
             mergeArray[i].setText(values2[i]);
         }
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        curSpeed = progress;
-        String s = progress / 1000. + " sec";
-        tvDelay.setText(s);
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
     }
 }

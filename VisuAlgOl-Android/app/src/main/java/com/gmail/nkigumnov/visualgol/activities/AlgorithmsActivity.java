@@ -27,6 +27,14 @@ public class AlgorithmsActivity extends AppCompatActivity {
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
     private String setter;
+    private final Class<?>[][] intents = {
+            {StupidSort.class, BubbleSort.class, SelectionSort.class, InsertionSort.class,
+                    MergeSort.class, QuickSort.class, CountingSort.class, RadixSort.class},
+            {Search.class, Search.class},
+            {Graph.class, Graph.class},
+            {Strings.class, Strings.class},
+            {BST.class, SegmentTree.class}
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,49 +64,7 @@ public class AlgorithmsActivity extends AppCompatActivity {
 
         // ListView child click listener
         expListView.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
-            Intent intent;
-            if (groupPosition == 0) {
-                switch (childPosition) {
-                    case 1:
-                        intent = new Intent(this, BubbleSort.class);
-                        break;
-                    case 2:
-                        intent = new Intent(this, SelectionSort.class);
-                        break;
-                    case 3:
-                        intent = new Intent(this, InsertionSort.class);
-                        break;
-                    case 4:
-                        intent = new Intent(this, MergeSort.class);
-                        break;
-                    case 5:
-                        intent = new Intent(this, QuickSort.class);
-                        break;
-                    case 6:
-                        intent = new Intent(this, CountingSort.class);
-                        break;
-                    case 7:
-                        intent = new Intent(this, RadixSort.class);
-                        break;
-                    default:
-                        intent = new Intent(this, StupidSort.class);
-                        break;
-                }
-            } else if (groupPosition == 1) {
-                intent = new Intent(this, Search.class);
-            } else if (groupPosition == 2) {
-                intent = new Intent(this, Graph.class);
-            } else if (groupPosition == 3) {
-                intent = new Intent(this, Strings.class);
-            } else if (groupPosition == 4) {
-                if (childPosition == 1) {
-                    intent = new Intent(this, BST.class);
-                } else {
-                    intent = new Intent(this, SegmentTree.class);
-                }
-            } else {
-                throw new IllegalArgumentException("Something went wrong");
-            }
+            Intent intent = new Intent(this, intents[groupPosition][childPosition]);
             intent.putExtra("num", childPosition);
             intent.putExtra("num_2", listAdapter.getPozAll(groupPosition));
             startActivity(intent);

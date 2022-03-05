@@ -23,8 +23,9 @@ public class Util {
         } catch (IOException ex) {
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             StringBuilder curBuilder = new StringBuilder();
-            for (int i = 0; i < 100; ++i)
+            for (int i = 0; i < 100; ++i) {
                 curBuilder.append('0');
+            }
             saveText(activity, curBuilder.toString());
             return curBuilder.toString();
         }
@@ -37,10 +38,11 @@ public class Util {
 
         saveText(activity, text);
 
-        if (c == '1')
+        if (c == '1') {
             Toast.makeText(activity, "Right answer, text saved", Toast.LENGTH_SHORT).show();
-        else
+        } else {
             Toast.makeText(activity, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private static void saveText(Activity activity, String text) {
