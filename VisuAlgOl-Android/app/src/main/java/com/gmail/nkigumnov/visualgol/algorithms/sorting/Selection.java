@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.activities.SelectionSort;
+import com.gmail.nkigumnov.visualgol.util.AlgoCompletionListener;
 
 import java.util.TimerTask;
 
@@ -14,11 +15,16 @@ public class Selection extends TimerTask {
     private int[] colors;
     private int time;
     public int timerCounter;
+    public AlgoCompletionListener completionListener;
 
     public Selection(Activity activity, int[] array, int timerCounter) {
         this.activity = activity;
         mainArray = array.clone();
         this.timerCounter = timerCounter;
+    }
+
+    public void setCompletionListener(AlgoCompletionListener completionListener) {
+        this.completionListener = completionListener;
     }
 
     @Override
@@ -82,6 +88,7 @@ public class Selection extends TimerTask {
             }
         }
         --timerCounter;
+        completionListener.onAlgoCompleted();
     }
 }
 // slider с 0,... (на 0 не успевает) ([0,01, 3]) (++)

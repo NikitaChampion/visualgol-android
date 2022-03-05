@@ -28,6 +28,7 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     private final Random random = new Random();
     private Stupid timerAction;
     private boolean timerIsRunning;
+    private boolean timerFinished;
     private Timer sort;
 
     @Override
@@ -52,6 +53,12 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         tvDelay = findViewById(R.id.tv_delay);
         tvDelay.setText(R.string.sec);
 
+        ((Slider) findViewById(R.id.sb_delay)).addOnChangeListener((slider, value, fromUser) -> {
+            curSpeed = (int) (value * 1000);
+            String s = value + " sec";
+            tvDelay.setText(s);
+        });
+
         findViewById(R.id.previous).setOnClickListener(this);
         findViewById(R.id.next).setOnClickListener(this);
 
@@ -59,39 +66,33 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
         stageBtn.setOnClickListener(this);
         stageBtn.setImageResource(R.drawable.play);
 
-        ((Slider) findViewById(R.id.sb_delay)).addOnChangeListener((slider, value, fromUser) -> {
-            curSpeed = (int) (value * 1000);
-            String s = value + " sec";
-            tvDelay.setText(s);
-        });
-
         findViewById(R.id.generate).setOnClickListener(this);
         findViewById(R.id.btn_save).setOnClickListener(this);
 
         editText = findViewById(R.id.edit_text);
 
-        generate();
         sort = new Timer();
-        timerAction = new Stupid(this, array, -1);
+        generate();
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.generate) {
-            sort.cancel();
             generate();
-            timerAction = new Stupid(this, array, -1);
-            sort = new Timer();
         } else if (id == R.id.btn_save) {
-            Util.saveText(this, ((editText.getText().toString().equals("3")) ? '1' : '0'),
+            Util.saveText(this, ((editText.getText().toString().equals("1 2 3")) ? '1' : '0'),
                     groupPosition + childPosition);
         } else if (id == R.id.previous) {
             previous();
         } else if (id == R.id.next) {
             next();
         } else if (id == R.id.stage) {
-            if (timerIsRunning) {
+            if (timerFinished) {
+                pause();
+                update();
+                play();
+            } else if (timerIsRunning) {
                 pause();
             } else {
                 play();
@@ -100,42 +101,37 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
     }
 
     private void previous() {
-        sort.cancel();
-        sort = new Timer();
+        pause();
         if (timerAction.timerCounter <= 0) {
             return;
         }
         timerAction.timerCounter -= 2;
         timerAction.run();
-        timerIsRunning = false;
-        stageBtn.setImageResource(R.drawable.play);
+        timerFinished = false;
     }
 
     private void next() {
-        sort.cancel();
-        sort = new Timer();
+        pause();
         timerAction.run();
-        timerIsRunning = false;
-        stageBtn.setImageResource(R.drawable.play);
     }
 
     private void pause() {
         sort.cancel();
-        sort = new Timer();
         timerIsRunning = false;
         stageBtn.setImageResource(R.drawable.play);
     }
 
     private void play() {
-        sort.cancel();
         sort = new Timer();
-        timerAction = new Stupid(this, array, timerAction.timerCounter);
-        sort.scheduleAtFixedRate(timerAction, 0, curSpeed);
         timerIsRunning = true;
         stageBtn.setImageResource(R.drawable.pause);
+
+        setTimerAction(timerAction.timerCounter);
+        sort.scheduleAtFixedRate(timerAction, 0, curSpeed);
     }
 
     private void generate() {
+        pause();
         for (int i = 0; i < array.length; ++i) {
             array[i] = random.nextInt() % 10;
         }
@@ -147,7 +143,17 @@ public class StupidSort extends AppCompatActivity implements View.OnClickListene
             txtNum[i].setText(String.valueOf(array[i]));
             txtNum[i].setBackgroundResource(R.drawable.rectangle_gray);
         }
-        timerIsRunning = false;
+
+        setTimerAction(-1);
+        timerFinished = false;
+    }
+
+    private void setTimerAction(int timerCounter) {
+        timerAction = new Stupid(this, array, timerCounter);
+        timerAction.setCompletionListener(() -> {
+            stageBtn.setImageResource(R.drawable.restart);
+            timerFinished = true;
+        });
     }
 
     public void setColor(final int[] colors) {

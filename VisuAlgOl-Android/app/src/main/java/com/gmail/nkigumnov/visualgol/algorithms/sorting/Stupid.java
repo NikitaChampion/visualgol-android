@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.activities.StupidSort;
+import com.gmail.nkigumnov.visualgol.util.AlgoCompletionListener;
 
 import java.util.TimerTask;
 
@@ -14,11 +15,16 @@ public class Stupid extends TimerTask {
     private int[] colors;
     private int time;
     public int timerCounter;
+    public AlgoCompletionListener completionListener;
 
     public Stupid(Activity activity, int[] array, int timerCounter) {
         this.activity = activity;
         mainArray = array.clone();
         this.timerCounter = timerCounter;
+    }
+
+    public void setCompletionListener(AlgoCompletionListener completionListener) {
+        this.completionListener = completionListener;
     }
 
     @Override
@@ -72,6 +78,7 @@ public class Stupid extends TimerTask {
         for (int i = 0; i < array.length; ++i) {
             colors[i] = R.drawable.rectangle_dark;
         }
+        completionListener.onAlgoCompleted();
         if (time == timerCounter) {
             return;
         }

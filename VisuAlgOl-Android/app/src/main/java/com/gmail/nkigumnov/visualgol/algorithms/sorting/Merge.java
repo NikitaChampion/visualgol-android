@@ -5,6 +5,7 @@ import android.util.Pair;
 
 import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.activities.MergeSort;
+import com.gmail.nkigumnov.visualgol.util.AlgoCompletionListener;
 
 import java.util.TimerTask;
 
@@ -12,11 +13,16 @@ public class Merge extends TimerTask {
     private final Activity activity;
     private final int[] mainArray;
     public int timerCounter;
+    public AlgoCompletionListener completionListener;
 
     public Merge(Activity activity, int[] array, int timerCounter) {
         this.activity = activity;
         mainArray = array.clone();
         this.timerCounter = timerCounter;
+    }
+
+    public void setCompletionListener(AlgoCompletionListener completionListener) {
+        this.completionListener = completionListener;
     }
 
     @Override
@@ -145,6 +151,7 @@ public class Merge extends TimerTask {
         for (int i = 0; i < array.length; ++i) {
             colors[i] = R.drawable.rectangle_dark;
         }
+        completionListener.onAlgoCompleted();
         if (currentTime == timerCounter) {
             return new Pair<>(new Pair<>(colors, colorsMerge), new Pair<>(textArray, textArrayMerge));
         }

@@ -99,7 +99,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:gravity="center"
                 android:text="@string/s_t"
                 android:textColor="#000000"
                 android:textSize="16sp" />

@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.gmail.nkigumnov.visualgol.R;
 import com.gmail.nkigumnov.visualgol.activities.QuickSort;
+import com.gmail.nkigumnov.visualgol.util.AlgoCompletionListener;
 
 import java.util.TimerTask;
 
@@ -15,11 +16,16 @@ public class Quick extends TimerTask {
     private int[] colors;
     private int time;
     public int timerCounter;
+    public AlgoCompletionListener completionListener;
 
     public Quick(Activity activity, int[] array, int timerCounter) {
         this.activity = activity;
         mainArray = array.clone();
         this.timerCounter = timerCounter;
+    }
+
+    public void setCompletionListener(AlgoCompletionListener completionListener) {
+        this.completionListener = completionListener;
     }
 
     @Override
@@ -174,5 +180,6 @@ public class Quick extends TimerTask {
             return;
         }
         --timerCounter;
+        completionListener.onAlgoCompleted();
     }
 }
