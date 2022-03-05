@@ -5,7 +5,7 @@
 
 VisuAlgOl is an app that helps people in learning algorithms and data structures.
 
-[Visualization demo](https://media.giphy.com/media/ermrESYE7fN2kvIlOS/giphy.gif)
+![Visualization demo](https://media.giphy.com/media/ermrESYE7fN2kvIlOS/giphy.gif)
 
 ## Installing VisuAlgOl
 
