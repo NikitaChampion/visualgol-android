@@ -1,7 +1,7 @@
 # VisuAlgOl Android
 
-![GitHub repo size](https://img.shields.io/github/repo-size/scottydocs/README-template.md)
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FNikitaChampion%2FVisuAlgOl&count_bg=%23056DE3&title_bg=%23B5B5BC&icon=java.svg&icon_color=%23E7E7E7&title=Repository+Views&edge_flat=false)](https://hits.seeyoufarm.com)
+![GitHub repo size](https://img.shields.io/github/repo-size/NikitaChampion/visualgol-android)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FNikitaChampion%2Fvisualgol-android&count_bg=%23056DE3&title_bg=%23B5B5BC&icon=java.svg&icon_color=%23E7E7E7&title=Repository+Views&edge_flat=false)](https://hits.seeyoufarm.com)
 
 VisuAlgOl is an app that helps people in learning algorithms and data structures.
 
